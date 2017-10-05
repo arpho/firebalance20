@@ -1,0 +1,47 @@
+<!--
+  Generated template for the CategoriesPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header class="login-header auth-header">
+
+  <ion-navbar>
+    <ion-col class="item-icon .ion-ios-arrow-back" :before>
+
+      <ion-title>
+        <ion-icon name="arrow-back" (click)="goHome()"></ion-icon> Categorie</ion-title>
+    </ion-col>
+
+    <div id="categoriesForm">
+
+      <field-filter [placeholder]=segnaposto (doFilter)="newCategory= $event.filterString"></field-filter>
+    </div>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="listing-content">
+  <button (click)="categoriesSelector()">
+        <ion-icon name="pricetags"></ion-icon>
+      </button>
+  <h4 class="categories-title">{{'BROWSE_CATEGORIES' | translate}}</h4>
+
+  <article class="list">
+    <ion-col *ngFor="let category of categories| async">
+      <category-wud-item [categoria]=category *ngIf="showCategory(category)">
+      </category-wud-item>
+    </ion-col>
+  </article>
+  <hr>
+
+
+
+  <ion-fab bottom right>
+      <button  ion-fab (click)="createCategory()">
+          <ion-icon name="add"></ion-icon>
+        </button>
+      </ion-fab>
+
+</ion-content>
