@@ -28,6 +28,8 @@ import { FiltersPage } from '../pages/filters/filters';
 import { TermsOfServicePage } from '../pages/terms-of-service/terms-of-service';
 import { PrivacyPolicyPage } from '../pages/privacy-policy/privacy-policy';
 import { FormValidationsPage } from '../pages/form-validations/form-validations';
+import {CategoriesPage} from '../pages/categories/categories';
+import {CategoriesService} from '../pages/categories/categories.service';
 
 import { PreloadImage } from '../components/preload-image/preload-image';
 import { BackgroundImage } from '../components/background-image/background-image';
@@ -124,7 +126,8 @@ export function createTranslateLoader(http: Http) {
     GoogleLoginPage,
     ContactCardPage,
     TwitterLoginPage,
-		AdsPage,
+    AdsPage,
+    CategoriesPage,
 		FormValidationsPage,
 		VideoPlaylistPage,
 
@@ -182,7 +185,8 @@ export function createTranslateLoader(http: Http) {
     GoogleLoginPage,
     ContactCardPage,
     TwitterLoginPage,
-		AdsPage,
+    AdsPage,
+    CategoriesPage,
 		FormValidationsPage,
 		VideoPlaylistPage
   ],
@@ -190,6 +194,7 @@ export function createTranslateLoader(http: Http) {
     UserModel,
     AngularFireAuth,
     AuthService,
+    CategoriesService,
     FeedService,
     ListingService,
     ProfileService,

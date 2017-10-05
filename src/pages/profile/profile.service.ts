@@ -22,7 +22,6 @@ export class ProfileService {
 
   setUser(user) {
     this.user.build(user);
-    console.log('set user', this.user);
   }
 
   getUser() {

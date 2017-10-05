@@ -5,7 +5,7 @@ import 'rxjs/add/operator/toPromise';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { ListingModel } from '../pages/listing/listing.model';
 import { ProfileService } from '../profile/profile.service';
-import { FirebaseListObservable } from 'angularfire2/database';
+//import { FirebaseListObservable } from 'angularfire2/database';
 @Injectable()
 export class CategoriesService {
   constructor(public http: Http,
@@ -16,7 +16,7 @@ export class CategoriesService {
       this.categories = data;
     })*/
   }
-  public categories: FirebaseListObservable<any>
+ // public categories: FirebaseListObservable<any>
 
 
 
@@ -43,10 +43,10 @@ export class CategoriesService {
     this.afDB.list('categorie/' + this.User.getUserUid()).remove(categoria.$key).then(e => {
     });
   }
-  pushCategoryIfNotExist(category) {
+  /*pushCategoryIfNotExist(category) {
     const then = (next: (a:any)=>any) => {
-      const key: string = this.categories.filter(x => x.title == category)[0].$key;
-      next({"key":key});
+     // const key: string = this.categories.filter(x => x.title == category)[0].$key;
+      //next({"key":key});
     }
 
 
@@ -59,8 +59,7 @@ export class CategoriesService {
 
       }
 
-    }
-  }
+  
 
 
 

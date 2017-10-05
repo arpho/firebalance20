@@ -18,7 +18,7 @@ import {AngularFireList} from 'angularfire2/database'
   templateUrl: 'categories.html',
 })
 export class CategoriesPage {
-  categories: AngularFireList<any>;
+  categories: any;
   newCategory: any;
   segnaposto: string;
   category_id: string;
@@ -43,11 +43,11 @@ export class CategoriesPage {
 
   categoriesSelector() {
 
-    let modal = this.modal.create(CategoriesSelectorPage, this.categories_id);
+    /*let modal = this.modal.create(CategoriesSelectorPage, this.categories_id);
     modal.onDidDismiss(values => {
       console.log('modal dismissed', values);
     })
-    modal.present();
+    modal.present();*/
   }
   selectedCategories(val) {
     //console.log('selectedCategories', val);
