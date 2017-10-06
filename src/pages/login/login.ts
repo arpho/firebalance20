@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { UtilitiesProvider } from '../../providers/utilities/utilities';
+import { Component,Inject } from '@angular/core';
 import { NavController, LoadingController } from 'ionic-angular';
 import { Validators, FormGroup, FormControl } from '@angular/forms';
 
@@ -12,6 +13,7 @@ import { TwitterLoginService } from '../twitter-login/twitter-login.service';
 import {AuthService} from '../../providers/auth/auth';
 import {ProfileService} from '../profile/profile.service';
 
+
 @Component({
   selector: 'login-page',
   templateUrl: 'login.html'
@@ -23,7 +25,11 @@ export class LoginPage {
 
 
   constructor(
+    @Inject('production') public Production,
+    @Inject('emailDev') public emailDev,
+    @Inject('passwordDev') public passwordDev,
     public nav: NavController,
+    public Utilities: UtilitiesProvider,
     public facebookLoginService: FacebookLoginService,
     public googleLoginService: GoogleLoginService,
     public twitterLoginService: TwitterLoginService,
@@ -34,14 +40,16 @@ export class LoginPage {
     this.main_page = { component: TabsNavigationPage };
 
     this.login = new FormGroup({
-      email: new FormControl('', Validators.required),
-      password: new FormControl('test', Validators.required)
+      email: new FormControl(!this.Production?this.emailDev:'', Validators.required),
+      password: new FormControl(!this.Production?this.passwordDev:'', Validators.required)
     });
   }
 
   doLogin(){
     console.log('doing login',this.login.controls.email.value,this.login.controls.password.value)
-    this.Auth.login(this.login.controls.email.value, this.login.controls.password.value).then(a=>this.Profiles.setUser(a))
+    this.Auth.login(this.login.controls.email.value, this.login.controls.password.value).then(a=>{this.Profiles.setUser(a)
+    console.log('logged',this.Profiles.getUser())
+    })
     this.nav.setRoot(this.main_page.component);
   }
 

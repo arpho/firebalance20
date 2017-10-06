@@ -36,7 +36,7 @@ export class CategoriesPage {
     this.categories_id.push("-Ks0UbaDoqhXN1yoyKNP");
     /*this.Categories.fetchCategoryById(this.category_id).subscribe(cat => {
     })*/
-    this.categories = this.Categories.getCategories();
+    this.Categories.getCategories();
     this.newCategory = "";
 
   }

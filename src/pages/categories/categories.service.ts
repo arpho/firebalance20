@@ -1,8 +1,10 @@
+import { snapshotChanges } from 'angularfire2/database/public_api';
 import { Injectable, OnInit } from "@angular/core";
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/toPromise';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase }
+from 'angularfire2/database';
 import { ListingModel } from '../pages/listing/listing.model';
 import { ProfileService } from '../profile/profile.service';
 //import { FirebaseListObservable } from 'angularfire2/database';

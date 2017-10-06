@@ -1,5 +1,7 @@
 export const  environment = {
-production:true,
+production:false,
+emailDev:'damicogiuseppe77@gmail.com',
+passwordDev: 'vilu7240',
 googleKey : "AIzaSyATOf9HX67HaKlMQU0V7qUvrCe0McNSo40",
 outpanKey : "7b756067bae876191fd0af70e3978589",
 firebaseConfig:{

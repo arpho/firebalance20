@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.arpho.firerbase" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.arpho.firerbase" version="2.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Firebalance</name>
     <description>Firebase</description>
-    <author email="hi@ionicthemes.com" >arpho</author>
+    <author email="hi@ionicthemes.com">arpho</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
@@ -110,4 +110,5 @@
     <plugin name="twitter-connect-plugin" spec="^0.6.0">
         <variable name="FABRIC_KEY" value="6da298eb1112d28ba03183d50236498db4b7380e" />
     </plugin>
+    <plugin name="cordova-plugin-x-toast" spec="^2.6.0" />
 </widget>

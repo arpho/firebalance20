@@ -71,7 +71,7 @@ import { AppRate } from '@ionic-native/app-rate';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Crop } from '@ionic-native/crop';
 import { EmailComposer } from '@ionic-native/email-composer';
-
+import { Toast } from '@ionic-native/toast';
 // Functionalities
 import { FunctionalitiesPage } from '../pages/functionalities/functionalities';
 import { MapsPage } from '../pages/maps/maps';
@@ -88,8 +88,9 @@ import { LanguageService } from '../providers/language/language.service';
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { AngularFireAuth } from 'angularfire2/auth';
-
+import { AngularFireDatabase } from 'angularfire2/database';
 import { AuthService } from '../providers/auth/auth';
+import { UtilitiesProvider } from '../providers/utilities/utilities';
 AngularFireModule.initializeApp(environment.firebaseConfig)
 export function createTranslateLoader(http: Http) {
 	return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -191,6 +192,15 @@ export function createTranslateLoader(http: Http) {
 		VideoPlaylistPage
   ],
   providers: [
+
+    { provide: "GoogleKey", useValue: environment.googleKey },
+    { provide: "FIREBASE_CONFIG", useValue: environment.firebaseConfig },
+    { provide: "OutpanKey",useValue: environment.outpanKey},
+    {provide:"production",useValue:environment.production},
+    {provide:"emailDev",useValue:environment.emailDev},
+    {provide:"passwordDev",useValue:environment.passwordDev},
+    Toast,
+    AngularFireDatabase,
     UserModel,
     AngularFireAuth,
     AuthService,
@@ -223,7 +233,8 @@ export function createTranslateLoader(http: Http) {
 		AppRate,
 		ImagePicker,
 		Crop,
-		EmailComposer
+		EmailComposer,
+    UtilitiesProvider
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
