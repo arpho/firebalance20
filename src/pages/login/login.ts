@@ -38,19 +38,28 @@ export class LoginPage {
     public Profiles:ProfileService,
   ) {
     this.main_page = { component: TabsNavigationPage };
-
-    this.login = new FormGroup({
-      email: new FormControl(!this.Production?this.emailDev:'', Validators.required),
-      password: new FormControl(!this.Production?this.passwordDev:'', Validators.required)
-    });
+    if(!this.Production)
+      this.login = new FormGroup({
+        email: new FormControl(this.emailDev, Validators.required),
+        password: new FormControl(this.passwordDev, Validators.required)
+      });
+    else
+      this.login = new FormGroup({//TODO  implementare ricorda credenziali
+        email: new FormControl( Validators.required),
+        password: new FormControl( Validators.required)
+      });
   }
 
   doLogin(){
     console.log('doing login',this.login.controls.email.value,this.login.controls.password.value)
     this.Auth.login(this.login.controls.email.value, this.login.controls.password.value).then(a=>{this.Profiles.setUser(a)
-    console.log('logged',this.Profiles.getUser())
-    })
+    console.log('logged',this.Profiles.getUser());
+    this.Utilities.showToast('benvenuto '+ a.email,'5000','top');
     this.nav.setRoot(this.main_page.component);
+    }).catch(err=>{
+      console.log('loginb failed',err);
+      this.Utilities.showToast('problemi di login'+err.message,'7000','top');
+    })
   }
 
   doFacebookLogin() {

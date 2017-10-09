@@ -234,6 +234,7 @@ export function createTranslateLoader(http: Http) {
 		ImagePicker,
 		Crop,
 		EmailComposer,
+    UtilitiesProvider,
     UtilitiesProvider
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
