@@ -91,7 +91,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AuthService } from '../providers/auth/auth';
 import { UtilitiesProvider } from '../providers/utilities/utilities';
-AngularFireModule.initializeApp(environment.firebaseConfig)
+//AngularFireModule.initializeApp(environment.firebaseConfig)
 export function createTranslateLoader(http: Http) {
 	return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }

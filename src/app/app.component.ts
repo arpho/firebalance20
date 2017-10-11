@@ -3,8 +3,13 @@ import { Platform, MenuController, Nav, App, ToastController } from 'ionic-angul
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Observable } from 'rxjs/Observable';
+import { AngularFireModule } from 'angularfire2';
 
+AngularFireModule.initializeApp(environment.firebaseConfig);
+import { AngularFireAuth } from 'angularfire2/auth';
+import { environment } from '../environments/environment';
 import { TabsNavigationPage } from '../pages/tabs-navigation/tabs-navigation';
+import { LoginPage } from '../pages/login/login';
 import { FormsPage } from '../pages/forms/forms';
 import { LayoutsPage } from '../pages/layouts/layouts';
 import { WalkthroughPage } from '../pages/walkthrough/walkthrough';
@@ -31,6 +36,7 @@ export class MyApp {
   pushPages: Array<{title: any, icon: string, component: any}>;
 
   constructor(
+    public firebaseAuth: AngularFireAuth,
     platform: Platform,
     public menu: MenuController,
     public app: App,
@@ -41,10 +47,23 @@ export class MyApp {
   ) {
     translate.setDefaultLang('en');
     translate.use('en');
+    
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
+      console.log('platform ready');
+      const unsubscribe = this.firebaseAuth.auth.onAuthStateChanged(user =>{
+        if(!user){
+          console.log('authState changed',user);
+          this.rootPage = LoginPage;
+          unsubscribe();
+        }
+        else{
+          console.log(' user logged',user);
+          this.rootPage = TabsNavigationPage;
+        }
+      })
       this.splashScreen.hide();
       this.statusBar.styleDefault();
     });
