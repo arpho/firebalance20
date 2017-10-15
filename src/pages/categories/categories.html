@@ -23,18 +23,16 @@
 
 
 <ion-content class="listing-content">
-  <button (click)="categoriesSelector()">
-        <ion-icon name="pricetags"></ion-icon>
-      </button>
-  <h4 class="categories-title">{{'BROWSE_CATEGORIES' | translate}}</h4>
+  <h4 class="categories-title">{{'BROWSE_CATEGORIES' | translate}}<ion-button (click)="search()">
+    <ion-icon name="search"></ion-icon>
+    </ion-button></h4>
+  <categories-list [Categorie]="Categorie">
 
-  <article class="list">
-    <ion-col *ngFor="let category of categories| async">
-      <category-wud-item [categoria]=category *ngIf="showCategory(category)">
-      </category-wud-item>
-    </ion-col>
-  </article>
-  <hr>
+  </categories-list>
+  <!--button (click)="categoriesSelector()">
+        <ion-icon name="pricetags"></ion-icon>
+      </button-->
+
 
 
 

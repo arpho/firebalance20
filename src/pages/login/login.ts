@@ -54,8 +54,8 @@ export class LoginPage {
     console.log('doing login',this.login.controls.email.value,this.login.controls.password.value)
     this.Auth.login(this.login.controls.email.value, this.login.controls.password.value).then(a=>{
       console.log('logged user',a)
-      this.Profiles.setUser(a)
-    this.Utilities.showToast('benvenuto '+ a.email,'5000','top');
+      
+    this.Utilities.showToast('benvenuto ','5000','top');
     this.nav.setRoot(this.main_page.component);
     }).catch(err=>{
       console.log('loginb failed',err);

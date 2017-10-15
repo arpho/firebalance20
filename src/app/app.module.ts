@@ -39,7 +39,7 @@ import { ColorRadio } from '../components/color-radio/color-radio';
 import { CounterInput } from '../components/counter-input/counter-input';
 import { Rating } from '../components/rating/rating';
 import { GoogleMap } from '../components/google-map/google-map';
-
+import { AlertController } from 'ionic-angular';
 import { FeedService } from '../pages/feed/feed.service';
 import { ListingService } from '../pages/listing/listing.service';
 import { ProfileService } from '../pages/profile/profile.service';
@@ -89,8 +89,12 @@ import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
+import {SuiModule} from 'ng2-semantic-ui';
 import { AuthService } from '../providers/auth/auth';
 import { UtilitiesProvider } from '../providers/utilities/utilities';
+import { CategoriesProvider } from '../providers/categories/categories';
+import { CategoriesListComponent } from '../components/categories-list/categories-list';
+import { CategoriesListItemComponent } from '../components/categories-list-item/categories-list-item';
 //AngularFireModule.initializeApp(environment.firebaseConfig)
 export function createTranslateLoader(http: Http) {
 	return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -139,9 +143,12 @@ export function createTranslateLoader(http: Http) {
     ColorRadio,
     CounterInput,
     Rating,
-    GoogleMap
+    GoogleMap,
+    CategoriesListComponent,
+    CategoriesListItemComponent
   ],
   imports: [
+    SuiModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     BrowserModule,
     HttpModule,
@@ -192,7 +199,7 @@ export function createTranslateLoader(http: Http) {
 		VideoPlaylistPage
   ],
   providers: [
-
+    AlertController,
     { provide: "GoogleKey", useValue: environment.googleKey },
     { provide: "FIREBASE_CONFIG", useValue: environment.firebaseConfig },
     { provide: "OutpanKey",useValue: environment.outpanKey},
@@ -235,7 +242,8 @@ export function createTranslateLoader(http: Http) {
 		Crop,
 		EmailComposer,
     UtilitiesProvider,
-    UtilitiesProvider
+    UtilitiesProvider,
+    CategoriesProvider
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

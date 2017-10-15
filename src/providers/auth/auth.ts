@@ -10,6 +10,7 @@ export class AuthService {
   user: Observable<firebase.User>;
 
   constructor(private firebaseAuth: AngularFireAuth) {
+    this.firebaseAuth.auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
     this.user = firebaseAuth.authState;
   }
 
@@ -28,7 +29,9 @@ export class AuthService {
   login(email: string, password: string) {
     return this.firebaseAuth
       .auth
-      .signInWithEmailAndPassword(email, password)
+      .signInWithEmailAndPassword(email, password).then(newUser=>{
+        firebase.database().ref(`/userProfile/${newUser.uid}/email`).set(email);
+      })
       
       .catch(err => {
         console.log('Something went wrong:',err.message);
@@ -36,7 +39,7 @@ export class AuthService {
   }
 
   logout() {
-    this.firebaseAuth
+   return  this.firebaseAuth
       .auth
       .signOut();
   }

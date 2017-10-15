@@ -1,3 +1,4 @@
+import { ProfileService } from '../pages/profile/profile.service';
 import { Component, ViewChild } from '@angular/core';
 import { Platform, MenuController, Nav, App, ToastController } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -5,7 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireModule } from 'angularfire2';
 
-AngularFireModule.initializeApp(environment.firebaseConfig);
+//AngularFireModule.initializeApp(environment.firebaseConfig);
 import { AngularFireAuth } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { TabsNavigationPage } from '../pages/tabs-navigation/tabs-navigation';
@@ -17,6 +18,7 @@ import { SettingsPage } from '../pages/settings/settings';
 import { FunctionalitiesPage } from '../pages/functionalities/functionalities';
 import {CategoriesPage} from '../pages/categories/categories';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
+
 
 @Component({
   selector: 'app-root',
@@ -38,6 +40,7 @@ export class MyApp {
   constructor(
     public firebaseAuth: AngularFireAuth,
     platform: Platform,
+    public Profiles:ProfileService,
     public menu: MenuController,
     public app: App,
     public splashScreen: SplashScreen,
@@ -45,14 +48,13 @@ export class MyApp {
     public translate: TranslateService,
     public toastCtrl: ToastController
   ) {
-    translate.setDefaultLang('en');
-    translate.use('en');
+    translate.setDefaultLang('it');
+    translate.use('it');
     
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      console.log('platform ready');
       const unsubscribe = this.firebaseAuth.auth.onAuthStateChanged(user =>{
         if(!user){
           console.log('authState changed',user);
@@ -60,8 +62,9 @@ export class MyApp {
           unsubscribe();
         }
         else{
-          console.log(' user logged',user);
+          this.Profiles.setUser(user);
           this.rootPage = TabsNavigationPage;
+          unsubscribe();
         }
       })
       this.splashScreen.hide();

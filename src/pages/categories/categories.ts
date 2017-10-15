@@ -1,10 +1,14 @@
+import { AlertController } from 'ionic-angular/es2015';
+import { snapshotChanges } from 'angularfire2/database/public_api';
+import { CategoriesProvider } from '../../providers/categories/categories';
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
-import { CategoriesService } from './categories.service';
 import { TabsNavigationPage } from '../tabs-navigation/tabs-navigation';
 import { CategoriesSelectorPage } from '../categories-selector/categories-selector';
-import {AngularFireList} from 'angularfire2/database'
+import { AngularFireList } from 'angularfire2/database';
+import Rx from 'rxjs/Rx';
+
 
 /**
  * Generated class for the CategoriesPage page.
@@ -18,15 +22,16 @@ import {AngularFireList} from 'angularfire2/database'
   templateUrl: 'categories.html',
 })
 export class CategoriesPage {
-  categories: any;
+  Categorie: any;
   newCategory: any;
   segnaposto: string;
   category_id: string;
   categories_id: string[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public Categories: CategoriesService,
-    public modal: ModalController
+    public modal: ModalController,
+    public Categories: CategoriesProvider,
+    //public alertCtrl:AlertController
   ) {
     this.segnaposto = "filtra categoria";
     this.category_id = "-Ks0UbaDoqhXN1yoyKNP";
@@ -36,9 +41,57 @@ export class CategoriesPage {
     this.categories_id.push("-Ks0UbaDoqhXN1yoyKNP");
     /*this.Categories.fetchCategoryById(this.category_id).subscribe(cat => {
     })*/
-    this.Categories.getCategories();
+    
+    console.log('ref cat',this.Categories.getCategories());
+   this.Categories.getCategories().on('value',categoriesSnapshot=>{
+    
+    this.Categorie = []; // inizializzo la lista delle categorie
+console.log('snap',categoriesSnapshot.val())
+//Rx.Observable.from(categoriesSnapshot)
+categoriesSnapshot.forEach(snap=>{
+  this.Categorie.push(snap.val())
+  return false;
+})
+//const categoriesObservable = Observable.from(this.Categorie)
+//console.log('obsverbale',categoriesObservable);
+//this.Categorie = categoriesObservable;
+console.log('categorie ready',this.Categorie)
+   });
     this.newCategory = "";
 
+  }
+  search(){
+    console.log('search');
+   /* const alert = this.alertCtrl.create({
+      title: 'Login',
+      inputs: [
+        {
+          name: 'username',
+          placeholder: 'Username'
+        },
+        {
+          name: 'password',
+          placeholder: 'Password',
+          type: 'password'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Login',
+          handler: data => {
+            console.log('login')
+          }
+        }
+      ]
+    });
+    alert.present();*/
   }
 
   categoriesSelector() {
@@ -84,9 +137,9 @@ export class CategoriesPage {
 
   createCategory() {
     var categoria = { "title": this.newCategory };
-    this.Categories.pushNewCategory(categoria).then(o => {
+    /*this.Categories.pushNewCategory(categoria).then(o => {
       this.newCategory = "";
-    });
+    });*/
   }
   goHome() {
     this.navCtrl.setRoot(TabsNavigationPage);
