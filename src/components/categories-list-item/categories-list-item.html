@@ -1,4 +1,7 @@
 <!-- Generated template for the CategoriesListItemComponent component -->
-<div class="article">
-  {{categoria.title}}
+<div class="article ui form" [formGroup]="form">
+  <ion-input type= "text"
+             placeholder="category"
+             formControlName="categoria">
+  </ion-input>
 </div>

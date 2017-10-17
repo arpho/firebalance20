@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 /**
  * Generated class for the CategoriesListItemComponent component.
@@ -10,13 +11,21 @@ import { Component, Input } from '@angular/core';
   selector: 'categories-list-item',
   templateUrl: 'categories-list-item.html'
 })
-export class CategoriesListItemComponent {
- @Input() categoria:any;
+export class CategoriesListItemComponent implements OnInit {
+  @Input() categoria: any;
   text: string;
-
-  constructor() {
-    console.log('categoria',this.categoria)
+  public form: FormGroup
+  constructor(
+    public fb: FormBuilder,
+  ) {
+    //console.log('categoria', this.categoria)
     this.text = 'Hello World';
   }
-
+  ngOnInit() {
+    this.form = this.fb.group({
+      categoria: new FormControl(this.categoria.title)
+    }
+    )
+    console.log('categ.', this.categoria)
+  }
 }
