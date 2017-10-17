@@ -15,7 +15,7 @@ export class CategoriesListItemComponent {
   text: string;
 
   constructor() {
-    console.log('Hello CategoriesListItemComponent Component');
+    console.log('categoria',this.categoria)
     this.text = 'Hello World';
   }
 

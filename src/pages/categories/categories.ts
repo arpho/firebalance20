@@ -43,20 +43,25 @@ export class CategoriesPage {
     })*/
     
     console.log('ref cat',this.Categories.getCategories());
-   this.Categories.getCategories().on('value',categoriesSnapshot=>{
-    
-    this.Categorie = []; // inizializzo la lista delle categorie
-console.log('snap',categoriesSnapshot.val())
-//Rx.Observable.from(categoriesSnapshot)
-categoriesSnapshot.forEach(snap=>{
-  this.Categorie.push(snap.val())
-  return false;
-})
-//const categoriesObservable = Observable.from(this.Categorie)
-//console.log('obsverbale',categoriesObservable);
-//this.Categorie = categoriesObservable;
-console.log('categorie ready',this.Categorie)
-   });
+    this.Categories.subscribeSubjectCategoriesRef(ref=>{
+      console.log('sottoscritto ',ref);
+      if(ref)
+        ref.on('value',categoriesSnapshot=>{
+        
+          this.Categorie = []; // inizializzo la lista delle categorie
+      console.log('snap',categoriesSnapshot.val())
+      //Rx.Observable.from(categoriesSnapshot)
+      categoriesSnapshot.forEach(snap=>{
+        this.Categorie.push(snap.val())
+        return false;
+      })
+      //const categoriesObservable = Observable.from(this.Categorie)
+      //console.log('obsverbale',categoriesObservable);
+      //this.Categorie = categoriesObservable;
+      console.log('categorie ready',this.Categorie)
+       });
+    })
+   //this.Categories.getCategories().on
     this.newCategory = "";
 
   }

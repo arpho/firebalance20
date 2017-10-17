@@ -1,10 +1,11 @@
+
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, ChangeDetectorRef } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { Http } from '@angular/http';
-
+//import { BehaviorSubject} from 'rxjs/BehaviorSubject';
 import { ListingPage } from '../pages/listing/listing';
 import { FeedPage } from '../pages/feed/feed';
 import { FollowersPage } from '../pages/followers/followers';
@@ -199,6 +200,7 @@ export function createTranslateLoader(http: Http) {
 		VideoPlaylistPage
   ],
   providers: [
+    //BehaviorSubject,
     AlertController,
     { provide: "GoogleKey", useValue: environment.googleKey },
     { provide: "FIREBASE_CONFIG", useValue: environment.firebaseConfig },
