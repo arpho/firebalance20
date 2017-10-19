@@ -8,6 +8,7 @@ import { TabsNavigationPage } from '../tabs-navigation/tabs-navigation';
 import { CategoriesSelectorPage } from '../categories-selector/categories-selector';
 import { AngularFireList } from 'angularfire2/database';
 import Rx from 'rxjs/Rx';
+import {Category} from './categories.model';
 
 
 /**
@@ -51,8 +52,11 @@ export class CategoriesPage {
           this.Categorie = []; // inizializzo la lista delle categorie
       //console.log('snap',categoriesSnapshot.val())
       //Rx.Observable.from(categoriesSnapshot)
+      
       categoriesSnapshot.forEach(snap=>{
-        this.Categorie.push(snap.val())
+        console.log("snap.val()",snap.val());
+        const categoria = new Category({title:snap.val().title,$key:snap.key})
+        this.Categorie.push(categoria);
         return false;
       })
       //const categoriesObservable = Observable.from(this.Categorie)

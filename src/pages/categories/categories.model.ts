@@ -1,6 +1,8 @@
 export class Category{
     title:string;
-    constructor(title?:string){
-        this.title = title;
+    id: string;
+    constructor(category?:{title:string,$key:string}){
+        this.title = category.title;
+        this.id = category.$key;
     }
 }

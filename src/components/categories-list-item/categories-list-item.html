@@ -1,7 +1,10 @@
-<!-- Generated template for the CategoriesListItemComponent component -->
-<div class="article ui form" [formGroup]="form">
-  <ion-input type= "text"
-             placeholder="category"
-             formControlName="categoria">
+<ion-content padding>
+{{categoria.id}}
+<div class=" article ui form" [formGroup]="form">
+    <ion-label color="primary">Inline Label</ion-label>
+  <ion-input type= "text" placeholder="category" formControlName="categoria">
   </ion-input>
+  <button type="submit"></button>
+  
 </div>
+</ion-content>
