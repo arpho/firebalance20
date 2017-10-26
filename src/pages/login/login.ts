@@ -1,3 +1,4 @@
+import { UserModel } from '../profile/profile.model';
 import { UtilitiesProvider } from '../../providers/utilities/utilities';
 import { Component,Inject } from '@angular/core';
 import { NavController, LoadingController } from 'ionic-angular';
@@ -54,7 +55,10 @@ export class LoginPage {
     console.log('doing login',this.login.controls.email.value,this.login.controls.password.value)
     this.Auth.login(this.login.controls.email.value, this.login.controls.password.value).then(a=>{
       console.log('logged user',a)
-      
+      const user = new UserModel().build(a);
+      //this.Auth.setCurrentUser(user);
+      this.Profiles.setUser(user)
+      console.log('LOGGED',this.Profiles.getUser());
     this.Utilities.showToast('benvenuto ','5000','top');
     this.nav.setRoot(this.main_page.component);
     }).catch(err=>{

@@ -1,6 +1,7 @@
+import { CategoriesProvider } from '../../providers/categories/categories';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import {Category} from  '../../pages/categories/categories.model';
+import { Category } from '../../pages/categories/categories.model';
 
 /**
  * Generated class for the CategoriesListItemComponent component.
@@ -15,18 +16,28 @@ import {Category} from  '../../pages/categories/categories.model';
 export class CategoriesListItemComponent implements OnInit {
   @Input() categoria: Category;
   text: string;
-  public form: FormGroup
+  public myForm: FormGroup
   constructor(
     public fb: FormBuilder,
+    public Categories: CategoriesProvider
   ) {
     //console.log('categoria', this.categoria)
     this.text = 'Hello World';
   }
   ngOnInit() {
-    this.form = this.fb.group({
-      categoria: new FormControl(this.categoria.title)
-    }
-    )
-    //console.log('categ.', this.form.controls.categoria.value)
+    this.myForm = this.fb.group({
+      categoria: new FormControl(this.newFunction())
+    })
+
+    this.myForm.controls['categoria'].valueChanges.subscribe(data => {
+      console.log('dataChanges', data);
+      this.Categories.update(data, this.categoria.id).then(d => {
+        console.log('categoria aggionata', d)
+        this.myForm.controls.categoria.markAsPristine(); // setto la form come vergine
+      })
+    })}
+
+  private newFunction(): any {
+    return this.categoria.title;
   }
 }

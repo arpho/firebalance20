@@ -1,3 +1,4 @@
+import { ProfileService } from '../../pages/profile/profile.service';
 import { Injectable, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import * as firebase from 'firebase/app';
@@ -14,6 +15,7 @@ import { BehaviorSubject} from 'rxjs/BehaviorSubject';
 export class CategoriesProvider {
   public categoriesRef: firebase.database.Reference
   public user: any;
+  public Profile:ProfileService;
   subjectCategoriesRef = new BehaviorSubject(null) // instanzio il behaviorSubject, è definito subito
   constructor(public http: Http,
    
@@ -23,7 +25,7 @@ export class CategoriesProvider {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         console.log('got user', user)
-        const uid = user.uid
+        const uid = user.uid||this.Profile.getUser().uid;
         this.categoriesRef = firebase.database().ref(`/categorie/${uid}`);
         this.subjectCategoriesRef.next(this.categoriesRef); // inserisco il riferimento
         //this.subjectCategoriesRef = new BehaviorSubject(this.categoriesRef)
@@ -45,6 +47,9 @@ export class CategoriesProvider {
 
   getCategory(categoryId: string) {
     return this.categoriesRef.child(categoryId)
+  }
+  update(value,id){
+    return this.categoriesRef.child(`/${id}/`).update({title:value})
   }
 
   pushNewCategory(category: string) {

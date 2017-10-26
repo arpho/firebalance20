@@ -54,7 +54,7 @@ export class CategoriesPage {
       //Rx.Observable.from(categoriesSnapshot)
       
       categoriesSnapshot.forEach(snap=>{
-        console.log("snap.val()",snap.val());
+        //console.log("snap.val()",snap.val(),snap.key);
         const categoria = new Category({title:snap.val().title,$key:snap.key})
         this.Categorie.push(categoria);
         return false;
