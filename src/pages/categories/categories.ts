@@ -8,7 +8,7 @@ import { TabsNavigationPage } from '../tabs-navigation/tabs-navigation';
 import { CategoriesSelectorPage } from '../categories-selector/categories-selector';
 import { AngularFireList } from 'angularfire2/database';
 import Rx from 'rxjs/Rx';
-import {Category} from './categories.model';
+import { Category } from './categories.model';
 
 
 /**
@@ -40,87 +40,36 @@ export class CategoriesPage {
     this.categories_id.push("-Ks0UdZGtzunNoCmGGJd");
     this.categories_id.push("-Ks0VR4z3gZTXtwqTZ-V");
     this.categories_id.push("-Ks0UbaDoqhXN1yoyKNP");
-    /*this.Categories.fetchCategoryById(this.category_id).subscribe(cat => {
-    })*/
-    
-    console.log('ref cat',this.Categories.getCategories());
-    this.Categories.subscribeSubjectCategoriesRef(ref=>{
-      //console.log('sottoscritto ',ref);
-      if(ref)
-        ref.on('value',categoriesSnapshot=>{
-        
-          this.Categorie = []; // inizializzo la lista delle categorie
-      //console.log('snap',categoriesSnapshot.val())
-      //Rx.Observable.from(categoriesSnapshot)
-      
-      categoriesSnapshot.forEach(snap=>{
-        //console.log("snap.val()",snap.val(),snap.key);
-        const categoria = new Category({title:snap.val().title,$key:snap.key})
-        this.Categorie.push(categoria);
-        return false;
-      })
-      //const categoriesObservable = Observable.from(this.Categorie)
-      //console.log('obsverbale',categoriesObservable);
-      //this.Categorie = categoriesObservable;
-      //console.log('categorie ready',this.Categorie)
-       });
+    this.Categories.subscribeSubjectCategoriesRef(ref => {
+      if (ref)
+        ref.on('value', categoriesSnapshot => {
+
+          this.Categorie = [];
+
+          categoriesSnapshot.forEach(snap => {
+            const categoria = new Category({ title: snap.val().title, $key: snap.key })
+            this.Categorie.push(categoria);
+            return false;
+          })
+        });
     })
-   //this.Categories.getCategories().on
     this.newCategory = "";
 
   }
-  search(){
+  search() {
     console.log('search');
-   /* const alert = this.alertCtrl.create({
-      title: 'Login',
-      inputs: [
-        {
-          name: 'username',
-          placeholder: 'Username'
-        },
-        {
-          name: 'password',
-          placeholder: 'Password',
-          type: 'password'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: data => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'Login',
-          handler: data => {
-            console.log('login')
-          }
-        }
-      ]
-    });
-    alert.present();*/
+
   }
 
   categoriesSelector() {
 
-    /*let modal = this.modal.create(CategoriesSelectorPage, this.categories_id);
-    modal.onDidDismiss(values => {
-      console.log('modal dismissed', values);
-    })
-    modal.present();*/
   }
   selectedCategories(val) {
-    //console.log('selectedCategories', val);
     this.categories_id = val;
-    //this.categories.publish(val);
-    //console.log('published categories', val);
 
   }
 
   selectCategory(key) {
-    //console.log('selected category', key); 
     this.categories_id.push(key); //aggiungo la nuova categoria 
   }
 
@@ -135,7 +84,7 @@ export class CategoriesPage {
 
   showCategory(categoria): Boolean {
     var re = new RegExp(this.newCategory, 'i');
-    if (this.newCategory) { //console.log('match',categoria.title.match(re))
+    if (this.newCategory) {
       return categoria.title.match(re) != null;
     }
     else
@@ -146,9 +95,6 @@ export class CategoriesPage {
 
   createCategory() {
     var categoria = { "title": this.newCategory };
-    /*this.Categories.pushNewCategory(categoria).then(o => {
-      this.newCategory = "";
-    });*/
   }
   goHome() {
     this.navCtrl.setRoot(TabsNavigationPage);

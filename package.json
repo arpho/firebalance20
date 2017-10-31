@@ -90,7 +90,7 @@
     "@ionic/cli-plugin-ionic-angular": "1.3.1",
     "typescript": "2.3.4"
   },
-  "description": "ion2-FullApp: The Best Ionic 2 Starter app.",
+  "description": "my personal balance app",
   "config": {
     "ionic_sass": "./config/sass.config.js"
   },
@@ -102,7 +102,7 @@
       "cordova-plugin-device": {},
       "cordova-plugin-facebook4": {
         "APP_ID": "826720427470540",
-        "APP_NAME": "Ion2FullApp"
+        "APP_NAME": "firebalance"
       },
       "cordova-plugin-geolocation": {
         "GEOLOCATION_USAGE_DESCRIPTION": " "

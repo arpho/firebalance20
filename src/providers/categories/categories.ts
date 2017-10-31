@@ -1,9 +1,12 @@
+//import {RX} from 'rxjs/Rx'
+import { Observable } from 'rxjs/Rx';
 import { ProfileService } from '../../pages/profile/profile.service';
 import { Injectable, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import * as firebase from 'firebase/app';
 import 'rxjs/add/operator/map';
-import { BehaviorSubject} from 'rxjs/BehaviorSubject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Category } from '../../pages/categories/categories.model';
 
 /*
   Generated class for the CategoriesProvider provider.
@@ -15,20 +18,20 @@ import { BehaviorSubject} from 'rxjs/BehaviorSubject';
 export class CategoriesProvider {
   public categoriesRef: firebase.database.Reference
   public user: any;
-  public Profile:ProfileService;
+  Categorie: any;
+  public Profile: ProfileService;
   subjectCategoriesRef = new BehaviorSubject(null) // instanzio il behaviorSubject, è definito subito
   constructor(public http: Http,
-   
+
   ) {
-     
+
     console.log('check user')
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         console.log('got user', user)
-        const uid = user.uid||this.Profile.getUser().uid;
+        const uid = user.uid || this.Profile.getUser().uid;
         this.categoriesRef = firebase.database().ref(`/categorie/${uid}`);
         this.subjectCategoriesRef.next(this.categoriesRef); // inserisco il riferimento
-        //this.subjectCategoriesRef = new BehaviorSubject(this.categoriesRef)
         console.log('cateegoriesRef', this.categoriesRef);
       }
     })
@@ -36,20 +39,37 @@ export class CategoriesProvider {
 
   }
 
-  subscribeSubjectCategoriesRef(cb:(ref:firebase.database.Reference)=>any){
+  subscribeSubjectCategoriesRef(cb: (ref: firebase.database.Reference) => any) {
     return this.subjectCategoriesRef.subscribe(cb);
   }
 
   getCategories(): firebase.database.Reference {
-    //console.log('user in provider',this.user.uid)
     return this.categoriesRef
   }
 
+  getArrawyCategories(cb: any) {
+    this.Categorie = [];
+    this.subjectCategoriesRef.subscribe(ref => {
+      if (ref)
+        ref.on('value', categoriesSnapshot => {
+
+          this.Categorie = []; // inizializzo la lista delle categorie
+
+          categoriesSnapshot.forEach(snap => {
+            const categoria = new Category({ title: snap.val().title, $key: snap.key })
+            this.Categorie.push(new Category({ title: snap.val().title, $key: snap.key }));
+            return false;
+          })
+        });
+      cb(this.Categorie)
+    })
+
+  }
   getCategory(categoryId: string) {
     return this.categoriesRef.child(categoryId)
   }
-  update(value,id){
-    return this.categoriesRef.child(`/${id}/`).update({title:value})
+  update(value, id) {
+    return this.categoriesRef.child(`/${id}/`).update({ title: value })
   }
 
   pushNewCategory(category: string) {

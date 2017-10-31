@@ -10,14 +10,14 @@ export class UserModel {
   image: string;
 
   build(user) {
-    this.location = user.location || "";
-    this.photoURL = user.photoURL || "";
-    this.email = user.email || "";
-    this.name = user.name || "";
-    this.phone = user.phone || "";
-    this.website = user.website || "";
-    this.image = user.image || "";
-    this.uid = user.uid || "";
+    this.location = user && user.location || "";
+    this.photoURL = user && user.photoURL || "";
+    this.email = user && user.email || "";
+    this.name = user && user.name || "";
+    this.phone = user && user.phone || "";
+    this.website = user && user.website || "";
+    this.image = user && user.image || "";
+    this.uid = user && user.uid || "";
     return this;
   }
 }
