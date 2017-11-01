@@ -28,8 +28,8 @@ export class CategoriesListItemComponent implements OnInit {
     this.myForm = this.fb.group({
       categoria: new FormControl(this.newFunction())
     })
-
-    this.myForm.controls['categoria'].valueChanges.subscribe(data => {
+    
+    this.myForm.controls['categoria'].valueChanges.debounceTime(1000).subscribe(data => {
       console.log('dataChanges', data);
       this.Categories.update(data, this.categoria.id).then(d => {
         console.log('categoria aggionata', d)
