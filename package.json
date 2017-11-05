@@ -1,8 +1,7 @@
 {
-  "name": "ion2-fullapp-ELITE",
-  "author": "Ionic Themes",
-  "homepage": "https://ionicthemes.com",
-  "private": true,
+  "name": "fireBalance",
+  "author": "Giuseppe D'Amico",
+  "private": false,
   "scripts": {
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",

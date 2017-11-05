@@ -1,3 +1,4 @@
+import { ShoppingCartsProvider } from '../../providers/shopping-carts/shopping-carts';
 import { CategoriesProvider } from '../../providers/categories/categories';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
@@ -19,6 +20,7 @@ export class CategoriesListItemComponent implements OnInit {
   public myForm: FormGroup
   constructor(
     public fb: FormBuilder,
+    public ShoppingCart:ShoppingCartsProvider,
     public Categories: CategoriesProvider
   ) {
     //console.log('categoria', this.categoria)

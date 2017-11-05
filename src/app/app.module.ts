@@ -96,6 +96,7 @@ import { UtilitiesProvider } from '../providers/utilities/utilities';
 import { CategoriesProvider } from '../providers/categories/categories';
 import { CategoriesListComponent } from '../components/categories-list/categories-list';
 import { CategoriesListItemComponent } from '../components/categories-list-item/categories-list-item';
+import { ShoppingCartsProvider } from '../providers/shopping-carts/shopping-carts';
 //AngularFireModule.initializeApp(environment.firebaseConfig)
 export function createTranslateLoader(http: Http) {
 	return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -245,7 +246,8 @@ export function createTranslateLoader(http: Http) {
 		EmailComposer,
     UtilitiesProvider,
     UtilitiesProvider,
-    CategoriesProvider
+    CategoriesProvider,
+    ShoppingCartsProvider
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
