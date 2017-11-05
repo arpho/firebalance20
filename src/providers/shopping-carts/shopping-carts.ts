@@ -1,11 +1,11 @@
 import { Observable } from 'rxjs/Rx';
 import { ProfileService } from '../../pages/profile/profile.service';
-import { Injectable,OnInit } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import * as firebase from 'firebase/app';
 import 'rxjs/add/operator/map';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import {ShoppingCartModel,ItemModel} from '../../models/shoppingCart.model';
+import { ShoppingCartModel, ItemModel } from '../../models/shoppingCart.model';
 import * as _ from 'lodash';
 
 /*
@@ -15,14 +15,14 @@ import * as _ from 'lodash';
   for more info on providers and Angular DI.
 */
 @Injectable()
-export class ShoppingCartsProvider  {
+export class ShoppingCartsProvider {
   public shoppingCartRef: firebase.database.Reference;
   public Profile: ProfileService;
-  public ShoppingCartObservable:Observable<ShoppingCartModel>
+  public ShoppingCartObservable: Observable<ShoppingCartModel>
   public shoppingCarts: ShoppingCartModel[];
-  subjectShoppingCart:BehaviorSubject<firebase.database.Reference> = new BehaviorSubject(null) // instanzio il behaviorSubject, è definito subito
+  subjectShoppingCart: BehaviorSubject<firebase.database.Reference> = new BehaviorSubject(null) // instanzio il behaviorSubject, è definito subito
 
-  start(){
+  start() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         console.log('got user', user)
@@ -31,21 +31,20 @@ export class ShoppingCartsProvider  {
         this.subjectShoppingCart.next(this.shoppingCartRef); // inserisco il riferimento
       }
     })
-    this.subjectShoppingCart.subscribe(ref=>{
-      if(ref){
-        ref.on('value',snapshot=>{
+    this.subjectShoppingCart.subscribe(ref => {
+      if (ref) {
+        ref.on('value', snapshot => {
           this.shoppingCarts = []
-            snapshot.forEach(element => {
-              const shoppingCart = new ShoppingCartModel();
-              _.extend(shoppingCart,element)
-              shoppingCart.key = element.key;
-              this.shoppingCarts.push(shoppingCart)
-              this.ShoppingCartObservable
-              return false;
-            });
-            this.ShoppingCartObservable = Observable.from(this.shoppingCarts)
-            console.log('got shoppingcart')
-            
+          snapshot.forEach(element => {
+            const shoppingCart = new ShoppingCartModel();
+            _.extend(shoppingCart, element)
+            shoppingCart.key = element.key;
+            this.shoppingCarts.push(shoppingCart)
+            return false;
+          });
+          this.ShoppingCartObservable = Observable.from(this.shoppingCarts)
+          console.log('got shoppingcart')
+
         })
       }
     })
