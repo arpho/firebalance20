@@ -2,4 +2,8 @@
 <ion-item class=" article ui form" [formGroup]="myForm">
   <ion-input type= "text" placeholder="category" formControlName="categoria" id="inputCategoria">
   </ion-input>
+  
 </ion-item>
+<category-counter [dataFilter]="filter" [categoryId]="categoria.id">
+
+</category-counter>

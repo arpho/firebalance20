@@ -41,7 +41,7 @@ export class CategoriesPage {
     this.categories_id.push("-Ks0VR4z3gZTXtwqTZ-V");
     this.categories_id.push("-Ks0UbaDoqhXN1yoyKNP");
     this.Categories.subscribeSubjectCategoriesRef(ref => {
-      if (ref)
+      if (ref){
         ref.on('value', categoriesSnapshot => {
 
           this.Categorie = [];
@@ -52,6 +52,7 @@ export class CategoriesPage {
             return false;
           })
         });
+      }
     })
     this.newCategory = "";
 

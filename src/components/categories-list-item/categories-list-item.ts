@@ -20,13 +20,13 @@ export class CategoriesListItemComponent implements OnInit {
   public myForm: FormGroup
   constructor(
     public fb: FormBuilder,
-    public ShoppingCart:ShoppingCartsProvider,
     public Categories: CategoriesProvider
   ) {
     //console.log('categoria', this.categoria)
     this.text = 'Hello World';
   }
   ngOnInit() {
+    console.log('categoria',this.categoria.title)
     this.myForm = this.fb.group({
       categoria: new FormControl(this.newFunction())
     })
