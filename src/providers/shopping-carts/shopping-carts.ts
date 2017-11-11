@@ -21,7 +21,7 @@ export class ShoppingCartsProvider {
   public ShoppingCartObservable: Observable<ShoppingCartModel>
   public shoppingCarts: ShoppingCartModel[];
   subjectShoppingCart: BehaviorSubject<firebase.database.Reference> = new BehaviorSubject(null); // instanzio il behaviorSubject, è definito subito
-  shoppingCartSubject:BehaviorSubject<Observable<ShoppingCartModel>> = new BehaviorSubject(null);
+  shoppingCartSubject: BehaviorSubject<Observable<ShoppingCartModel>> = new BehaviorSubject(null);
 
   start() {
     firebase.auth().onAuthStateChanged(user => {
@@ -37,39 +37,49 @@ export class ShoppingCartsProvider {
         ref.on('value', snapshot => {
           this.shoppingCarts = []
           snapshot.forEach(element => {
-            console.log('element',element)
             const shoppingCart = new ShoppingCartModel();
             _.extend(shoppingCart, element.val())
-            console.log('cart',shoppingCart,element);
             shoppingCart.key = element.key;
             this.shoppingCarts.push(shoppingCart)
             return false;
           });
           this.ShoppingCartObservable = Observable.from(this.shoppingCarts)
-          this.shoppingCartSubject.next(this.ShoppingCartObservable); 
-          console.log('got shoppingcart')
+          this.shoppingCartSubject.next(this.ShoppingCartObservable);
 
         })
       }
     })
   }
-  countCategory(categoryId:string,cb){
-    console.log('counting ',categoryId)
-    this.shoppingCartSubject.subscribe(shoppingCarts=>{
-      console.log('abracadabra',shoppingCarts);
-      if (shoppingCarts)
-     var count =  shoppingCarts.flatMap(cart=>{
-       console.log('cart',cart,cart.items.length)
-       if (cart.items)
-        return Observable.from(cart.items);
-      }).count((value,i,s)=>{ 
-         return value.categorieId.indexOf(categoryId)>-1
-      }).subscribe(cb)
-    })
 
-    
+
+
+  countCategory(categoryId: string, cb) {
+    this.shoppingCartSubject.subscribe(shoppingCarts => {
+      if (shoppingCarts) {
+        shoppingCarts.flatMap(cart => {
+          if (cart.items)
+            return Observable.from(cart.items);
+        }).count(x => {
+          return x.categorieId && x.categorieId.indexOf(categoryId) > -1;
+        }).subscribe(cb)
+      }
+    })
   }
 
+  sumCategory(categoryId: string, cb) {
+    this.shoppingCartSubject.subscribe(shoppingCarts => {
+      if (shoppingCarts) {
+        shoppingCarts.flatMap(cart => {
+          if (cart.items)
+            return Observable.from(cart.items);
+        }).scan((acc, x) => {
+          if (x.categorieId && x.categorieId.indexOf(categoryId) > -1)
+            acc.prezzo = Number(acc.prezzo) + Number(x.prezzo)
+          return acc;
+        }, new ItemModel()).subscribe(cb)
+      }
+    })
+  }
   constructor(public http: Http) {
     console.log('Hello ShoppingCartsProvider Provider');
     this.ShoppingCartObservable = new Observable();

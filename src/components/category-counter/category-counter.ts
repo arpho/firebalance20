@@ -1,5 +1,5 @@
 import { ShoppingCartsProvider } from '../../providers/shopping-carts/shopping-carts';
-import { Component, Input,OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 /**
  * Generated class for the CategoryCounterComponent component.
@@ -13,20 +13,19 @@ import { Component, Input,OnInit } from '@angular/core';
 })
 export class CategoryCounterComponent implements OnInit {
   @Input() dataFilter: string;
-  @Input() categoryId:string;
+  @Input() categoryId: string;
   text: string;
   counter: number
- ngOnInit(){
-   console.log('counter',this.categoryId);
-    
-   this.ShoppingCart.countCategory(this.categoryId,c=>{
-    console.log('result',c)
-  })
- }
+  ngOnInit() {
+
+    this.ShoppingCart.countCategory(this.categoryId, c => {
+      this.counter = c;
+    })
+  }
   constructor(
     public ShoppingCart: ShoppingCartsProvider
   ) {
-    this.counter = 0;
+    //this.counter = 0;
   }
 
 }

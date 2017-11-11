@@ -1,4 +1,4 @@
-
+<article>
 <ion-item class=" article ui form" [formGroup]="myForm">
   <ion-input type= "text" placeholder="category" formControlName="categoria" id="inputCategoria">
   </ion-input>
@@ -7,3 +7,5 @@
 <category-counter [dataFilter]="filter" [categoryId]="categoria.id">
 
 </category-counter>
+<category-sum [dataFilter]="filter" [categoryId]="categoria.id"></category-sum>
+</article>

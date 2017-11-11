@@ -98,6 +98,7 @@ import { CategoriesListComponent } from '../components/categories-list/categorie
 import { CategoriesListItemComponent } from '../components/categories-list-item/categories-list-item';
 import { ShoppingCartsProvider } from '../providers/shopping-carts/shopping-carts';
 import { CategoryCounterComponent } from '../components/category-counter/category-counter';
+import { CategorySumComponent } from '../components/category-sum/category-sum';
 //AngularFireModule.initializeApp(environment.firebaseConfig)
 export function createTranslateLoader(http: Http) {
 	return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -149,7 +150,8 @@ export function createTranslateLoader(http: Http) {
     GoogleMap,
     CategoriesListComponent,
     CategoriesListItemComponent,
-    CategoryCounterComponent
+    CategoryCounterComponent,
+    CategorySumComponent
   ],
   imports: [
     SuiModule,

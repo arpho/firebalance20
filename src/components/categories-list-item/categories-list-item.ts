@@ -26,7 +26,6 @@ export class CategoriesListItemComponent implements OnInit {
     this.text = 'Hello World';
   }
   ngOnInit() {
-    console.log('categoria',this.categoria.title)
     this.myForm = this.fb.group({
       categoria: new FormControl(this.newFunction())
     })
