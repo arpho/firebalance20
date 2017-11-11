@@ -22,9 +22,9 @@ export class CategorySumComponent implements OnInit {
     this.text = 'Hello World' + this.categoryId;
     //  console.log('hi',this.categoryId);
     this.ShoppingCart.sumCategory(this.categoryId, x => {
-      console.log('result sum', x)
+      //console.log('result sum', x)
       this.sum['totale'] = this.roundToTwo(x.prezzo);
-      console.log('sum', this.sum)
+      //console.log('sum', this.sum)
       this.sum['moneta'] = x.moneta;
 
     })

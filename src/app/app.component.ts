@@ -16,6 +16,7 @@ import { LayoutsPage } from '../pages/layouts/layouts';
 import { WalkthroughPage } from '../pages/walkthrough/walkthrough';
 import { SettingsPage } from '../pages/settings/settings';
 import { FunctionalitiesPage } from '../pages/functionalities/functionalities';
+import { PaymentPage } from '../pages/payment/payment';
 import {CategoriesPage} from '../pages/categories/categories';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 
@@ -86,6 +87,7 @@ export class MyApp {
         Observable.forkJoin(
           this.translate.get('HOME'),
           this.translate.get('CATEGORIES'),
+          this.translate.get('PAYMENTS'),
           this.translate.get('FORMS'),
           this.translate.get('FUNCTIONALITIES'),
           this.translate.get('LAYOUTS'),
@@ -94,7 +96,7 @@ export class MyApp {
           this.pages = [
             { title: data[0], icon: 'home', component: TabsNavigationPage },
             { title: data[1], icon: 'pricetags', component: CategoriesPage },
-            { title: data[2], icon: 'code', component: FunctionalitiesPage }
+            { title: data[2], icon: 'cash', component: PaymentPage }
           ];
 
           this.pushPages = [

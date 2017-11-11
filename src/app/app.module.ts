@@ -31,6 +31,7 @@ import { PrivacyPolicyPage } from '../pages/privacy-policy/privacy-policy';
 import { FormValidationsPage } from '../pages/form-validations/form-validations';
 import {CategoriesPage} from '../pages/categories/categories';
 import {CategoriesService} from '../pages/categories/categories.service';
+import {PaymentPage} from '../pages/payment/payment'
 
 import { PreloadImage } from '../components/preload-image/preload-image';
 import { BackgroundImage } from '../components/background-image/background-image';
@@ -99,6 +100,9 @@ import { CategoriesListItemComponent } from '../components/categories-list-item/
 import { ShoppingCartsProvider } from '../providers/shopping-carts/shopping-carts';
 import { CategoryCounterComponent } from '../components/category-counter/category-counter';
 import { CategorySumComponent } from '../components/category-sum/category-sum';
+import { PaymentsProvider } from '../providers/payments/payments';
+import { PaymentListComponent } from '../components/payment-list/payment-list';
+import { PaymentItemListComponent } from '../components/payment-item-list/payment-item-list';
 //AngularFireModule.initializeApp(environment.firebaseConfig)
 export function createTranslateLoader(http: Http) {
 	return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -137,6 +141,7 @@ export function createTranslateLoader(http: Http) {
     TwitterLoginPage,
     AdsPage,
     CategoriesPage,
+    PaymentPage,
 		FormValidationsPage,
 		VideoPlaylistPage,
 
@@ -151,7 +156,9 @@ export function createTranslateLoader(http: Http) {
     CategoriesListComponent,
     CategoriesListItemComponent,
     CategoryCounterComponent,
-    CategorySumComponent
+    CategorySumComponent,
+    PaymentListComponent,
+    PaymentItemListComponent
   ],
   imports: [
     SuiModule,
@@ -201,6 +208,7 @@ export function createTranslateLoader(http: Http) {
     TwitterLoginPage,
     AdsPage,
     CategoriesPage,
+    PaymentPage,
 		FormValidationsPage,
 		VideoPlaylistPage
   ],
@@ -251,7 +259,8 @@ export function createTranslateLoader(http: Http) {
     UtilitiesProvider,
     UtilitiesProvider,
     CategoriesProvider,
-    ShoppingCartsProvider
+    ShoppingCartsProvider,
+    PaymentsProvider
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
