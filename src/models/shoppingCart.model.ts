@@ -12,7 +12,7 @@ export class ItemModel {
     moneta: string;
     key: String;
     quantita:string;
-    constructor() {
+    constructor(item?:any) {
         this.prezzo =  0;
         this.barcode =  '';
         this.descrizione = '';
@@ -58,16 +58,15 @@ export class ShoppingCartModel {
     dataAddebito: string;
     items: Array<ItemModel>;
     key: string;
-    constructor() {
-        this.fornitoreId = "";
-        this.pagamentoId = "";
-        this.moneta = "€"
-        this.online = false;
-        this.tassoConversione = Number(1);
-        this.dataAcquisto = new Date().toISOString();
-        this.dataAddebito = new Date().toISOString();
-        this.items = [];
-        this.key = "";
+    constructor(shoppingCart?:any) {
+        this.fornitoreId = shoppingCart.fornitoreId || "";
+        this.pagamentoId = shoppingCart.pagamentoId || "";
+        this.dataAcquisto = shoppingCart.dataAcquisto || new Date().toISOString();
+        this.dataAddebito = shoppingCart.dataAddebito || new Date().toISOString();
+        this.totale = shoppingCart.totale|| 0;
+        this.online = shoppingCart.online || false;
+        this.items = shoppingCart.items || [];
+        this.key = shoppingCart.key || "";
     }
     build(shoppingCart: {
         fornitoreId: string,

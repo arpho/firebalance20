@@ -37,8 +37,8 @@ export class ShoppingCartsProvider {
         ref.on('value', snapshot => {
           this.shoppingCarts = []
           snapshot.forEach(element => {
-            const shoppingCart = new ShoppingCartModel();
-            _.extend(shoppingCart, element.val())
+            const shoppingCart = new ShoppingCartModel(element.val());
+            //_.extend(shoppingCart, element.val())
             shoppingCart.key = element.key;
             this.shoppingCarts.push(shoppingCart)
             return false;
@@ -51,15 +51,18 @@ export class ShoppingCartsProvider {
     })
   }
 
+  flattenCarts(shoppingCarts: Observable<ShoppingCartModel>) {
+    return shoppingCarts.flatMap(cart => {
+      if (cart.items)
+        return Observable.from(cart.items);
+    })
+  }
 
 
   countCategory(categoryId: string, cb) {
     this.shoppingCartSubject.subscribe(shoppingCarts => {
       if (shoppingCarts) {
-        shoppingCarts.flatMap(cart => {
-          if (cart.items)
-            return Observable.from(cart.items);
-        }).count(x => {
+        this.flattenCarts(shoppingCarts).count(x => {
           return x.categorieId && x.categorieId.indexOf(categoryId) > -1;
         }).subscribe(cb)
       }
@@ -69,10 +72,7 @@ export class ShoppingCartsProvider {
   sumCategory(categoryId: string, cb) {
     this.shoppingCartSubject.subscribe(shoppingCarts => {
       if (shoppingCarts) {
-        shoppingCarts.flatMap(cart => {
-          if (cart.items)
-            return Observable.from(cart.items);
-        }).scan((acc, x) => {
+        this.flattenCarts(shoppingCarts).scan((acc, x) => {
           if (x.categorieId && x.categorieId.indexOf(categoryId) > -1)
             acc.prezzo = Number(acc.prezzo) + Number(x.prezzo)
           return acc;
