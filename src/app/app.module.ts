@@ -14,6 +14,7 @@ import { FormsPage } from '../pages/forms/forms';
 import { LoginPage } from '../pages/login/login';
 import { NotificationsPage } from '../pages/notifications/notifications';
 import { ProfilePage } from '../pages/profile/profile';
+ import {CreatePaymentPage} from '../pages/create-payment/create-payment';
 import { TabsNavigationPage } from '../pages/tabs-navigation/tabs-navigation';
 import { WalkthroughPage } from '../pages/walkthrough/walkthrough';
 import { SettingsPage } from '../pages/settings/settings';
@@ -103,6 +104,7 @@ import { CategorySumComponent } from '../components/category-sum/category-sum';
 import { PaymentsProvider } from '../providers/payments/payments';
 import { PaymentListComponent } from '../components/payment-list/payment-list';
 import { PaymentItemListComponent } from '../components/payment-item-list/payment-item-list';
+//import { PaymentProvider } from '../providers/payment/payment';
 //AngularFireModule.initializeApp(environment.firebaseConfig)
 export function createTranslateLoader(http: Http) {
 	return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -120,6 +122,7 @@ export function createTranslateLoader(http: Http) {
     LoginPage,
     NotificationsPage,
     ProfilePage,
+    CreatePaymentPage,
     TabsNavigationPage,
     WalkthroughPage,
     SettingsPage,
@@ -187,6 +190,7 @@ export function createTranslateLoader(http: Http) {
     LoginPage,
     NotificationsPage,
     ProfilePage,
+    CreatePaymentPage,
     TabsNavigationPage,
     WalkthroughPage,
     SettingsPage,
@@ -260,7 +264,9 @@ export function createTranslateLoader(http: Http) {
     UtilitiesProvider,
     CategoriesProvider,
     ShoppingCartsProvider,
-    PaymentsProvider
+    PaymentsProvider,
+    UtilitiesProvider,
+    //PaymentProvider
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

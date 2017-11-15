@@ -5,14 +5,32 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>createPayment</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding>
-
-</ion-content>
+  
+    <ion-navbar>
+      <ion-title class="title"> {{'CREATION_NEW_PAYMENT' |translate}}</ion-title>
+      <ion-button>
+        <ion-icon name="close" (click)="dismiss()"></ion-icon>
+      </ion-button>
+  
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content padding>
+    <div class=" ui form" [formGroup]="paymentForm">
+  
+      <label for="nome">Pagamento</label>
+      <ion-input type="text" id="nomeInput" placeholder="Pagamento" formControlName="nome">
+      </ion-input>
+      <label for="addebito">Codice addebito</label>
+      <ion-input type="text" id="addebitoInput" placeholder="codice addebito" formControlName="addebito">
+      </ion-input><label for="addebito">Note</label>
+      <ion-input type="text" id="noteInput" placeholder="note" formControlName="note">
+      </ion-input>
+      <button type="submit" ion-button block icon-right class="choose-category-button" (click)="createPayment(this.paymentForm)">
+      {{'INSERT' | translate}}
+    </button>
+    </div>
+  
+  </ion-content>

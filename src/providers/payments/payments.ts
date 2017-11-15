@@ -7,6 +7,7 @@ import 'rxjs/add/operator/map';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Category } from '../../pages/categories/categories.model';
 import { PaymentsModel } from '../../models/payment.model'
+import { ShoppingCartsProvider } from '../shopping-carts/shopping-carts';
 
 /*
   Generated class for the PaymentsProvider provider.
@@ -19,7 +20,8 @@ export class PaymentsProvider {
   public paymentsRef: firebase.database.Reference
   paymentsList: any;
   subjectPaymentsRef = new BehaviorSubject(null) // instanzio il behaviorSubject, è definito subito
-  constructor(public http: Http) {
+  constructor(public http: Http,
+    public Carts:ShoppingCartsProvider) {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         const uid = user.uid;
@@ -27,6 +29,17 @@ export class PaymentsProvider {
         this.subjectPaymentsRef.next(this.paymentsRef);
 
       }
+    })
+  }
+
+
+  calculateAmmount(pagamentoId,cb){
+    this.Carts.shoppingCartSubject.subscribe(shoppingCart=>{
+      shoppingCart.scan((acc,x)=>{
+        if(x.pagamentoId==pagamentoId)
+        acc.totale = acc.totale||0 + x.totale
+        return acc
+      }).subscribe(tot=>cb(tot))
     })
   }
 

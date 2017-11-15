@@ -1,5 +1,11 @@
+import { PaymentsProvider } from '../../providers/payments/payments';
+import { UtilitiesProvider } from '../../providers/utilities/utilities';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { FormBuilder, FormControl, FormGroup, Validators, AbstractControl, ReactiveFormsModule } from '@angular/forms';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { PaymentsService } from '../payments/payments.service';
+import { PaymentsModel } from '../../models/payment.model';
+import { UtilitiesService } from '../../app/utilities.service';
 
 /**
  * Generated class for the CreatePaymentPage page.
@@ -13,12 +19,36 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'create-payment.html',
 })
 export class CreatePaymentPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  public paymentForm: FormGroup;
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    private Payments: PaymentsProvider,
+    private Utilities: UtilitiesProvider,
+    fb: FormBuilder,
+    public view: ViewController) {
+    this.paymentForm = fb.group({
+      addebito: new FormControl(''),
+      nome: new FormControl(''),
+      note: new FormControl(''),
+      key: new FormControl('')
+    }, Validators.required);
+   
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CreatePaymentPage');
-  }
+  dismiss() {
+  this.view.dismiss();
+}
 
+
+
+ionViewDidLoad() {
+  console.log('ionViewDidLoad CreatePaymentPage');
+}
+createPayment(payment:any) {
+  var Payment = new PaymentsModel(payment.controls);
+ /* this.Payments.pushNewPayment(Payment).then(data=>{
+    console.log('creato',data.key);
+      this.view.dismiss(data.key);
+});*/
+
+  }
 }

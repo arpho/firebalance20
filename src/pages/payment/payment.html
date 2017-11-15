@@ -8,7 +8,7 @@
 
   <ion-navbar>
       <ion-title>
-        <ion-icon name="arrow-back" (click)="goHome()"></ion-icon> Categorie</ion-title>
+        <ion-icon name="arrow-back" (click)="goHome()"></ion-icon> Pagamenti</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -16,7 +16,10 @@
 
 <ion-content padding>
   <payment-list [paymentsList]="paymentsList">
-
+    
   </payment-list>
-
+<ion-fab top right>
+      <button ion-fab color="primary" (click)="create()"><ion-icon name="add"></ion-icon>
+      </button>
+    </ion-fab>
 </ion-content>
