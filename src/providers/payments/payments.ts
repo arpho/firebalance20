@@ -1,3 +1,4 @@
+import { ShoppingCartModel } from '../../models/shoppingCart.model';
 import { Injectable } from '@angular/core';
 
 import { Http } from '@angular/http';
@@ -21,7 +22,7 @@ export class PaymentsProvider {
   paymentsList: any;
   subjectPaymentsRef = new BehaviorSubject(null) // instanzio il behaviorSubject, è definito subito
   constructor(public http: Http,
-    public Carts:ShoppingCartsProvider) {
+    public Carts: ShoppingCartsProvider) {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         const uid = user.uid;
@@ -33,13 +34,14 @@ export class PaymentsProvider {
   }
 
 
-  calculateAmmount(pagamentoId,cb){
-    this.Carts.shoppingCartSubject.subscribe(shoppingCart=>{
-      shoppingCart.scan((acc,x)=>{
-        if(x.pagamentoId==pagamentoId)
-        acc.totale = acc.totale||0 + x.totale
-        return acc
-      }).subscribe(tot=>cb(tot))
+  calculateAmmount(pagamentoId, cb) {
+    this.Carts.shoppingCartSubject.subscribe(shoppingCart => {
+      if (shoppingCart)
+        shoppingCart.scan((acc, x) => {
+          if (x.pagamentoId == pagamentoId)
+            acc.totale = acc.totale || 0 + x.totale
+          return acc
+        }, new ShoppingCartModel()).subscribe(tot => cb(tot))
     })
   }
 

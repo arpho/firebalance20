@@ -19,15 +19,14 @@ export class PaymentItemListComponent implements OnInit {
 
   ngOnInit(){
     console.log('payment',this.Payment)
-     this.Payments.calculateAmmount(this.Payment.key, totale=>{
-       console.log('totale per '+this.Payment.key,this.Payment.nome,totale);
+     this.Payments.calculateAmmount(this.Payment.key, acc=>{
+       this.totale = acc.totale
+       //console.log('totale per '+this.Payment.nome,acc.totale);
      })
   }
   constructor(
     public Payments:PaymentsProvider
   ) {
-    console.log('Hello PaymentItemListComponent Component');
-    this.text = 'Hello World';
   }
 
 }

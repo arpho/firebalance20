@@ -59,14 +59,27 @@ export class ShoppingCartModel {
     items: Array<ItemModel>;
     key: string;
     constructor(shoppingCart?:any) {
-        this.fornitoreId = shoppingCart.fornitoreId || "";
-        this.pagamentoId = shoppingCart.pagamentoId || "";
-        this.dataAcquisto = shoppingCart.dataAcquisto || new Date().toISOString();
-        this.dataAddebito = shoppingCart.dataAddebito || new Date().toISOString();
-        this.totale = shoppingCart.totale|| 0;
-        this.online = shoppingCart.online || false;
-        this.items = shoppingCart.items || [];
-        this.key = shoppingCart.key || "";
+        if(shoppingCart){
+            this.fornitoreId = shoppingCart.fornitoreId || "";
+            this.pagamentoId = shoppingCart.pagamentoId || "";
+            this.dataAcquisto = shoppingCart.dataAcquisto || new Date().toISOString();
+            this.dataAddebito = shoppingCart.dataAddebito || new Date().toISOString();
+            this.totale = shoppingCart.totale|| 0;
+            this.online = shoppingCart.online || false;
+            this.items = shoppingCart.items || [];
+            this.key = shoppingCart.key || "";
+        }
+        else{
+            this.fornitoreId = "";
+            this.pagamentoId =  "";
+            this.dataAcquisto =  new Date().toISOString();
+            this.dataAddebito =  new Date().toISOString();
+            this.totale =  0;
+            this.online =  false;
+            this.items = [];
+            this.key =  "";
+
+        }
     }
     build(shoppingCart: {
         fornitoreId: string,
