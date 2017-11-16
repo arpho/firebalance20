@@ -50,7 +50,7 @@ export class PaymentsProvider {
           return acc
         }, new ShoppingCartModel()).subscribe(tot => {
           cb(tot);
-        }).unsubscribe();
+        })// mantengo la sottoscrizione perchè è un'operazione di lettura
     })
   }
 
@@ -65,7 +65,7 @@ export class PaymentsProvider {
         Payments.push(pagamento, (result => {
           cb(result)
         }))
-    }).unsubscribe()
+    }).unsubscribe()//cancello la sottoscrizione è un'operazione che non deve essere ripetuta
   }
 
   getPaymentsArray(next) {
