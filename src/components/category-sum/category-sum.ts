@@ -1,3 +1,4 @@
+import { CategoriesProvider } from '../../providers/categories/categories';
 import { ShoppingCartsProvider } from '../../providers/shopping-carts/shopping-carts';
 import { Component, Input, OnInit } from '@angular/core';
 
@@ -18,10 +19,10 @@ export class CategorySumComponent implements OnInit {
   text: string;
   sum: any;
   ngOnInit() {
-    this.sum = {};
+
     this.text = 'Hello World' + this.categoryId;
     //  console.log('hi',this.categoryId);
-    this.ShoppingCart.sumCategory(this.categoryId, x => {
+    this.Categories.sumCategory(this.categoryId, x => {
       //console.log('result sum', x)
       this.sum['totale'] = this.roundToTwo(x.prezzo);
       //console.log('sum', this.sum)
@@ -33,8 +34,10 @@ export class CategorySumComponent implements OnInit {
     return Math.round(num * 100) / 100
   }
   constructor(
-    public ShoppingCart: ShoppingCartsProvider
+    public ShoppingCart: ShoppingCartsProvider,
+    public Categories: CategoriesProvider
   ) {
+    this.sum = { totale: 0, 'moneta': '' };
 
 
   }

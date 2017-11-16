@@ -1,7 +1,7 @@
 
 import { Timestamp } from 'rxjs/Rx';
 export class ItemModel {
-    id:string;
+    id: string;
     prezzo: number;
     barcode: string;
     nome: string;
@@ -11,20 +11,20 @@ export class ItemModel {
     tassoConversione: number;
     moneta: string;
     key: String;
-    quantita:string;
-    constructor(item?:any) {
-        this.prezzo =  0;
-        this.barcode =  '';
+    quantita: string;
+    constructor(item?: any) {
+        this.prezzo = 0;
+        this.barcode = '';
         this.descrizione = '';
-        this.picture =  '';
-        this.categorieId =  [];
-        this.tassoConversione =  1;
+        this.picture = '';
+        this.categorieId = [];
+        this.tassoConversione = 1;
         this.moneta = '€';
-        this.key =  '';
+        this.key = '';
         this.quantita = '';
     }
 
-    build(item:any/* {prezzo:number,
+    build(item: any/* {prezzo:number,
                  barcode:string,
                 descrizione:string,
                 picture:string,
@@ -43,7 +43,7 @@ export class ItemModel {
         this.moneta = item && item.moneta || '€';
         this.key = item && item.key || '';
         this.id = item && item.id
-        this.quantita = item && item.quantita||'';
+        this.quantita = item && item.quantita || '';
         return this;
     }
 }
@@ -51,33 +51,33 @@ export class ShoppingCartModel {
     fornitoreId: string;
     totale: number;
     pagamentoId: string;
-    moneta:string;
-    tassoConversione;number;
+    moneta: string;
+    tassoConversione; number;
     dataAcquisto: string;
     online: boolean;
     dataAddebito: string;
     items: Array<ItemModel>;
     key: string;
-    constructor(shoppingCart?:any) {
-        if(shoppingCart){
+    constructor(shoppingCart?: any) {
+        if (shoppingCart) {
             this.fornitoreId = shoppingCart.fornitoreId || "";
             this.pagamentoId = shoppingCart.pagamentoId || "";
             this.dataAcquisto = shoppingCart.dataAcquisto || new Date().toISOString();
             this.dataAddebito = shoppingCart.dataAddebito || new Date().toISOString();
-            this.totale = shoppingCart.totale|| 0;
+            this.totale = shoppingCart.totale || 0;
             this.online = shoppingCart.online || false;
             this.items = shoppingCart.items || [];
             this.key = shoppingCart.key || "";
         }
-        else{
+        else {
             this.fornitoreId = "";
-            this.pagamentoId =  "";
-            this.dataAcquisto =  new Date().toISOString();
-            this.dataAddebito =  new Date().toISOString();
-            this.totale =  0;
-            this.online =  false;
+            this.pagamentoId = "";
+            this.dataAcquisto = new Date().toISOString();
+            this.dataAddebito = new Date().toISOString();
+            this.totale = 0;
+            this.online = false;
             this.items = [];
-            this.key =  "";
+            this.key = "";
 
         }
     }
@@ -86,8 +86,8 @@ export class ShoppingCartModel {
         pagamentoId: string,
         dataAcquisto: string,
         dataAddebito: string,
-        online:boolean
-        totale:number,
+        online: boolean
+        totale: number,
         key: string,
         items: [ItemModel],
     }) {
@@ -95,7 +95,7 @@ export class ShoppingCartModel {
         this.pagamentoId = shoppingCart.pagamentoId || "";
         this.dataAcquisto = shoppingCart.dataAcquisto || new Date().toISOString();
         this.dataAddebito = shoppingCart.dataAddebito || new Date().toISOString();
-        this.totale = shoppingCart.totale|| 0;
+        this.totale = shoppingCart.totale || 0;
         this.online = shoppingCart.online || false;
         this.items = shoppingCart.items || [];
         this.key = shoppingCart.key || "";

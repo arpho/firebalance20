@@ -1,3 +1,4 @@
+import { CategoriesProvider } from '../../providers/categories/categories';
 import { ShoppingCartsProvider } from '../../providers/shopping-carts/shopping-carts';
 import { Component, Input, OnInit } from '@angular/core';
 
@@ -18,12 +19,13 @@ export class CategoryCounterComponent implements OnInit {
   counter: number
   ngOnInit() {
 
-    this.ShoppingCart.countCategory(this.categoryId, c => {
+    this.Categories.countCategory(this.categoryId, c => {
       this.counter = c;
     })
   }
   constructor(
-    public ShoppingCart: ShoppingCartsProvider
+    public ShoppingCart: ShoppingCartsProvider,
+    public Categories: CategoriesProvider
   ) {
     //this.counter = 0;
   }

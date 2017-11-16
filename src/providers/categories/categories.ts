@@ -7,6 +7,8 @@ import * as firebase from 'firebase/app';
 import 'rxjs/add/operator/map';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Category } from '../../pages/categories/categories.model';
+import { ShoppingCartsProvider } from '../shopping-carts/shopping-carts';
+import { ItemModel } from '../../models/shoppingCart.model'
 
 /*
   Generated class for the CategoriesProvider provider.
@@ -16,12 +18,14 @@ import { Category } from '../../pages/categories/categories.model';
 */
 @Injectable()
 export class CategoriesProvider {
+
   public categoriesRef: firebase.database.Reference
   public user: any;
   Categorie: any;
   public Profile: ProfileService;
   subjectCategoriesRef = new BehaviorSubject(null) // instanzio il behaviorSubject, è definito subito
   constructor(public http: Http,
+    public ShoppingCart: ShoppingCartsProvider
 
   ) {
 
@@ -65,6 +69,29 @@ export class CategoriesProvider {
     })
 
   }
+
+  countCategory(categoryId: string, cb) {
+    this.ShoppingCart.shoppingCartSubject.subscribe(shoppingCarts => {
+      if (shoppingCarts) {
+        this.ShoppingCart.flattenCarts(shoppingCarts).count(x => {
+          return x.categorieId && x.categorieId.indexOf(categoryId) > -1;
+        }).subscribe(cb)
+      }
+    })
+  }
+
+  sumCategory(categoryId: string, cb) {
+    this.ShoppingCart.shoppingCartSubject.subscribe(shoppingCarts => {
+      if (shoppingCarts) {
+        this.ShoppingCart.flattenCarts(shoppingCarts).scan((acc, x) => {
+          if (x.categorieId && x.categorieId.indexOf(categoryId) > -1)
+            acc.prezzo = Number(acc.prezzo) + Number(x.prezzo)
+          return acc;
+        }, new ItemModel()).subscribe(cb)
+      }
+    })
+  }
+
   getCategory(categoryId: string) {
     return this.categoriesRef.child(categoryId)
   }
