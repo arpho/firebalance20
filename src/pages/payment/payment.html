@@ -15,11 +15,13 @@
 
 
 <ion-content padding>
+  <section>
   <payment-list [paymentsList]="paymentsList">
     
   </payment-list>
-<ion-fab top right>
+<ion-fab bottom right>
       <button ion-fab color="primary" (click)="create()"><ion-icon name="add"></ion-icon>
       </button>
     </ion-fab>
+    </section>
 </ion-content>

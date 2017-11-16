@@ -31,24 +31,27 @@ export class CreatePaymentPage {
       note: new FormControl(''),
       key: new FormControl('')
     }, Validators.required);
-   
+
   }
 
   dismiss() {
-  this.view.dismiss();
-}
+    this.view.dismiss();
+  }
 
 
 
-ionViewDidLoad() {
-  console.log('ionViewDidLoad CreatePaymentPage');
-}
-createPayment(payment:any) {
-  var Payment = new PaymentsModel(payment.controls);
- /* this.Payments.pushNewPayment(Payment).then(data=>{
-    console.log('creato',data.key);
-      this.view.dismiss(data.key);
-});*/
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad CreatePaymentPage');
+  }
+  createPayment(payment: any) {
+    var Payment = new PaymentsModel(payment.controls);
+    console.log('pagamento', Payment)
+    if (!Payment.key)
+
+      this.Payments.pushNewPayment(Payment, err => {
+        console.log('creato', err);
+        this.view.dismiss();
+      });
 
   }
 }

@@ -35,14 +35,37 @@ export class PaymentsProvider {
 
 
   calculateAmmount(pagamentoId, cb) {
+    /*
+    calcola l'importo del pagamento effetuato con il metodo
+    @param pagamentoId:string chiave del pagamento
+    @param cb:shoppingCartModel=>{} funzione di callback
+    @todo aggiungere paramentro di filtro
+    */
     this.Carts.shoppingCartSubject.subscribe(shoppingCart => {
       if (shoppingCart)
         shoppingCart.scan((acc, x) => {
+
           if (x.pagamentoId == pagamentoId)
             acc.totale = acc.totale || 0 + x.totale
           return acc
-        }, new ShoppingCartModel()).subscribe(tot => cb(tot))
+        }, new ShoppingCartModel()).subscribe(tot => {
+          cb(tot);
+        }).unsubscribe();
     })
+  }
+
+  pushNewPayment(pagamento: PaymentsModel, cb) {
+    /*
+    inserisce un pnuovo pagamento nel db
+    @param pagamento:PaymentsModel nuovo pagamento
+    cb:result=>{} funzione di callback
+    */
+    this.subjectPaymentsRef.subscribe(Payments => {
+      if (Payments)
+        Payments.push(pagamento, (result => {
+          cb(result)
+        }))
+    }).unsubscribe()
   }
 
   getPaymentsArray(next) {
@@ -62,3 +85,4 @@ export class PaymentsProvider {
   }
 
 }
+
