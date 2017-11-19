@@ -53,6 +53,12 @@ export class PaymentsProvider {
         })// mantengo la sottoscrizione perchè è un'operazione di lettura
     })
   }
+  updatePayment(pagamento:PaymentsModel,cb){
+    this.subjectPaymentsRef.subscribe(Payments =>{
+      if(Payments)
+      Payments.child(`/${pagamento.key}/`).update(pagamento).then(cb);
+    }).unsubscribe()
+  }
 
   pushNewPayment(pagamento: PaymentsModel, cb) {
     /*

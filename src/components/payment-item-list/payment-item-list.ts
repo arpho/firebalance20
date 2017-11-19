@@ -1,7 +1,8 @@
-import { PaymentsModel } from '../../models/payment.model';
 import { Component,Input,OnInit } from '@angular/core';
+import { IonicPage, NavController, NavParams,ModalController } from 'ionic-angular';
 import { PaymentsProvider } from '../../providers/payments/payments';
-
+import { PaymentsModel } from '../../models/payment.model';
+import {UpdatePaymentPage} from '../../pages/update-payment/update-payment';
 /**
  * Generated class for the PaymentItemListComponent component.
  *
@@ -17,6 +18,14 @@ export class PaymentItemListComponent implements OnInit {
   text: string;
   totale: number;
 
+
+  update(key){
+    console.log('this is trhe key',key)
+    let modal = this.modal.create(UpdatePaymentPage,this.Payment);
+    modal.present();
+    
+  }
+
   ngOnInit(){
     console.log('payment',this.Payment)
      this.Payments.calculateAmmount(this.Payment.key, acc=>{
@@ -25,7 +34,8 @@ export class PaymentItemListComponent implements OnInit {
      })
   }
   constructor(
-    public Payments:PaymentsProvider
+    public Payments:PaymentsProvider,
+    public modal: ModalController,
   ) {
   }
 

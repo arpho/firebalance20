@@ -46,7 +46,7 @@ export class PaymentPage implements OnInit {
             console.log('un giorno clicked');
             let today = new Date();
             //tomorrow = new Date(today.getTime()+ (1000*60*60*24))
-            this.filterFunction =(target:ShoppingCartModel)=>{return new Date(target.dataAddebito).getTime()>=today.setDate(today.getDate()-1).getTime()}
+            //this.filterFunction =(target:ShoppingCartModel)=>{return new Date(target.dataAddebito).getTime()>=today.setDate(today.getDate()-1).getTime()}
           }
         },
         {

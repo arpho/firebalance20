@@ -33,6 +33,7 @@ import { FormValidationsPage } from '../pages/form-validations/form-validations'
 import {CategoriesPage} from '../pages/categories/categories';
 import {CategoriesService} from '../pages/categories/categories.service';
 import {PaymentPage} from '../pages/payment/payment'
+import {UpdatePaymentPage } from '../pages/update-payment/update-payment'
 
 import { PreloadImage } from '../components/preload-image/preload-image';
 import { BackgroundImage } from '../components/background-image/background-image';
@@ -123,6 +124,7 @@ export function createTranslateLoader(http: Http) {
     NotificationsPage,
     ProfilePage,
     CreatePaymentPage,
+    UpdatePaymentPage,
     TabsNavigationPage,
     WalkthroughPage,
     SettingsPage,
@@ -191,6 +193,7 @@ export function createTranslateLoader(http: Http) {
     NotificationsPage,
     ProfilePage,
     CreatePaymentPage,
+    UpdatePaymentPage,
     TabsNavigationPage,
     WalkthroughPage,
     SettingsPage,

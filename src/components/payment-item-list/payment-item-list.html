@@ -1,8 +1,12 @@
 <!-- Generated template for the PaymentItemListComponent component -->
-<article>
-  <p>{{Payment.nome}}</p>
+<article (click)='update(Payment.key)'>
+  <h1>{{Payment.nome}}</h1>
+  <section class="addebito">
   <label>Addebito</label>
   <p>{{Payment.addebito}}</p>
+</section>
+<section class="totale">
   <label>totale</label>
-  <p>{{totale}}</p>
+  <ion-chip>{{totale}}</ion-chip>
+  </section>
 </article>
