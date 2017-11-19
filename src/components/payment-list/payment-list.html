@@ -1,6 +1,14 @@
 <!-- Generated template for the PaymentListComponent component -->
-<ion-item *ngFor="let Payment of paymentsList" >
+<ion-list>
+<ion-item-sliding *ngFor="let Payment of paymentsList" (ionSwipe)="delete(item)">
+  <ion-item>
     <payment-item-list [Payment]="Payment" >
 
     </payment-item-list>
   </ion-item>
+  <ion-item-options side="right">
+      <button ion-button (click)="update(Payment)"><ion-icon name="create"></ion-icon>modifica</button>
+      <button ion-button color="danger" (click)="share(item)">Share</button>
+    </ion-item-options>
+  </ion-item-sliding>
+</ion-list>

@@ -19,12 +19,7 @@ export class PaymentItemListComponent implements OnInit {
   totale: number;
 
 
-  update(key){
-    console.log('this is trhe key',key)
-    let modal = this.modal.create(UpdatePaymentPage,this.Payment);
-    modal.present();
-    
-  }
+  
 
   ngOnInit(){
     console.log('payment',this.Payment)

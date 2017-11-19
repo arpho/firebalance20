@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, AbstractControl, ReactiveFormsModule } from '@angular/forms';
-import { IonicPage, NavController, NavParams,ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { PaymentsModel } from '../../models/payment.model';
 import { PaymentsProvider } from '../../providers/payments/payments';
 
@@ -17,15 +17,15 @@ import { PaymentsProvider } from '../../providers/payments/payments';
 })
 export class UpdatePaymentPage {
   public paymentForm: FormGroup;
-  Payment:PaymentsModel;
+  Payment: PaymentsModel;
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public Payments:PaymentsProvider,
+    public Payments: PaymentsProvider,
     fb: FormBuilder,
     public view: ViewController
   ) {
-    console.log('params',this.navParams);
+    console.log('params', this.navParams);
     this.Payment = this.navParams.data;
-    console.log('Payment',this.Payment)
+    console.log('Payment', this.Payment)
     this.paymentForm = fb.group({
       addebito: new FormControl(this.Payment.addebito),
       nome: new FormControl(this.Payment.nome),
@@ -34,11 +34,14 @@ export class UpdatePaymentPage {
     }, Validators.required);
   }
 
-  updatePayment(payment){
+  dismiss() {
+    this.view.dismiss();
+  }
+  updatePayment(payment) {
     const Payment = new PaymentsModel(payment.controls)
-    console.log('pagamento',Payment)
-    this.Payments.updatePayment(Payment,err=>{
-      console.log('errore in modifica',err)
+    console.log('pagamento', Payment)
+    this.Payments.updatePayment(Payment, err => {
+      console.log('errore in modifica', err)
       this.view.dismiss();
     })
 
