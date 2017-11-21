@@ -105,6 +105,7 @@ import { CategorySumComponent } from '../components/category-sum/category-sum';
 import { PaymentsProvider } from '../providers/payments/payments';
 import { PaymentListComponent } from '../components/payment-list/payment-list';
 import { PaymentItemListComponent } from '../components/payment-item-list/payment-item-list';
+import { FilterFactoryProvider } from '../providers/filter-factory/filter-factory';
 //import { PaymentProvider } from '../providers/payment/payment';
 //AngularFireModule.initializeApp(environment.firebaseConfig)
 export function createTranslateLoader(http: Http) {
@@ -269,6 +270,7 @@ export function createTranslateLoader(http: Http) {
     ShoppingCartsProvider,
     PaymentsProvider,
     UtilitiesProvider,
+    FilterFactoryProvider,
     //PaymentProvider
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]

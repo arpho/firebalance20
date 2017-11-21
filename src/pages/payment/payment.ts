@@ -1,3 +1,4 @@
+import { FilterFactoryProvider } from '../../providers/filter-factory/filter-factory';
 import { PaymentsProvider } from '../../providers/payments/payments';
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams,ModalController } from 'ionic-angular';
@@ -19,9 +20,11 @@ import { ShoppingCartModel } from '../../models/shoppingCart.model';
 })
 export class PaymentPage implements OnInit {
   public paymentsList: any;
+  public shoppingCartDateFilter:[(cart:ShoppingCartModel)=>boolean]
   public filterFunction:(doFilter:ShoppingCartModel)=>boolean
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public modal: ModalController,
+    public Filters:FilterFactoryProvider,
     public actionSheetCtrl: ActionSheetController,
     public Payments: PaymentsProvider
   ) {
@@ -44,6 +47,8 @@ export class PaymentPage implements OnInit {
           text: 'un giorno',
           handler: () => {
             console.log('un giorno clicked');
+            this.shoppingCartDateFilter =[this.Filters.shoppingCartDateFilter(1,'dataAcquisto')];
+
             let today = new Date();
             //tomorrow = new Date(today.getTime()+ (1000*60*60*24))
             //this.filterFunction =(target:ShoppingCartModel)=>{return new Date(target.dataAddebito).getTime()>=today.setDate(today.getDate()-1).getTime()}
@@ -52,25 +57,29 @@ export class PaymentPage implements OnInit {
         {
           text: 'una settimana',
           handler: () => {
-            console.log('un giorno clicked');
+            console.log('una settimana clicked');
+            this.shoppingCartDateFilter =[this.Filters.shoppingCartDateFilter(7,'dataAcquisto')];
           }
         },
         {
           text: 'un mese',
           handler: () => {
             console.log('un mese clicked');
+            this.shoppingCartDateFilter =[this.Filters.shoppingCartDateFilter(30,'dataAcquisto')];
           }
         },
         {
           text: 'tre mesi',
           handler: () => {
             console.log('tre mesi clicked');
+            this.shoppingCartDateFilter =[this.Filters.shoppingCartDateFilter(180,'dataAcquisto')];
           }
         },
         {
           text: 'un anno',
           handler: () => {
             console.log('un anno clicked');
+            this.shoppingCartDateFilter =[this.Filters.shoppingCartDateFilter(365,'dataAcquisto')];
           }
         },
         {

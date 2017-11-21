@@ -34,7 +34,7 @@ export class PaymentsProvider {
   }
 
 
-  calculateAmmount(pagamentoId, cb) {
+  calculateAmmount(filterShoppingCart:[(cart:ShoppingCartModel)=>boolean],pagamentoId, cb) {
     /*
     calcola l'importo del pagamento effetuato con il metodo
     @param pagamentoId:string chiave del pagamento

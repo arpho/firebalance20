@@ -1,3 +1,4 @@
+import { ShoppingCartModel } from '../../models/shoppingCart.model';
 import { Component,Input,OnChanges,SimpleChanges,OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams,ModalController } from 'ionic-angular';
 import {UpdatePaymentPage} from '../../pages/update-payment/update-payment';
@@ -14,6 +15,7 @@ import {UpdatePaymentPage} from '../../pages/update-payment/update-payment';
 })
 export class PaymentListComponent implements OnInit, OnChanges{
  @Input() paymentsList:any
+ @Input() shoppingCartDateFilter:[(cart:ShoppingCartModel)=>boolean]
   text: string;
 
   ngOnInit(){
@@ -24,7 +26,6 @@ export class PaymentListComponent implements OnInit, OnChanges{
   }
 
   update(payment){
-    console.log('this is trhe key',payment)
     let modal = this.modal.create(UpdatePaymentPage,payment);
     modal.present();
     
@@ -36,9 +37,6 @@ export class PaymentListComponent implements OnInit, OnChanges{
   constructor(
     public modal: ModalController
   ) {
-    console.log('Hello PaymentListComponent Component');
-    this.text = 'Hello World payments-list component';
-    console.log('paymentsList constructor',this.paymentsList)
     this.paymentsList= [];
   }
 

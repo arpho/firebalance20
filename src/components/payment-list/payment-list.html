@@ -2,7 +2,7 @@
 <ion-list>
 <ion-item-sliding *ngFor="let Payment of paymentsList" (ionSwipe)="delete(item)">
   <ion-item>
-    <payment-item-list [Payment]="Payment" >
+    <payment-item-list [Payment]="Payment" [shoppingCartDateFilter]="shoppingCartDateFilter" >
 
     </payment-item-list>
   </ion-item>
