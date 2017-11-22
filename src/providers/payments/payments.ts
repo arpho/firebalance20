@@ -43,7 +43,7 @@ export class PaymentsProvider {
     */
     this.Carts.shoppingCartSubject.subscribe(shoppingCart => {
       if (shoppingCart)
-        shoppingCart.scan((acc, x) => {
+        this.Carts.applyFilterChain(shoppingCart,filterShoppingCart).scan((acc, x) => {
 
           if (x.pagamentoId == pagamentoId)
             acc.totale = acc.totale || 0 + x.totale

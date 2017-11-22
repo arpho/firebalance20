@@ -23,11 +23,15 @@ export class PaymentItemListComponent implements OnInit,OnChanges {
 
   
   ngOnChanges(changes:SimpleChanges){
-    console.log('changes on item',changes)
+    console.log('changes')
+    this.Payments.calculateAmmount(this.shoppingCartDateFilter,this.Payment.key, acc=>{
+      this.totale = acc.totale
+      console.log('ricalcolato totale per',this.Payment.nome,this.totale)
+      //console.log('totale per '+this.Payment.nome,acc.totale);
+    })
   }
 
   ngOnInit(){
-    console.log('payment',this.Payment)
      this.Payments.calculateAmmount(this.shoppingCartDateFilter,this.Payment.key, acc=>{
        this.totale = acc.totale
        //console.log('totale per '+this.Payment.nome,acc.totale);

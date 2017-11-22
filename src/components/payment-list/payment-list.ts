@@ -19,7 +19,6 @@ export class PaymentListComponent implements OnInit, OnChanges{
   text: string;
 
   ngOnInit(){
-    console.log('paymentsList oninit',this.paymentsList)
   }
   delete(){
     console.log('delete')
@@ -32,7 +31,6 @@ export class PaymentListComponent implements OnInit, OnChanges{
   }
 
   ngOnChanges(changes:SimpleChanges){
-    console.log('changes',changes)
   }
   constructor(
     public modal: ModalController

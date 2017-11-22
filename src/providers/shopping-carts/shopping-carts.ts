@@ -51,6 +51,16 @@ export class ShoppingCartsProvider {
     })
   }
 
+  applyFilterChain(source:Observable<ShoppingCartModel>,filters:[(cart:ShoppingCartModel)=>boolean]){
+    
+   
+    _.each(filters,filter=>{
+     source = source.filter(filter);
+    })
+    return source;
+  }
+
+
   flattenCarts(shoppingCarts: Observable<ShoppingCartModel>) {
     return shoppingCarts.flatMap(cart => {
       if (cart.items)
