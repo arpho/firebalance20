@@ -16,14 +16,15 @@ import { ShoppingCartModel } from '../../models/shoppingCart.model';
 })
 export class PaymentItemListComponent implements OnInit,OnChanges {
  @Input() Payment:PaymentsModel;
- @Input() shoppingCartDateFilter:[(cart:ShoppingCartModel)=>boolean]
+ @Input() shoppingCartDateFilter:(cart:ShoppingCartModel)=>boolean
   text: string;
   totale: number;
 
 
   
   ngOnChanges(changes:SimpleChanges){
-    console.log('changes')
+    console.log('payment',this.Payment.nome)
+    console.log('changes',changes)
     this.Payments.calculateAmmount(this.shoppingCartDateFilter,this.Payment.key, acc=>{
       this.totale = acc.totale
       console.log('ricalcolato totale per',this.Payment.nome,this.totale)
@@ -34,7 +35,7 @@ export class PaymentItemListComponent implements OnInit,OnChanges {
   ngOnInit(){
      this.Payments.calculateAmmount(this.shoppingCartDateFilter,this.Payment.key, acc=>{
        this.totale = acc.totale
-       //console.log('totale per '+this.Payment.nome,acc.totale);
+       console.log('cb totale per '+this.Payment.nome,acc.totale);
      })
   }
   constructor(

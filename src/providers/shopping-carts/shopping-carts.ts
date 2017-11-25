@@ -51,14 +51,7 @@ export class ShoppingCartsProvider {
     })
   }
 
-  applyFilterChain(source:Observable<ShoppingCartModel>,filters:[(cart:ShoppingCartModel)=>boolean]){
-    
-   
-    _.each(filters,filter=>{
-     source = source.filter(filter);
-    })
-    return source;
-  }
+  
 
 
   flattenCarts(shoppingCarts: Observable<ShoppingCartModel>) {
@@ -72,6 +65,7 @@ export class ShoppingCartsProvider {
   countCategory(categoryId: string, cb) {
     this.shoppingCartSubject.subscribe(shoppingCarts => {
       if (shoppingCarts) {
+        console.log('applico filtri')
         this.flattenCarts(shoppingCarts).count(x => {
           return x.categorieId && x.categorieId.indexOf(categoryId) > -1;
         }).subscribe(cb)

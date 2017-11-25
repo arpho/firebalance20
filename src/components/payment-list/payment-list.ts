@@ -15,7 +15,7 @@ import {UpdatePaymentPage} from '../../pages/update-payment/update-payment';
 })
 export class PaymentListComponent implements OnInit, OnChanges{
  @Input() paymentsList:any
- @Input() shoppingCartDateFilter:[(cart:ShoppingCartModel)=>boolean]
+ @Input() shoppingCartDateFilter:(cart:ShoppingCartModel)=>boolean
   text: string;
 
   ngOnInit(){

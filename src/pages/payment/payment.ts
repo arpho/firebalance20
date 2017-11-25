@@ -22,7 +22,8 @@ import * as _ from 'lodash'
 })
 export class PaymentPage implements OnInit {
   public paymentsList: any;
-  public shoppingCartDateFilter: [(cart: ShoppingCartModel) => boolean]
+  public filterText: string= ` dall'inizio dei tempi`;
+  public shoppingCartDateFilter: (cart: ShoppingCartModel) => boolean
   public filterFunction: (doFilter: ShoppingCartModel) => boolean
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public modal: ModalController,
@@ -31,7 +32,7 @@ export class PaymentPage implements OnInit {
     public Payments: PaymentsProvider,
     public Utilities: UtilitiesProvider
   ) {
-    this.shoppingCartDateFilter = [this.Filters.takeEmAll()];
+    this.shoppingCartDateFilter = this.Filters.takeEmAll();
   }
 
   ngOnInit() {
@@ -49,8 +50,8 @@ export class PaymentPage implements OnInit {
           text: 'un giorno',
           handler: () => {
             console.log('un giorno clicked');
-            this.shoppingCartDateFilter.push(this.Filters.shoppingCartDateFilter(1, 'dataAcquisto'));// aggiungo il  filtro selezionato
-            this.shoppingCartDateFilter = this.Utilities.cloneArray(this.shoppingCartDateFilter);// clono shoppingCartDateFilter
+            this.filterText = ' ultimo giorno'
+            this.shoppingCartDateFilter = this.Filters.shoppingCartDateFilter(1, 'dataAcquisto');// clono shoppingCartDateFilter
             //this.shoppingCartDateFilter = this.cloneArray(this.shoppingCartDateFilter)
             //let today = new Date();
             //tomorrow = new Date(today.getTime()+ (1000*60*60*24))
@@ -60,33 +61,33 @@ export class PaymentPage implements OnInit {
         {
           text: 'una settimana',
           handler: () => {
+            this.filterText = ' ultima settimana';
             console.log('una settimana clicked');
-            this.shoppingCartDateFilter.push(this.Filters.shoppingCartDateFilter(7, 'dataAcquisto'));// aggiungo il  filtro selezionato
-            this.shoppingCartDateFilter = this.Utilities.cloneArray(this.shoppingCartDateFilter);// clono shoppingCartDateFilter
+            this.shoppingCartDateFilter = this.Filters.shoppingCartDateFilter(7, 'dataAcquisto');// clono shoppingCartDateFilter
           }
         },
         {
           text: 'un mese',
           handler: () => {
             console.log('un mese clicked');
-            this.shoppingCartDateFilter.push(this.Filters.shoppingCartDateFilter(30, 'dataAcquisto'));// aggiungo il  filtro selezionato
-            this.shoppingCartDateFilter = this.Utilities.cloneArray(this.shoppingCartDateFilter);// clono shoppingCartDateFilter
+            this.filterText = ' ultimo mese';
+            this.shoppingCartDateFilter = this.Filters.shoppingCartDateFilter(30, 'dataAcquisto');// clono shoppingCartDateFilter
           }
         },
         {
           text: 'tre mesi',
           handler: () => {
+            this.filterText = ' ultimi tre mesi';
             console.log('tre mesi clicked');
-            this.shoppingCartDateFilter.push(this.Filters.shoppingCartDateFilter(180, 'dataAcquisto'));// aggiungo il  filtro selezionato
-            this.shoppingCartDateFilter = this.Utilities.cloneArray(this.shoppingCartDateFilter);// clono shoppingCartDateFilter
+            this.shoppingCartDateFilter = this.Filters.shoppingCartDateFilter(180, 'dataAcquisto')// clono shoppingCartDateFilter
           }
         },
         {
           text: 'un anno',
           handler: () => {
+            this.filterText = ' ultimo anno';
             console.log('un anno clicked');
-            this.shoppingCartDateFilter.push(this.Filters.shoppingCartDateFilter(365, 'dataAcquisto'));// aggiungo il  filtro selezionato
-            this.shoppingCartDateFilter = this.Utilities.cloneArray(this.shoppingCartDateFilter);// clono shoppingCartDateFilter
+            this.shoppingCartDateFilter = this.Filters.shoppingCartDateFilter(365, 'dataAcquisto');// clono shoppingCartDateFilter
 
           }
         },
@@ -94,9 +95,9 @@ export class PaymentPage implements OnInit {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
+            this.filterText = ` dall'inizio dei tempi`;
             console.log('Cancel clicked');
-            this.shoppingCartDateFilter = [this.Filters.takeEmAll()];// resetto i filtri
-            this.shoppingCartDateFilter = this.Utilities.cloneArray(this.shoppingCartDateFilter);// clono shoppingCartDateFilter
+            this.shoppingCartDateFilter = this.Filters.takeEmAll();// resetto i filtri
 
           }
         }
