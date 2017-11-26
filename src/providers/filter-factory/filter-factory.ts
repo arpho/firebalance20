@@ -4,6 +4,7 @@ import 'rxjs/add/operator/map';
 import { ShoppingCartModel } from '../../models/shoppingCart.model';
 import { Observable } from 'videogular2/node_modules/rxjs/Observable';
 import * as _ from 'lodash';
+import { UtilitiesProvider } from '../utilities/utilities';
 
 /*
   Generated class for the FilterFactoryProvider provider.
@@ -14,7 +15,8 @@ import * as _ from 'lodash';
 @Injectable()
 export class FilterFactoryProvider {
 
-  constructor(public http: Http) {
+  constructor(public http: Http,
+  public utils:UtilitiesProvider) {
     console.log('Hello FilterFactoryProvider Provider');
   }
 
@@ -29,15 +31,15 @@ export class FilterFactoryProvider {
 
       const Data = new Date(cart[data]);
       const today = new Date();
-      const since = new Date(today.getTime() - 24 * 60 * 60 * 1000*days) //pongo il riferimento a days giorni prima di oggi
-      const result = since<= Data
+      const since = this.utils.moveDaysBack(today,days) //pongo il riferimento a days giorni prima di oggi
+      const result = since <= Data
       return result;// l'acquisto è avvenuto dopo 
 
     }
 
   }
-  takeEmAll(){
-    return (item:any)=>{
+  takeEmAll() {
+    return (item: any) => {
       return true;
     }
   }

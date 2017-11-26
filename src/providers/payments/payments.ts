@@ -41,7 +41,6 @@ export class PaymentsProvider {
     @param cb:shoppingCartModel=>{} funzione di callback
     @todo aggiungere paramentro di filtro
     */
-    console.log('calcolo il total per',pagamentoId)
     this.Carts.shoppingCartSubject.subscribe(shoppingCart => {
       if (shoppingCart)
           shoppingCart.filter(filterShoppingCart).isEmpty().subscribe(empty=>{
@@ -54,7 +53,6 @@ export class PaymentsProvider {
                 acc.totale = acc.totale  + x.totale
               return acc
             }, new ShoppingCartModel()).subscribe(tot => {
-              console.log('calcolati  totale filtrati',tot.totale)
               cb(tot);
             });// mantengo la sottoscrizione perchè è un'operazione di lettura
             }

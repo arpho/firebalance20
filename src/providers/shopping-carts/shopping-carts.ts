@@ -51,8 +51,14 @@ export class ShoppingCartsProvider {
     })
   }
 
-  
 
+  getMin(comparer: (cartx:
+    ShoppingCartModel, carty: ShoppingCartModel) => number, cb: (cart: ShoppingCartModel) => void) {
+    this.shoppingCartSubject.subscribe(carts => {
+      if (carts)
+        carts.min(comparer).subscribe(cb);
+    })
+  }
 
   flattenCarts(shoppingCarts: Observable<ShoppingCartModel>) {
     return shoppingCarts.flatMap(cart => {

@@ -17,24 +17,33 @@ export class UtilitiesProvider {
   constructor(
     public http: Http,
     private toast: Toast,
-    public Filters:FilterFactoryProvider
+    // public Filters:FilterFactoryProvider
   ) {
   }
-  cloneArray(master:[(cart:ShoppingCartModel)=>boolean]){
-   const out:[(cart:ShoppingCartModel)=>boolean] = [this.Filters.takeEmAll()];
-   master.forEach(element => {out.push(element)
-     
-   });
-   return out;
+  formatDate(date) {
+    var d = new Date(date),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [day, month, year].join('/');
+  }
+
+  moveDaysBack(today: Date, days: number) {
+    const oneDay = 24 * 60 * 60 * 1000;
+    return new Date(today.getTime() - oneDay * days)
   }
 
   showToast(message: string, duration: string, position: string, next?: () => void) {
-    
-                console.log('toasted',message)
-                this.toast.show(message, duration, position).subscribe(next);
-                if (next)
-                  next();
-    
-        }
+
+    console.log('toasted', message)
+    this.toast.show(message, duration, position).subscribe(next);
+    if (next)
+      next();
+
+  }
 
 }

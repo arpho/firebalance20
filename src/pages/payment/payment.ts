@@ -8,6 +8,7 @@ import { ActionSheetController } from 'ionic-angular'
 import { ShoppingCartModel } from '../../models/shoppingCart.model';
 import { UtilitiesProvider } from '../../providers/utilities/utilities';
 import * as _ from 'lodash'
+import { ShoppingCartsProvider } from '../../providers/shopping-carts/shopping-carts';
 
 /**
  * Generated class for the PaymentPage page.
@@ -22,11 +23,12 @@ import * as _ from 'lodash'
 })
 export class PaymentPage implements OnInit {
   public paymentsList: any;
-  public filterText: string= ` dall'inizio dei tempi`;
+  public filterText: string;
   public shoppingCartDateFilter: (cart: ShoppingCartModel) => boolean
   public filterFunction: (doFilter: ShoppingCartModel) => boolean
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public modal: ModalController,
+    public Carts: ShoppingCartsProvider,
     public Filters: FilterFactoryProvider,
     public actionSheetCtrl: ActionSheetController,
     public Payments: PaymentsProvider,
@@ -34,8 +36,20 @@ export class PaymentPage implements OnInit {
   ) {
     this.shoppingCartDateFilter = this.Filters.takeEmAll();
   }
+  comparer(cartX: ShoppingCartModel, cartY: ShoppingCartModel) {
+    if (cartX.dataAcquisto > cartY.dataAcquisto) {
+      return 1;
+    }
+    else if (cartX.dataAcquisto < cartY.dataAcquisto) {
+      return -1;
+    }
+    return 0;
+  }
 
   ngOnInit() {
+    this.Carts.getMin(this.comparer, value => {
+      this.filterText = ' dal ' + this.Utilities.formatDate(value.dataAcquisto);
+    })
     this.Payments.getPaymentsArray(payments => {
       this.paymentsList = payments;
     })
@@ -47,56 +61,61 @@ export class PaymentPage implements OnInit {
       enableBackdropDismiss: true,
       buttons: [
         {
-          text: 'un giorno',
+          text: 'da ieri',
           handler: () => {
-            console.log('un giorno clicked');
-            this.filterText = ' ultimo giorno'
-            this.shoppingCartDateFilter = this.Filters.shoppingCartDateFilter(1, 'dataAcquisto');// clono shoppingCartDateFilter
-            //this.shoppingCartDateFilter = this.cloneArray(this.shoppingCartDateFilter)
-            //let today = new Date();
-            //tomorrow = new Date(today.getTime()+ (1000*60*60*24))
-            //this.filterFunction =(target:ShoppingCartModel)=>{return new Date(target.dataAddebito).getTime()>=today.setDate(today.getDate()-1).getTime()}
+            const days = 1;
+            this.filterText = ' dal ' + this.Utilities.formatDate(this.Utilities.moveDaysBack(new Date(), days));
+            this.shoppingCartDateFilter = this.Filters.shoppingCartDateFilter(days, 'dataAccredito');// clono shoppingCartDateFilte
+          }
+        },
+        {
+          text: 'oggi',
+          handler: () => {
+            const days = 0;
+            this.filterText = ' dal ' + this.Utilities.formatDate(this.Utilities.moveDaysBack(new Date(), days));
+            this.shoppingCartDateFilter = this.Filters.shoppingCartDateFilter(days, 'dataAccredito');// clono shoppingCartDateFilte
           }
         },
         {
           text: 'una settimana',
           handler: () => {
-            this.filterText = ' ultima settimana';
-            console.log('una settimana clicked');
-            this.shoppingCartDateFilter = this.Filters.shoppingCartDateFilter(7, 'dataAcquisto');// clono shoppingCartDateFilter
+            const days = 7;
+            this.filterText = ' dal ' + this.Utilities.formatDate(this.Utilities.moveDaysBack(new Date(), days));
+            this.shoppingCartDateFilter = this.Filters.shoppingCartDateFilter(days, 'dataAcquisto');// clono shoppingCartDateFilter
           }
         },
         {
           text: 'un mese',
           handler: () => {
-            console.log('un mese clicked');
-            this.filterText = ' ultimo mese';
-            this.shoppingCartDateFilter = this.Filters.shoppingCartDateFilter(30, 'dataAcquisto');// clono shoppingCartDateFilter
+            const days = 30;
+            this.filterText = ' dal ' + this.Utilities.formatDate(this.Utilities.moveDaysBack(new Date(), days));
+            this.shoppingCartDateFilter = this.Filters.shoppingCartDateFilter(days, 'dataAcquisto');// clono shoppingCartDateFilter
           }
         },
         {
           text: 'tre mesi',
           handler: () => {
-            this.filterText = ' ultimi tre mesi';
-            console.log('tre mesi clicked');
-            this.shoppingCartDateFilter = this.Filters.shoppingCartDateFilter(180, 'dataAcquisto')// clono shoppingCartDateFilter
+            const days = 90;
+            this.filterText = ' dal ' + this.Utilities.formatDate(this.Utilities.moveDaysBack(new Date(), days));
+            this.shoppingCartDateFilter = this.Filters.shoppingCartDateFilter(days, 'dataAcquisto')// clono shoppingCartDateFilter
           }
         },
         {
           text: 'un anno',
           handler: () => {
-            this.filterText = ' ultimo anno';
-            console.log('un anno clicked');
-            this.shoppingCartDateFilter = this.Filters.shoppingCartDateFilter(365, 'dataAcquisto');// clono shoppingCartDateFilter
+            const days = 365;
+            this.filterText = ' dal ' + this.Utilities.formatDate(this.Utilities.moveDaysBack(new Date(), days));
+            this.shoppingCartDateFilter = this.Filters.shoppingCartDateFilter(days, 'dataAcquisto');// clono shoppingCartDateFilter
 
           }
         },
         {
-          text: 'Cancel',
+          text: 'dal primo acquisto registrato',
           role: 'cancel',
           handler: () => {
-            this.filterText = ` dall'inizio dei tempi`;
-            console.log('Cancel clicked');
+            this.Carts.getMin(this.comparer, value => {
+              this.filterText = ' dal ' + this.Utilities.formatDate(value.dataAcquisto);
+            })
             this.shoppingCartDateFilter = this.Filters.takeEmAll();// resetto i filtri
 
           }

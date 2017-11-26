@@ -1,8 +1,8 @@
-import { Component,Input,OnInit,OnChanges,SimpleChanges } from '@angular/core';
-import { IonicPage, NavController, NavParams,ModalController } from 'ionic-angular';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { PaymentsProvider } from '../../providers/payments/payments';
 import { PaymentsModel } from '../../models/payment.model';
-import {UpdatePaymentPage} from '../../pages/update-payment/update-payment';
+import { UpdatePaymentPage } from '../../pages/update-payment/update-payment';
 import { ShoppingCartModel } from '../../models/shoppingCart.model';
 /**
  * Generated class for the PaymentItemListComponent component.
@@ -14,32 +14,28 @@ import { ShoppingCartModel } from '../../models/shoppingCart.model';
   selector: 'payment-item-list',
   templateUrl: 'payment-item-list.html'
 })
-export class PaymentItemListComponent implements OnInit,OnChanges {
- @Input() Payment:PaymentsModel;
- @Input() shoppingCartDateFilter:(cart:ShoppingCartModel)=>boolean
+export class PaymentItemListComponent implements OnInit, OnChanges {
+  @Input() Payment: PaymentsModel;
+  @Input() shoppingCartDateFilter: (cart: ShoppingCartModel) => boolean
   text: string;
   totale: number;
 
 
-  
-  ngOnChanges(changes:SimpleChanges){
-    console.log('payment',this.Payment.nome)
-    console.log('changes',changes)
-    this.Payments.calculateAmmount(this.shoppingCartDateFilter,this.Payment.key, acc=>{
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.Payments.calculateAmmount(this.shoppingCartDateFilter, this.Payment.key, acc => {
       this.totale = acc.totale
-      console.log('ricalcolato totale per',this.Payment.nome,this.totale)
       //console.log('totale per '+this.Payment.nome,acc.totale);
     })
   }
 
-  ngOnInit(){
-     this.Payments.calculateAmmount(this.shoppingCartDateFilter,this.Payment.key, acc=>{
-       this.totale = acc.totale
-       console.log('cb totale per '+this.Payment.nome,acc.totale);
-     })
+  ngOnInit() {
+    this.Payments.calculateAmmount(this.shoppingCartDateFilter, this.Payment.key, acc => {
+      this.totale = acc.totale
+    })
   }
   constructor(
-    public Payments:PaymentsProvider,
+    public Payments: PaymentsProvider,
     public modal: ModalController,
   ) {
   }
