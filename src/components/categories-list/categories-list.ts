@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { ShoppingCartModel } from '../../models/shoppingCart.model';
 
 /**
  * Generated class for the CategoriesListComponent component.
@@ -12,6 +13,7 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 })
 export class CategoriesListComponent implements OnChanges {
  @Input() Categorie:any
+ @Input() shoppingCartDateFilter:(cart:ShoppingCartModel)=> boolean;
   text: string;
 
   ngOnChanges(changes:SimpleChanges){

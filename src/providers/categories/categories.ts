@@ -8,7 +8,7 @@ import 'rxjs/add/operator/map';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Category } from '../../pages/categories/categories.model';
 import { ShoppingCartsProvider } from '../shopping-carts/shopping-carts';
-import { ItemModel } from '../../models/shoppingCart.model'
+import { ItemModel, ShoppingCartModel } from '../../models/shoppingCart.model'
 
 /*
   Generated class for the CategoriesProvider provider.
@@ -70,20 +70,24 @@ export class CategoriesProvider {
 
   }
 
-  countCategory(categoryId: string, cb) {
+  countCategory(Filter: (cart: ShoppingCartModel) => boolean, categoryId: string, cb) {
     this.ShoppingCart.shoppingCartSubject.subscribe(shoppingCarts => {
       if (shoppingCarts) {
-        this.ShoppingCart.flattenCarts(shoppingCarts).count(x => {
+        this.ShoppingCart.flattenCarts(Filter, shoppingCarts).count(x => {
           return x.categorieId && x.categorieId.indexOf(categoryId) > -1;
         }).subscribe(cb)
       }
     })
   }
 
-  sumCategory(categoryId: string, cb) {
+  sumCategory(Filter: (cart: ShoppingCartModel) => boolean, categoryId: string, cb) {
     this.ShoppingCart.shoppingCartSubject.subscribe(shoppingCarts => {
       if (shoppingCarts) {
-        this.ShoppingCart.flattenCarts(shoppingCarts).scan((acc, x) => {
+        this.ShoppingCart.flattenCarts(Filter, shoppingCarts).isEmpty().subscribe(empty => {
+          if (empty)// il filtro taglia via tutti i risultati
+            cb(new ItemModel())// ritorno 0
+        })
+        this.ShoppingCart.flattenCarts(Filter, shoppingCarts).scan((acc, x) => {
           if (x.categorieId && x.categorieId.indexOf(categoryId) > -1)
             acc.prezzo = Number(acc.prezzo) + Number(x.prezzo)
           return acc;

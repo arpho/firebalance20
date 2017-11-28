@@ -1,6 +1,6 @@
 <!-- Generated template for the PaymentListComponent component -->
 <ion-list>
-<ion-item-sliding *ngFor="let Payment of paymentsList" (ionSwipe)="delete(item)">
+<ion-item-sliding *ngFor="let Payment of paymentsList" (ionSwipe)="delete(item)" (ionDrag)="logDrag($event)">
   <ion-item>
     <payment-item-list [Payment]="Payment" [shoppingCartDateFilter]="shoppingCartDateFilter" >
 

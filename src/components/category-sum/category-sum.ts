@@ -1,6 +1,8 @@
 import { CategoriesProvider } from '../../providers/categories/categories';
 import { ShoppingCartsProvider } from '../../providers/shopping-carts/shopping-carts';
 import { Component, Input, OnInit } from '@angular/core';
+import { ShoppingCartModel } from '../../models/shoppingCart.model';
+import { OnChanges, SimpleChanges } from '@angular/core/src/metadata/lifecycle_hooks';
 
 /**
  * Generated class for the CategorySumComponent component.
@@ -12,17 +14,27 @@ import { Component, Input, OnInit } from '@angular/core';
   selector: 'category-sum',
   templateUrl: 'category-sum.html'
 })
-export class CategorySumComponent implements OnInit {
+export class CategorySumComponent implements OnInit,OnChanges {
 
   @Input() categoryId: string
-  @Input() dataFilter: string;
+  @Input() shoppingCartDateFilter: (cart:ShoppingCartModel)=> boolean;
   text: string;
   sum: any;
+  ngOnChanges(changes:SimpleChanges){
+    this.Categories.sumCategory(this.shoppingCartDateFilter,this.categoryId, x => {
+      //console.log('result sum', x)
+      this.sum['totale'] = this.roundToTwo(x.prezzo);
+      //console.log('sum', this.sum)
+      this.sum['moneta'] = x.moneta;
+
+    })
+
+  }
   ngOnInit() {
 
     this.text = 'Hello World' + this.categoryId;
     //  console.log('hi',this.categoryId);
-    this.Categories.sumCategory(this.categoryId, x => {
+    this.Categories.sumCategory(this.shoppingCartDateFilter,this.categoryId, x => {
       //console.log('result sum', x)
       this.sum['totale'] = this.roundToTwo(x.prezzo);
       //console.log('sum', this.sum)

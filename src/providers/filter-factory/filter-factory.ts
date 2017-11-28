@@ -16,7 +16,7 @@ import { UtilitiesProvider } from '../utilities/utilities';
 export class FilterFactoryProvider {
 
   constructor(public http: Http,
-  public utils:UtilitiesProvider) {
+    public utils: UtilitiesProvider) {
     console.log('Hello FilterFactoryProvider Provider');
   }
 
@@ -31,7 +31,7 @@ export class FilterFactoryProvider {
 
       const Data = new Date(cart[data]);
       const today = new Date();
-      const since = this.utils.moveDaysBack(today,days) //pongo il riferimento a days giorni prima di oggi
+      const since = this.utils.moveDaysBack(today, days) //pongo il riferimento a days giorni prima di oggi
       const result = since <= Data
       return result;// l'acquisto è avvenuto dopo 
 
@@ -39,7 +39,7 @@ export class FilterFactoryProvider {
 
   }
   takeEmAll() {
-    return (item: any) => {
+    return (item: ShoppingCartModel) => {
       return true;
     }
   }

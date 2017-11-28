@@ -10,7 +10,7 @@
     <ion-col class="item-icon .ion-ios-arrow-back" :before>
 
       <ion-title>
-        <ion-icon name="arrow-back" (click)="goHome()"></ion-icon> Categorie</ion-title>
+        <ion-icon name="arrow-back" (click)="goHome()"></ion-icon> Categorie <ion-icon name="aperture" (click)="filter()"></ion-icon>{{filterText}}</ion-title>
     </ion-col>
 
     <div id="categoriesForm">
@@ -26,7 +26,7 @@
   <h4 class="categories-title">{{'BROWSE_CATEGORIES' | translate}}<ion-button (click)="search()">
     <ion-icon name="search"></ion-icon>
     </ion-button></h4>
-  <categories-list [Categorie]="Categorie">
+  <categories-list [Categorie]="Categorie" [shoppingCartDateFilter]="shoppingCartDateFilter">
 
   </categories-list>
   <!--button (click)="categoriesSelector()">

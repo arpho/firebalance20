@@ -37,6 +37,17 @@ export class UtilitiesProvider {
     return new Date(today.getTime() - oneDay * days)
   }
 
+
+  shoppingCartDateComparer(cartX: ShoppingCartModel, cartY: ShoppingCartModel) {
+    if (cartX.dataAcquisto > cartY.dataAcquisto) {
+      return 1;
+    }
+    else if (cartX.dataAcquisto < cartY.dataAcquisto) {
+      return -1;
+    }
+    return 0;
+  }
+
   showToast(message: string, duration: string, position: string, next?: () => void) {
 
     console.log('toasted', message)

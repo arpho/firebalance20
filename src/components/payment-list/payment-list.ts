@@ -29,6 +29,9 @@ export class PaymentListComponent implements OnInit, OnChanges{
     modal.present();
     
   }
+  logDrag(event){
+    //console.log('drag',event  );
+  }
 
   ngOnChanges(changes:SimpleChanges){
   }

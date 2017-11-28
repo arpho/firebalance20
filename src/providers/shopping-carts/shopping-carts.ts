@@ -60,38 +60,18 @@ export class ShoppingCartsProvider {
     })
   }
 
-  flattenCarts(shoppingCarts: Observable<ShoppingCartModel>) {
-    return shoppingCarts.flatMap(cart => {
-      if (cart.items)
-        return Observable.from(cart.items);
-    })
+  flattenCarts(filter: (cart: ShoppingCartModel) => boolean, shoppingCarts: Observable<ShoppingCartModel>) {
+    if (filter) // ci sono casi in cui il filtro non è definito
+      //shoppingCarts.filter(filter).subscribe(result=>console.log('result filtro',result))
+      return shoppingCarts.filter(filter).flatMap(cart => {
+        if (cart.items)
+          return Observable.from(cart.items);
+      })
+    else
+      return Observable.from([]);
   }
 
-
-  countCategory(categoryId: string, cb) {
-    this.shoppingCartSubject.subscribe(shoppingCarts => {
-      if (shoppingCarts) {
-        console.log('applico filtri')
-        this.flattenCarts(shoppingCarts).count(x => {
-          return x.categorieId && x.categorieId.indexOf(categoryId) > -1;
-        }).subscribe(cb)
-      }
-    })
-  }
-
-  sumCategory(categoryId: string, cb) {
-    this.shoppingCartSubject.subscribe(shoppingCarts => {
-      if (shoppingCarts) {
-        this.flattenCarts(shoppingCarts).scan((acc, x) => {
-          if (x.categorieId && x.categorieId.indexOf(categoryId) > -1)
-            acc.prezzo = Number(acc.prezzo) + Number(x.prezzo)
-          return acc;
-        }, new ItemModel()).subscribe(cb)
-      }
-    })
-  }
   constructor(public http: Http) {
-    console.log('Hello ShoppingCartsProvider Provider');
     this.ShoppingCartObservable = new Observable();
     this.start();
   }

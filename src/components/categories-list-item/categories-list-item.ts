@@ -3,6 +3,7 @@ import { CategoriesProvider } from '../../providers/categories/categories';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Category } from '../../pages/categories/categories.model';
+import { ShoppingCartModel } from '../../models/shoppingCart.model';
 
 /**
  * Generated class for the CategoriesListItemComponent component.
@@ -16,6 +17,7 @@ import { Category } from '../../pages/categories/categories.model';
 })
 export class CategoriesListItemComponent implements OnInit {
   @Input() categoria: Category;
+  @Input() shoppingCartDateFilter:(cart:ShoppingCartModel)=> boolean;
   text: string;
   public myForm: FormGroup
   constructor(
