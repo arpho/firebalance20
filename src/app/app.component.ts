@@ -19,6 +19,7 @@ import { FunctionalitiesPage } from '../pages/functionalities/functionalities';
 import { PaymentPage } from '../pages/payment/payment';
 import {CategoriesPage} from '../pages/categories/categories';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
+import { ProvidersPage } from '../pages/providers/providers';
 
 
 @Component({
@@ -88,6 +89,7 @@ export class MyApp {
           this.translate.get('HOME'),
           this.translate.get('CATEGORIES'),
           this.translate.get('PAYMENTS'),
+          this.translate.get('PROVIDERS'),
           this.translate.get('FORMS'),
           this.translate.get('FUNCTIONALITIES'),
           this.translate.get('LAYOUTS'),
@@ -100,7 +102,7 @@ export class MyApp {
           ];
 
           this.pushPages = [
-            { title: data[3], icon: 'grid', component: LayoutsPage },
+            { title: data[3], icon: 'contacts', component: ProvidersPage },
             { title: data[4], icon: 'settings', component: SettingsPage }
           ];
         });

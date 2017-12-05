@@ -1,0 +1,48 @@
+<!--
+  Generated template for the ProvidersPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{'Providers'|translate}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+</ion-content>
+
+
+<!--
+  Generated template for the FornitoriPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  
+    <ion-navbar>
+      <ion-title>
+       <span> <ion-icon name="arrow-back" (click)="goHome()"></ion-icon> </span>{{'PROVIDERS'|translate}}</ion-title>
+      <div id="SupplierForm">
+        
+        <field-filter [placeholder]='segnaposto' (doFilter)="filterFornitore= $event.filterString"></field-filter>
+      </div>
+    </ion-navbar>
+  
+  
+    
+  </ion-header>
+  
+  
+  
+  <ion-content class="listing-content">
+      
+     <providers-list  [ProvidersList]="ProvidersList" [shoppingCartDateFilter]="shoppingCartDateFilter"></providers-list>
+    
+  </ion-content>

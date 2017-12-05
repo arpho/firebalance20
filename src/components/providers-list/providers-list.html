@@ -1,0 +1,12 @@
+<ion-list>
+  <ion-item-sliding *ngFor="let Provider of ProvidersList" (ionSwipe)="delete(item)" (ionDrag)="logDrag($event)">
+    <ion-item>
+      <providers-item-list [Provider]="Provider" [shoppingCartDateFilter]="shoppingCartDateFilter"></providers-item-list>
+
+    </ion-item>
+    <ion-item-options side="right">
+        <button ion-button (click)="update(Provider)"><ion-icon name="create"></ion-icon>modifica</button>
+        <button ion-button color="danger" (click)="share(item)">Share</button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>

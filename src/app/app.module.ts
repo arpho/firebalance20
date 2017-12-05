@@ -14,6 +14,7 @@ import { FormsPage } from '../pages/forms/forms';
 import { LoginPage } from '../pages/login/login';
 import { NotificationsPage } from '../pages/notifications/notifications';
 import { ProfilePage } from '../pages/profile/profile';
+import { ProvidersPage } from '../pages/providers/providers';
  import {CreatePaymentPage} from '../pages/create-payment/create-payment';
 import { TabsNavigationPage } from '../pages/tabs-navigation/tabs-navigation';
 import { WalkthroughPage } from '../pages/walkthrough/walkthrough';
@@ -106,6 +107,9 @@ import { PaymentsProvider } from '../providers/payments/payments';
 import { PaymentListComponent } from '../components/payment-list/payment-list';
 import { PaymentItemListComponent } from '../components/payment-item-list/payment-item-list';
 import { FilterFactoryProvider } from '../providers/filter-factory/filter-factory';
+import { ProvidersListComponent } from '../components/providers-list/providers-list';
+import { ProvidersItemListComponent } from '../components/providers-item-list/providers-item-list';
+import { ProvidersProvider } from '../providers/providers/providers';
 //import { PaymentProvider } from '../providers/payment/payment';
 //AngularFireModule.initializeApp(environment.firebaseConfig)
 export function createTranslateLoader(http: Http) {
@@ -125,6 +129,7 @@ export function createTranslateLoader(http: Http) {
     NotificationsPage,
     ProfilePage,
     CreatePaymentPage,
+    ProvidersPage,
     UpdatePaymentPage,
     TabsNavigationPage,
     WalkthroughPage,
@@ -164,7 +169,11 @@ export function createTranslateLoader(http: Http) {
     CategoryCounterComponent,
     CategorySumComponent,
     PaymentListComponent,
-    PaymentItemListComponent
+    PaymentItemListComponent,
+    ProvidersListComponent,
+    ProvidersListComponent,
+    ProvidersListComponent,
+    ProvidersItemListComponent
   ],
   imports: [
     SuiModule,
@@ -194,6 +203,7 @@ export function createTranslateLoader(http: Http) {
     NotificationsPage,
     ProfilePage,
     CreatePaymentPage,
+    ProvidersPage,
     UpdatePaymentPage,
     TabsNavigationPage,
     WalkthroughPage,
@@ -271,6 +281,7 @@ export function createTranslateLoader(http: Http) {
     PaymentsProvider,
     UtilitiesProvider,
     FilterFactoryProvider,
+    ProvidersProvider,
     //PaymentProvider
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
