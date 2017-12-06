@@ -1,6 +1,7 @@
 import { ShoppingCartModel } from '../../models/shoppingCart.model';
 import { Component,Input,OnChanges,SimpleChanges,OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams,ModalController } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
 import {UpdatePaymentPage} from '../../pages/update-payment/update-payment';
 
 /**
@@ -36,6 +37,7 @@ export class PaymentListComponent implements OnInit, OnChanges{
   ngOnChanges(changes:SimpleChanges){
   }
   constructor(
+    
     public modal: ModalController
   ) {
     this.paymentsList= [];

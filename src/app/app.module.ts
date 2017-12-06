@@ -35,7 +35,7 @@ import {CategoriesPage} from '../pages/categories/categories';
 import {CategoriesService} from '../pages/categories/categories.service';
 import {PaymentPage} from '../pages/payment/payment'
 import {UpdatePaymentPage } from '../pages/update-payment/update-payment'
-
+import { UpdateProviderPage } from '../pages/update-provider/update-provider'
 import { PreloadImage } from '../components/preload-image/preload-image';
 import { BackgroundImage } from '../components/background-image/background-image';
 import { ShowHideContainer } from '../components/show-hide-password/show-hide-container';
@@ -151,6 +151,7 @@ export function createTranslateLoader(http: Http) {
     ContactCardPage,
     TwitterLoginPage,
     AdsPage,
+    UpdateProviderPage,
     CategoriesPage,
     PaymentPage,
 		FormValidationsPage,
@@ -205,6 +206,7 @@ export function createTranslateLoader(http: Http) {
     CreatePaymentPage,
     ProvidersPage,
     UpdatePaymentPage,
+    UpdateProviderPage,
     TabsNavigationPage,
     WalkthroughPage,
     SettingsPage,

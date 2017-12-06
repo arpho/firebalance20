@@ -14,5 +14,54 @@
 
 
 <ion-content padding>
+  
+
+
+
+    <div class=" ui form"  [formGroup]="providerForm">
+        <label for="nome">Nome del fornitore</label>
+        <ion-input type="text"
+                   id="nomeInput"
+                   placeholder="nome Fornitore"
+                   formControlName="nome" >
+        </ion-input>
+        <label for="indirizzo">Indirizzo</label>
+        <ion-input type="text"
+                   id="indirrizzo"
+                   placeholder="indirizzo del fornitore"
+                   formControlName="indirizzo">
+        </ion-input>
+        <div *ngIf="!this.providerForm.controls.onLine.value">
+            
+        
+        
+            <div  *ngIf="this.providerForm.controls.longitudine.value">
+            <label for="longitudine">Longitudine</label>
+            <ion-input type="text"
+                    id="longitudine"
+                    placeholder="longitudine"
+                    formControlName="longitudine">
+            </ion-input>
+            </div>
+            <div  *ngIf="this.providerForm.controls.latitudine.value ">
+            <label for="latitudine">Latitudine</label>
+            <ion-input type="text"
+                    id="latitudine"
+                    placeholder="latitudine"
+                    formControlName="latitudine">
+            </ion-input>
+            </div>
+
+            <label for="note">note</label>
+            <ion-input type="text"
+                       id="note"
+                       placeholder="note"
+                       formControlName="note">
+            </ion-input>
+            </div>
+      </div>
+
+
+
 
 </ion-content>
