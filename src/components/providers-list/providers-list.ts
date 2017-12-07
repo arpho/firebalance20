@@ -30,7 +30,6 @@ export class ProvidersListComponent  {
   }
 
   create(){
-    console.log('creating')
     let modal = this.modal.create(CreateProviderPage);
     modal.present()
 

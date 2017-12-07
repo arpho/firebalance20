@@ -112,6 +112,7 @@ import { ProvidersListComponent } from '../components/providers-list/providers-l
 import { ProvidersItemListComponent } from '../components/providers-item-list/providers-item-list';
 import { ProvidersProvider } from '../providers/providers/providers';
 import { SwitchTextPipe } from '../pipes/switch-text/switch-text';
+import { GeolocationProvider } from '../providers/geolocation/geolocation';
 //import { PaymentProvider } from '../providers/payment/payment';
 //AngularFireModule.initializeApp(environment.firebaseConfig)
 export function createTranslateLoader(http: Http) {
@@ -290,6 +291,7 @@ export function createTranslateLoader(http: Http) {
     UtilitiesProvider,
     FilterFactoryProvider,
     ProvidersProvider,
+    GeolocationProvider,
     //PaymentProvider
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]

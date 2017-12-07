@@ -4,7 +4,7 @@ import { FormBuilder, FormControl, FormGroup, Validators, AbstractControl, React
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { ProviderModel } from '../../models/providers/provider.model';
 import { ProvidersProvider } from '../../providers/providers/providers';
-
+import { Geolocation } from '@ionic-native/geolocation';
 /**
  * Generated class for the UpdateProviderPage page.
  *
@@ -23,6 +23,7 @@ export class UpdateProviderPage {
     public Providers: ProvidersProvider,
     public Commons: UtilitiesProvider,
     public view: ViewController,
+    private geolocation: Geolocation,
     fb: FormBuilder,
   ) {
     console.log('navparams', navParams)
