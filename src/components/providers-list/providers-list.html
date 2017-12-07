@@ -4,9 +4,13 @@
       <providers-item-list [Provider]="Provider" [shoppingCartDateFilter]="shoppingCartDateFilter"></providers-item-list>
 
     </ion-item>
-    <ion-item-options side="right">
+    <ion-item-options side="left">
         <button ion-button (click)="update(Provider,slidingItem)"><ion-icon name="create"></ion-icon>modifica</button>
         <button ion-button color="danger" (click)="delete(Provider,slidingItem)">Cancella</button>
       </ion-item-options>
     </ion-item-sliding>
+    <ion-fab bottom right>
+        <button ion-fab color="primary" (click)="create()"><ion-icon name="add"></ion-icon>
+        </button>
+      </ion-fab>
   </ion-list>

@@ -61,8 +61,12 @@
                        placeholder="note"
                        formControlName="note">
             </ion-input>
+            <label for="onLIne">On line</label>
+            <ion-toggle formControlName="onLine"
+            placeholder="online" >
+          </ion-toggle>
             </div>
-            <button type="submit" (click)="update(providerForm)">Update</button>
+            <button type="submit" ion-button block icon-right class="choose-category-button" (click)="update(providerForm)">Update</button>
       </div>
 
 

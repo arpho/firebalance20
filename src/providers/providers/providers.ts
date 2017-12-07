@@ -36,6 +36,20 @@ export class ProvidersProvider {
     }).unsubscribe()
   }
 
+  delete(provider, cb) {
+    this.subjectProvidersRef.subscribe(Providers => {
+      if (Providers)
+        //Providers.child(`/$provider.key}/`).remove().then(cb);
+        Providers.child(`/${provider.key}/`).remove().then(cb)
+    }).unsubscribe()
+  }
+
+  create(provider: ProviderModel, cb) {
+    this.subjectProvidersRef.subscribe(Providers => {
+      Providers.push(provider).then(cb);
+    })
+  }
+
   getProvidersArray(next) {
     this.subjectProvidersRef.subscribe(ref => {
       if (ref)

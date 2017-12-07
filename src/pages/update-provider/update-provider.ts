@@ -46,7 +46,6 @@ export class UpdateProviderPage {
       this.dismiss()//chiudo il popup
       if (!err)
         this.Commons.showToast('Fornitore aggiornato', '5000', 'top', () => {
-          console.log('updated')
         })
       else
         console.log('errore on update', err);

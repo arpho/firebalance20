@@ -15,7 +15,6 @@ import { LoginPage } from '../pages/login/login';
 import { NotificationsPage } from '../pages/notifications/notifications';
 import { ProfilePage } from '../pages/profile/profile';
 import { ProvidersPage } from '../pages/providers/providers';
- import {CreatePaymentPage} from '../pages/create-payment/create-payment';
 import { TabsNavigationPage } from '../pages/tabs-navigation/tabs-navigation';
 import { WalkthroughPage } from '../pages/walkthrough/walkthrough';
 import { SettingsPage } from '../pages/settings/settings';
@@ -34,6 +33,8 @@ import { FormValidationsPage } from '../pages/form-validations/form-validations'
 import {CategoriesPage} from '../pages/categories/categories';
 import {CategoriesService} from '../pages/categories/categories.service';
 import {PaymentPage} from '../pages/payment/payment'
+import { CreatePaymentPage } from '../pages/create-payment/create-payment';
+import { CreateProviderPage } from '../pages/create-provider/create-provider';
 import {UpdatePaymentPage } from '../pages/update-payment/update-payment'
 import { UpdateProviderPage } from '../pages/update-provider/update-provider'
 import { PreloadImage } from '../components/preload-image/preload-image';
@@ -152,7 +153,9 @@ export function createTranslateLoader(http: Http) {
     TwitterLoginPage,
     AdsPage,
     UpdateProviderPage,
+    CreateProviderPage,
     CategoriesPage,
+    
     PaymentPage,
 		FormValidationsPage,
 		VideoPlaylistPage,
@@ -204,6 +207,7 @@ export function createTranslateLoader(http: Http) {
     NotificationsPage,
     ProfilePage,
     CreatePaymentPage,
+    CreateProviderPage,
     ProvidersPage,
     UpdatePaymentPage,
     UpdateProviderPage,

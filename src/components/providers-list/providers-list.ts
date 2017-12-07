@@ -4,6 +4,8 @@ import { ProviderModel } from '../../models/providers/provider.model';
 import { ShoppingCartModel } from '../../models/shoppingCart.model';
 import { ItemSliding } from 'ionic-angular/components/item/item-sliding';
 import { UpdateProviderPage } from '../../pages/update-provider/update-provider';
+import { CreateProviderPage } from '../../pages/create-provider/create-provider'
+import { ProvidersProvider } from '../../providers/providers/providers';
 //import { UpdateProviderPage } from '../pages/update-provider';
 /**
  * Generated class for the ProvidersListComponent component.
@@ -27,6 +29,12 @@ export class ProvidersListComponent  {
     modal.present()
   }
 
+  create(){
+    console.log('creating')
+    let modal = this.modal.create(CreateProviderPage);
+    modal.present()
+
+  }
   delete(provider:ProviderModel,slidingItem: ItemSliding){
 
     let alert = this.alertCtrl.create({
@@ -45,7 +53,11 @@ export class ProvidersListComponent  {
           text: 'Cancella',
           handler: () => {
             console.log('cancella clicked');
+            this.Providers.delete(provider,res=>{
+              console.log('deleted',provider,res)
+            })
             slidingItem.close();
+
           }
         }
       ]
@@ -55,6 +67,7 @@ export class ProvidersListComponent  {
 
   constructor(
     public modal:ModalController,
+    public Providers:ProvidersProvider,
     private alertCtrl: AlertController
   ) {
   }

@@ -7,12 +7,60 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>CreateProvider</ion-title>
+    <ion-title><ion-button>
+        <ion-icon name="close" (click)="dismiss()"></ion-icon>{{'CREATEPROVIDER'|translate}}</ion-button></ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+
+    <div class=" ui form"  [formGroup]="providerForm">
+        <label for="nome">Nome del fornitore</label>
+        <ion-input type="text"
+                   id="nomeInput"
+                   placeholder="nome Fornitore"
+                   formControlName="nome" >
+        </ion-input>
+        <label for="indirizzo">Indirizzo</label>
+        <ion-input type="text"
+                   id="indirrizzo"
+                   placeholder="indirizzo del fornitore"
+                   formControlName="indirizzo">
+        </ion-input>
+        <div *ngIf="!this.providerForm.controls.onLine.value">
+            
+        
+        
+            <div  *ngIf="this.providerForm.controls.longitudine.value">
+                <label for="longitudine">Longitudine</label>
+                <ion-input type="text"
+                        id="longitudine"
+                        placeholder="longitudine"
+                        formControlName="longitudine">
+                </ion-input>
+            </div>
+            <div  *ngIf="this.providerForm.controls.latitudine.value ">
+              <label for="latitudine">Latitudine</label>
+              <ion-input type="text"
+                      id="latitudine"
+                      placeholder="latitudine"
+                      formControlName="latitudine">
+              </ion-input>
+            </div>
+        </div>
+            <label for="note">note</label>
+            <ion-input type="text"
+                       id="note"
+                       placeholder="note"
+                       formControlName="note">
+            </ion-input>
+            <label for="onLIne">On line</label>
+            <ion-toggle formControlName="onLine"
+                        placeholder="online" >
+                      </ion-toggle>
+            <button type="submit" ion-button block icon-right class="choose-category-button" (click)="create(providerForm)">Crea</button>
+      </div>
 
 </ion-content>
