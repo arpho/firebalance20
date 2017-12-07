@@ -37,7 +37,6 @@ export class UtilitiesProvider {
     return new Date(today.getTime() - oneDay * days)
   }
 
-
   shoppingCartDateComparer(cartX: ShoppingCartModel, cartY: ShoppingCartModel) {
     if (cartX.dataAcquisto > cartY.dataAcquisto) {
       return 1;

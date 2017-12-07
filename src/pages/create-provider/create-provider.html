@@ -56,7 +56,7 @@
                        placeholder="note"
                        formControlName="note">
             </ion-input>
-            <label for="onLIne">On line</label>
+            <label for="onLIne">{{ this.providerForm.controls.onLine.value|switchText:'Venditore onLine':'venditore tradizionale'}}</label>
             <ion-toggle formControlName="onLine"
                         placeholder="online" >
                       </ion-toggle>

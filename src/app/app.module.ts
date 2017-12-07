@@ -111,6 +111,7 @@ import { FilterFactoryProvider } from '../providers/filter-factory/filter-factor
 import { ProvidersListComponent } from '../components/providers-list/providers-list';
 import { ProvidersItemListComponent } from '../components/providers-item-list/providers-item-list';
 import { ProvidersProvider } from '../providers/providers/providers';
+import { SwitchTextPipe } from '../pipes/switch-text/switch-text';
 //import { PaymentProvider } from '../providers/payment/payment';
 //AngularFireModule.initializeApp(environment.firebaseConfig)
 export function createTranslateLoader(http: Http) {
@@ -177,7 +178,8 @@ export function createTranslateLoader(http: Http) {
     ProvidersListComponent,
     ProvidersListComponent,
     ProvidersListComponent,
-    ProvidersItemListComponent
+    ProvidersItemListComponent,
+    SwitchTextPipe
   ],
   imports: [
     SuiModule,

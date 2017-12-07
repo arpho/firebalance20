@@ -57,6 +57,7 @@ export class UpdateProviderPage {
     this.view.dismiss();
   }
 
+ 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UpdateProviderPage');
   }

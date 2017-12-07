@@ -61,11 +61,11 @@
                        placeholder="note"
                        formControlName="note">
             </ion-input>
-            <label for="onLIne">On line</label>
+            </div>
+            <label for="onLIne">{{ this.providerForm.controls.onLine.value|switchText:'Venditore onLine':'venditore tradizionale'}}</label>
             <ion-toggle formControlName="onLine"
             placeholder="online" >
           </ion-toggle>
-            </div>
             <button type="submit" ion-button block icon-right class="choose-category-button" (click)="update(providerForm)">Update</button>
       </div>
 
