@@ -32,7 +32,8 @@ export class CategoriesListItemComponent implements OnInit {
       categoria: new FormControl(this.newFunction())
     })
     
-    this.myForm.controls['categoria'].valueChanges.debounceTime(1000).subscribe(data => {
+    this.myForm.controls['categoria'].valueChanges.debounceTime(1000).distinctUntilChanged()
+    .subscribe(data => {
       console.log('dataChanges', data);
       this.Categories.update(data, this.categoria.id).then(d => {
         console.log('categoria aggionata', d)
