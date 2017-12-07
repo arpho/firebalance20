@@ -17,7 +17,7 @@ import { ShoppingCartModel } from '../../models/shoppingCart.model';
 })
 export class CategoriesListItemComponent implements OnInit {
   @Input() categoria: Category;
-  @Input() shoppingCartDateFilter:(cart:ShoppingCartModel)=> boolean;
+  @Input() shoppingCartDateFilter: (cart: ShoppingCartModel) => boolean;
   text: string;
   public myForm: FormGroup
   constructor(
@@ -31,15 +31,16 @@ export class CategoriesListItemComponent implements OnInit {
     this.myForm = this.fb.group({
       categoria: new FormControl(this.newFunction())
     })
-    
+
     this.myForm.controls['categoria'].valueChanges.debounceTime(1000).distinctUntilChanged()
-    .subscribe(data => {
-      console.log('dataChanges', data);
-      this.Categories.update(data, this.categoria.id).then(d => {
-        console.log('categoria aggionata', d)
-        this.myForm.controls.categoria.markAsPristine(); // setto la form come vergine
+      .subscribe(data => {
+        console.log('dataChanges', data);
+        this.Categories.update(data, this.categoria.id).then(d => {
+          console.log('categoria aggionata', d)
+          this.myForm.controls.categoria.markAsPristine(); // setto la form come vergine
+        })
       })
-    })}
+  }
 
   private newFunction(): any {
     return this.categoria.title;

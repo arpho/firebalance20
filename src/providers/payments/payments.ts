@@ -34,7 +34,7 @@ export class PaymentsProvider {
   }
 
 
-  calculateAmmount(filterShoppingCart:(cart:ShoppingCartModel)=>boolean,pagamentoId, cb) {
+  calculateAmmount(filterShoppingCart: (cart: ShoppingCartModel) => boolean, pagamentoId, cb) {
     /*
     calcola l'importo del pagamento effetuato con il metodo
     @param pagamentoId:string chiave del pagamento
@@ -43,30 +43,30 @@ export class PaymentsProvider {
     */
     this.Carts.shoppingCartSubject.subscribe(shoppingCart => {
       if (shoppingCart)
-          shoppingCart.filter(filterShoppingCart).isEmpty().subscribe(empty=>{
-            if(empty)
+        shoppingCart.filter(filterShoppingCart).isEmpty().subscribe(empty => {
+          if (empty)
             cb(new ShoppingCartModel())// il filtro non ritorna valori il totale del pagamento è 0
-            else{
-              shoppingCart.filter(filterShoppingCart).scan((acc, x) => {
+          else {
+            shoppingCart.filter(filterShoppingCart).scan((acc, x) => {
 
               if (x.pagamentoId == pagamentoId)
-                acc.totale = acc.totale  + x.totale
+                acc.totale = acc.totale + x.totale
               return acc
             }, new ShoppingCartModel()).subscribe(tot => {
               cb(tot);
             });// mantengo la sottoscrizione perchè è un'operazione di lettura
-            }
-          })
-           
-            
+          }
+        })
 
-          
+
+
+
     })
   }
-  updatePayment(pagamento:PaymentsModel,cb){
-    this.subjectPaymentsRef.subscribe(Payments =>{
-      if(Payments)
-      Payments.child(`/${pagamento.key}/`).update(pagamento).then(cb);
+  updatePayment(pagamento: PaymentsModel, cb) {
+    this.subjectPaymentsRef.subscribe(Payments => {
+      if (Payments)
+        Payments.child(`/${pagamento.key}/`).update(pagamento).then(cb);
     }).unsubscribe()
   }
 

@@ -18,7 +18,7 @@ export class ProvidersProvider {
   subjectProvidersRef = new BehaviorSubject(null) // instanzio il behaviorSubject, è definito subito
   providersList = Array<ProviderModel>();
   constructor(public http: Http,
-  Carts:ShoppingCartsProvider) {
+    Carts: ShoppingCartsProvider) {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         const uid = user.uid;
@@ -29,6 +29,12 @@ export class ProvidersProvider {
     })
   }
 
+  update(provider, cb) {
+    this.subjectProvidersRef.subscribe(Providers => {
+      if (Providers)
+        Providers.child(`/${provider.key}/`).update(provider).then(cb);
+    }).unsubscribe()
+  }
 
   getProvidersArray(next) {
     this.subjectProvidersRef.subscribe(ref => {

@@ -1,7 +1,9 @@
+import { UtilitiesProvider } from '../../providers/utilities/utilities';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, AbstractControl, ReactiveFormsModule } from '@angular/forms';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { ProviderModel } from '../../models/providers/provider.model';
+import { ProvidersProvider } from '../../providers/providers/providers';
 
 /**
  * Generated class for the UpdateProviderPage page.
@@ -15,12 +17,15 @@ import { ProviderModel } from '../../models/providers/provider.model';
   templateUrl: 'update-provider.html',
 })
 export class UpdateProviderPage {
-  provider:ProviderModel;
+  provider: ProviderModel;
   public providerForm: FormGroup;
   constructor(public navCtrl: NavController, public navParams: NavParams,
+    public Providers: ProvidersProvider,
+    public Commons: UtilitiesProvider,
+    public view: ViewController,
     fb: FormBuilder,
   ) {
-    console.log('navparams',navParams)
+    console.log('navparams', navParams)
     this.provider = navParams.data
     this.providerForm = fb.group({
       nome: new FormControl(navParams.get('nome')),
@@ -32,6 +37,25 @@ export class UpdateProviderPage {
       onLine: new FormControl(false)
     },
       Validators.required);
+  }
+  update(provider) {
+    console.log('modifica', provider);
+    const Provider = new ProviderModel().buildFromActiveForm(provider.controls)
+    console.log('provider', Provider);
+    this.Providers.update(Provider, err => {
+      this.dismiss()//chiudo il popup
+      if (!err)
+        this.Commons.showToast('Fornitore aggiornato', '5000', 'top', () => {
+          console.log('updated')
+        })
+      else
+        console.log('errore on update', err);
+
+    })
+  }
+
+  dismiss() {
+    this.view.dismiss();
   }
 
   ionViewDidLoad() {
