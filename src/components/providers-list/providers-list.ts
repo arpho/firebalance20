@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { AlertController,ModalController } from 'ionic-angular';
+import { AlertController, ModalController } from 'ionic-angular';
 import { ProviderModel } from '../../models/providers/provider.model';
 import { ShoppingCartModel } from '../../models/shoppingCart.model';
 import { ItemSliding } from 'ionic-angular/components/item/item-sliding';
@@ -17,24 +17,24 @@ import { ProvidersProvider } from '../../providers/providers/providers';
   selector: 'providers-list',
   templateUrl: 'providers-list.html'
 })
-export class ProvidersListComponent  {
- @Input() ProvidersList:Array<ProviderModel>
- @Input() shoppingCartDateFilter:(cart:ShoppingCartModel)=>boolean
+export class ProvidersListComponent {
+  @Input() ProvidersList: Array<ProviderModel>
+  @Input() shoppingCartDateFilter: (cart: ShoppingCartModel) => boolean
   text: string;
-  update(provider:ProviderModel,slidingItem: ItemSliding,
-  ){
-    console.log('updating',provider)
+  update(provider: ProviderModel, slidingItem: ItemSliding,
+  ) {
+    console.log('updating', provider)
     slidingItem.close();
-    let modal = this.modal.create(UpdateProviderPage,provider);
+    let modal = this.modal.create(UpdateProviderPage, provider);
     modal.present()
   }
 
-  create(){
+  create() {
     let modal = this.modal.create(CreateProviderPage);
     modal.present()
 
   }
-  delete(provider:ProviderModel,slidingItem: ItemSliding){
+  delete(provider: ProviderModel, slidingItem: ItemSliding) {
 
     let alert = this.alertCtrl.create({
       title: 'Conferma Cancellazione',
@@ -52,8 +52,8 @@ export class ProvidersListComponent  {
           text: 'Cancella',
           handler: () => {
             console.log('cancella clicked');
-            this.Providers.delete(provider,res=>{
-              console.log('deleted',provider,res)
+            this.Providers.delete(provider, res => {
+              console.log('deleted', provider, res)
             })
             slidingItem.close();
 
@@ -65,8 +65,8 @@ export class ProvidersListComponent  {
   }
 
   constructor(
-    public modal:ModalController,
-    public Providers:ProvidersProvider,
+    public modal: ModalController,
+    public Providers: ProvidersProvider,
     private alertCtrl: AlertController
   ) {
   }

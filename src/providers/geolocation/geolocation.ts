@@ -1,4 +1,4 @@
-import { Injectable,Inject } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Http } from '@angular/http';
 import { Geolocation } from '@ionic-native/geolocation';
 import 'rxjs/add/operator/map';
@@ -12,19 +12,19 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class GeolocationProvider {
   public googleKey: string;
- locate(){
-   return this.geolocation.getCurrentPosition()
- }
+  locate() {
+    return this.geolocation.getCurrentPosition()
+  }
 
 
- makeUrl(lat, long) {
-  return "https://maps.googleapis.com/maps/api/geocode/json?latlng=".concat(lat).concat(",").concat(long).concat("&key=").concat(this.googleKey);
-}
+  makeUrl(lat, long) {
+    return "https://maps.googleapis.com/maps/api/geocode/json?latlng=".concat(lat).concat(",").concat(long).concat("&key=").concat(this.googleKey);
+  }
 
- inverseGeoLocation(lat, long) {
-  var url = this.makeUrl(lat, long)
-  return this.http.get(url);
-}
+  inverseGeoLocation(lat, long) {
+    var url = this.makeUrl(lat, long)
+    return this.http.get(url);
+  }
 
   constructor(public http: Http,
 

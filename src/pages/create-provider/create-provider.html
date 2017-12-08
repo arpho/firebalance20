@@ -32,7 +32,7 @@
         <div *ngIf="!this.providerForm.controls.onLine.value">
             
         <section *ngIf="listaIndirizzi">
-          <ion-select formControlName="indirizzo" >
+          <ion-select >
           <ion-option *ngFor="let address of listaIndirizzi"  value="address">
             {{address}}
           </ion-option>
@@ -62,11 +62,15 @@
                        placeholder="note"
                        formControlName="note">
             </ion-input>
+            <ion-fab right>
+            <button ion-fab mini color="primary" (click)="locate()"><ion-icon name="navigate"></ion-icon>
+
+            </button>
+          </ion-fab>
             <label for="onLIne">{{ this.providerForm.controls.onLine.value|switchText:'Venditore onLine':'venditore tradizionale'}}</label>
             <ion-toggle formControlName="onLine"
                         placeholder="online" >
                       </ion-toggle>
-                      <ion-button (click)="locate()"><ion-icon name="compass"></ion-icon></ion-button>
             <button type="submit" ion-button block icon-right class="choose-category-button" (click)="create(providerForm)">Crea</button>
       </div>
 

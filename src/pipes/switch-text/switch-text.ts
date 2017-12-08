@@ -13,7 +13,7 @@ export class SwitchTextPipe implements PipeTransform {
   /**
    * Takes a value and makes it lowercase.
    */
-  transform(control:boolean,trueValue: string,falseValue:string) {
-    return control?trueValue:falseValue;
+  transform(control: boolean, trueValue: string, falseValue: string) {
+    return control ? trueValue : falseValue;
   }
 }
