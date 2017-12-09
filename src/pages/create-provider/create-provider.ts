@@ -20,12 +20,14 @@ import * as _ from 'lodash'
 })
 export class CreateProviderPage {
   public providerForm: FormGroup;
+  public busy:boolean
   public listaIndirizzi: [string];
   constructor(public navCtrl: NavController, public navParams: NavParams, fb: FormBuilder,
     public Providers: ProvidersProvider,
     private geolocation: GeolocationProvider,
     public actionSheetCtrl: ActionSheetController,
     public view: ViewController) {
+      this.busy= false;
     this.providerForm = fb.group({
       nome: new FormControl(navParams.get('nome')),
       note: new FormControl(navParams.get('note')),
@@ -41,18 +43,19 @@ export class CreateProviderPage {
   locate() {
 
     this.geolocation.locate().then((resp) => {
+      this.busy = true;
       // resp.coords.latitude
       // resp.coords.longitude
       console.log(resp, this.providerForm)
       this.providerForm.controls.latitudine.setValue(resp.coords.latitude);
       this.providerForm.controls.longitudine.setValue(resp.coords.longitude);
       this.geolocation.inverseGeoLocation(resp.coords.latitude, resp.coords.longitude).subscribe(address => {
-        console.log('address', address.json())
+        this.busy = false;
         this.listaIndirizzi = [''];
         const buttons = [];
         address.json().results;
         _.each(address.json().results, item => {
-          console.log("item", item.formatted_address)
+          
           this.listaIndirizzi.push(item.formatted_address)
           buttons.push({
             text: item.formatted_address,

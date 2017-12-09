@@ -16,6 +16,7 @@
 
 <ion-content padding>
 
+
     <div class=" ui form"  [formGroup]="providerForm">
         <label for="nome">Nome del fornitore</label>
         <ion-input type="text"
@@ -31,13 +32,7 @@
         </ion-input>
         <div *ngIf="!this.providerForm.controls.onLine.value">
             
-        <section *ngIf="listaIndirizzi">
-          <ion-select >
-          <ion-option *ngFor="let address of listaIndirizzi"  value="address">
-            {{address}}
-          </ion-option>
-          </ion-select>  
-        </section> 
+
         
             <div  *ngIf="this.providerForm.controls.longitudine.value">
                 <label for="longitudine">Longitudine</label>
@@ -66,6 +61,9 @@
             <button ion-fab mini color="primary" (click)="locate()"><ion-icon name="navigate"></ion-icon>
 
             </button>
+            <div *ngIf="busy">
+            <ion-spinner name="crescent"></ion-spinner>
+            </div>
           </ion-fab>
             <label for="onLIne">{{ this.providerForm.controls.onLine.value|switchText:'Venditore onLine':'venditore tradizionale'}}</label>
             <ion-toggle formControlName="onLine"
@@ -74,4 +72,5 @@
             <button type="submit" ion-button block icon-right class="choose-category-button" (click)="create(providerForm)">Crea</button>
       </div>
 
+      
 </ion-content>
