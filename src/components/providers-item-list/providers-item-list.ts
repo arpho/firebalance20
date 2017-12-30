@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input,OnInit } from '@angular/core';
 import { ProviderModel } from '../../models/providers/provider.model';
 import { ShoppingCartModel } from '../../models/shoppingCart.model';
 
@@ -12,16 +12,18 @@ import { ShoppingCartModel } from '../../models/shoppingCart.model';
   selector: 'providers-item-list',
   templateUrl: 'providers-item-list.html'
 })
-export class ProvidersItemListComponent {
+export class ProvidersItemListComponent implements OnInit{
   @Input() Provider: ProviderModel;
   @Input() shoppingCartDateFilter: (cart: ShoppingCartModel) => boolean;
 
   text: string;
 
- 
+ ngOnInit(){
+
+ }
   constructor() {
-    console.log('Hello ProvidersItemListComponent Component');
     this.text = 'Hello World';
+
   }
 
 }

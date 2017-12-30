@@ -3,5 +3,8 @@
     <ion-icon name="more" class="handle"></ion-icon>
     <ion-icon name="locate" *ngIf="Provider.latitudine" class="locate"></ion-icon>
  <h1> {{Provider.nome}}</h1>
- <h3>{{Provider.note}}</h3>
+ <h3>{{Provider.note}}
+     <ion-icon name="wifi" *ngIf="Provider.onLine" ></ion-icon>
+ </h3>
+ <providers-total [ProviderKey]="Provider.key" [shoppingCartDateFilter]="shoppingCartDateFilter"></providers-total>
 </article>
