@@ -7,7 +7,9 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{'Providers'|translate}}</ion-title>
+    <ion-title><ion-icon name="arrow-back" (click)="goHome()"></ion-icon>{{'Providers'|translate}}
+    
+    </ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -28,7 +30,12 @@
   
     <ion-navbar>
       <ion-title>
-       <span> <ion-icon name="arrow-back" (click)="goHome()"></ion-icon> </span>{{'PROVIDERS'|translate}}</ion-title>
+       <span> 
+         <ion-icon name="arrow-back" (click)="goHome()"></ion-icon>
+        </span>{{'PROVIDERS'|translate}}
+        <ion-icon name="aperture" (click)="filter()"></ion-icon>
+       {{filterText}}
+      </ion-title>
       <div id="SupplierForm">
         
         <field-filter [placeholder]='segnaposto' (doFilter)="filterFornitore= $event.filterString"></field-filter>

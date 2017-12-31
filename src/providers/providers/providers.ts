@@ -5,6 +5,9 @@ import { Http } from '@angular/http';
 import * as firebase from 'firebase/app';
 import * as _ from 'lodash';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { ShoppingCartModel } from '../../models/shoppingCart.model';
+import { Observable } from 'videogular2/node_modules/rxjs/Observable';
+import { SharedStylesHost } from '@angular/platform-browser/src/dom/shared_styles_host';
 
 /*
   Generated class for the ProvidersProvider provider.
@@ -18,7 +21,7 @@ export class ProvidersProvider {
   subjectProvidersRef = new BehaviorSubject(null) // instanzio il behaviorSubject, è definito subito
   providersList = Array<ProviderModel>();
   constructor(public http: Http,
-    Carts: ShoppingCartsProvider) {
+    public Carts: ShoppingCartsProvider) {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         const uid = user.uid;
@@ -27,6 +30,34 @@ export class ProvidersProvider {
 
       }
     })
+  }
+
+
+  calculateTotal(filterShoppingCart: (cart: ShoppingCartModel) => boolean, providerKey: string,cb:any){
+    console.log('calcolo totale per',providerKey)
+    this.Carts.shoppingCartSubject.subscribe(carts => {
+      console.log('got carts',carts)
+      if(carts)// il primo valore puo' essere nullo
+      {
+        console.log('non vuoto',filterShoppingCart,providerKey)
+        carts.filter(filterShoppingCart).subscribe(res=>console.log('filtered',res))
+        carts.filter(filterShoppingCart).isEmpty().subscribe(empty => {
+            console.log('empty',empty)
+            if (empty) { 
+              console.log('empty')
+              cb(new ShoppingCartModel())
+            }
+            else {
+              carts.filter(filterShoppingCart).scan((acc, x) => {
+                console.log('scanning cart,x')
+                if (x.key == providerKey)
+                  acc.totale += x.totale
+                return acc;
+              },new ShoppingCartModel()).subscribe(total=>cb(total)).unsubscribe()
+            }
+          }).unsubscribe() //empty
+        }
+    }).unsubscribe()//shoppingCartSubject
   }
 
   update(provider, cb) {

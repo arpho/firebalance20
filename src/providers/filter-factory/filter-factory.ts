@@ -4,6 +4,7 @@ import 'rxjs/add/operator/map';
 import { ShoppingCartModel } from '../../models/shoppingCart.model';
 import { Observable } from 'videogular2/node_modules/rxjs/Observable';
 import * as _ from 'lodash';
+import { ShoppingCartsProvider } from '../shopping-carts/shopping-carts';
 import { UtilitiesProvider } from '../utilities/utilities';
 
 /*
@@ -15,8 +16,77 @@ import { UtilitiesProvider } from '../utilities/utilities';
 @Injectable()
 export class FilterFactoryProvider {
 
+  getFilterActionSheetsButtons(setFilterText: (txt: string) => {}, setShoppingCartDateFilter: (fn:(cart:ShoppingCartModel)=>boolean)=>{}) {
+
+    return [
+      {
+        text: 'da ieri',
+        handler: () => {
+          const days = 1;
+          setFilterText(' dal ' + this.utils.formatDate(this.utils.moveDaysBack(new Date(), days)));
+          setShoppingCartDateFilter(this.shoppingCartDateFilter(days, 'dataAccredito'));
+        }
+      },
+      {
+        text: 'oggi',
+        handler: () => {
+          const days = 0;
+          setFilterText(' dal ' + this.utils.formatDate(this.utils.moveDaysBack(new Date(), days)));
+          setShoppingCartDateFilter(this.shoppingCartDateFilter(days, 'dataAccredito'));
+        }
+      },
+      {
+        text: 'una settimana',
+        handler: () => {
+          const days = 7;
+          setFilterText(' dal ' + this.utils.formatDate(this.utils.moveDaysBack(new Date(), days)));
+          setShoppingCartDateFilter(this.shoppingCartDateFilter(days, 'dataAcquisto'));
+        }
+      },
+      {
+        text: 'un mese',
+        handler: () => {
+          const days = 30;
+          setFilterText(' dal ' + this.utils.formatDate(this.utils.moveDaysBack(new Date(), days)));
+          setShoppingCartDateFilter(this.shoppingCartDateFilter(days, 'dataAcquisto'));
+        }
+      },
+      {
+        text: 'tre mesi',
+        handler: () => {
+          const days = 90;
+          setFilterText(' dal ' + this.utils.formatDate(this.utils.moveDaysBack(new Date(), days)));
+          setShoppingCartDateFilter(this.shoppingCartDateFilter(days, 'dataAcquisto'));
+        }
+      },
+      {
+        text: 'un anno',
+        handler: () => {
+          const days = 365;
+          setFilterText(' dal ' + this.utils.formatDate(this.utils.moveDaysBack(new Date(), days)));
+          setShoppingCartDateFilter(this.shoppingCartDateFilter(days, 'dataAcquisto'));
+
+        }
+      },
+      {
+        text: 'dal primo acquisto registrato',
+        role: 'cancel',
+        handler: () => {
+          this.Carts.getMin(this.utils.shoppingCartDateComparer, value => {
+            setFilterText(' dal ' + this.utils.formatDate(value.dataAcquisto));
+          })
+          setShoppingCartDateFilter(this.takeEmAll());
+
+        }
+      }
+    ]
+
+
+  }
+
   constructor(public http: Http,
-    public utils: UtilitiesProvider) {
+    public utils: UtilitiesProvider,
+    public Carts: ShoppingCartsProvider) {
     console.log('Hello FilterFactoryProvider Provider');
   }
 
@@ -38,6 +108,11 @@ export class FilterFactoryProvider {
     }
 
   }
+  
+  takeAllCarts(){
+    return(cart:ShoppingCartModel)=>{return true}
+  }
+  
   takeEmAll() {
     return (item: ShoppingCartModel) => {
       return true;

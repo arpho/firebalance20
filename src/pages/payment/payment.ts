@@ -59,68 +59,7 @@ export class PaymentPage implements OnInit {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'limita a ',
       enableBackdropDismiss: true,
-      buttons: [
-        {
-          text: 'da ieri',
-          handler: () => {
-            const days = 1;
-            this.filterText = ' dal ' + this.Utilities.formatDate(this.Utilities.moveDaysBack(new Date(), days));
-            this.shoppingCartDateFilter = this.Filters.shoppingCartDateFilter(days, 'dataAccredito');// clono shoppingCartDateFilte
-          }
-        },
-        {
-          text: 'oggi',
-          handler: () => {
-            const days = 0;
-            this.filterText = ' dal ' + this.Utilities.formatDate(this.Utilities.moveDaysBack(new Date(), days));
-            this.shoppingCartDateFilter = this.Filters.shoppingCartDateFilter(days, 'dataAccredito');// clono shoppingCartDateFilte
-          }
-        },
-        {
-          text: 'una settimana',
-          handler: () => {
-            const days = 7;
-            this.filterText = ' dal ' + this.Utilities.formatDate(this.Utilities.moveDaysBack(new Date(), days));
-            this.shoppingCartDateFilter = this.Filters.shoppingCartDateFilter(days, 'dataAcquisto');// clono shoppingCartDateFilter
-          }
-        },
-        {
-          text: 'un mese',
-          handler: () => {
-            const days = 30;
-            this.filterText = ' dal ' + this.Utilities.formatDate(this.Utilities.moveDaysBack(new Date(), days));
-            this.shoppingCartDateFilter = this.Filters.shoppingCartDateFilter(days, 'dataAcquisto');// clono shoppingCartDateFilter
-          }
-        },
-        {
-          text: 'tre mesi',
-          handler: () => {
-            const days = 90;
-            this.filterText = ' dal ' + this.Utilities.formatDate(this.Utilities.moveDaysBack(new Date(), days));
-            this.shoppingCartDateFilter = this.Filters.shoppingCartDateFilter(days, 'dataAcquisto')// clono shoppingCartDateFilter
-          }
-        },
-        {
-          text: 'un anno',
-          handler: () => {
-            const days = 365;
-            this.filterText = ' dal ' + this.Utilities.formatDate(this.Utilities.moveDaysBack(new Date(), days));
-            this.shoppingCartDateFilter = this.Filters.shoppingCartDateFilter(days, 'dataAcquisto');// clono shoppingCartDateFilter
-
-          }
-        },
-        {
-          text: 'dal primo acquisto registrato',
-          role: 'cancel',
-          handler: () => {
-            this.Carts.getMin(this.comparer, value => {
-              this.filterText = ' dal ' + this.Utilities.formatDate(value.dataAcquisto);
-            })
-            this.shoppingCartDateFilter = this.Filters.takeEmAll();// resetto i filtri
-
-          }
-        }
-      ]
+      buttons: this.Filters.getFilterActionSheetsButtons(txt => this.filterText = txt, fn => this.shoppingCartDateFilter = fn)
     });
     actionSheet.present()
   }

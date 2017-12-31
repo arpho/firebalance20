@@ -86,7 +86,7 @@ export class CategoriesProvider {
         this.ShoppingCart.flattenCarts(Filter, shoppingCarts).isEmpty().subscribe(empty => {
           if (empty)// il filtro taglia via tutti i risultati
             cb(new ItemModel())// ritorno 0
-        })
+        }).unsubscribe()
         this.ShoppingCart.flattenCarts(Filter, shoppingCarts).scan((acc, x) => {
           if (x.categorieId && x.categorieId.indexOf(categoryId) > -1)
             acc.prezzo = Number(acc.prezzo) + Number(x.prezzo)

@@ -54,9 +54,9 @@ export class PaymentsProvider {
               return acc
             }, new ShoppingCartModel()).subscribe(tot => {
               cb(tot);
-            });// mantengo la sottoscrizione perchè è un'operazione di lettura
+            });
           }
-        })
+        }).unsubscribe()
 
 
 
