@@ -33,6 +33,8 @@ export class ProvidersProvider {
   }
 
 
+ 
+
   calculateTotal(filterShoppingCart: (cart: ShoppingCartModel) => boolean, providerKey: string,cb:(cart:ShoppingCartModel)=>any){
    // var out:Observable<ShoppingCartModel> = new Observable<ShoppingCartModel>()
     this.Carts.shoppingCartSubject.subscribe(carts => {

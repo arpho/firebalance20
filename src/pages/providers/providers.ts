@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ActionSheetController,AlertController } from 'ionic-angular';
 import { TabsNavigationPage } from '../tabs-navigation/tabs-navigation';
 import { ProvidersProvider } from '../../providers/providers/providers';
 import { ProviderModel } from '../../models/providers/provider.model';
@@ -22,11 +22,13 @@ import { ShoppingCartsProvider } from '../../providers/shopping-carts/shopping-c
 export class ProvidersPage {
   public ProvidersList: Array<ProviderModel>
   filterText: string;
+  public currentAlert: any;
   shoppingCartDateFilter: (cart: ShoppingCartModel) => boolean;
   constructor(public navCtrl: NavController,
     public Filters: FilterFactoryProvider,
     public Utilities: UtilitiesProvider,
     public Carts: ShoppingCartsProvider,
+    public alertCtrl:AlertController,
     public actionSheetCtrl: ActionSheetController,
     public Providers: ProvidersProvider) {
     this.shoppingCartDateFilter = this.Filters.takeAllCarts();
@@ -39,12 +41,22 @@ export class ProvidersPage {
 
     });
   }
+  public clearAlert(): void {
+    this.currentAlert.dismiss();//clears it
+}
+
 
   filter() {
+    
+    const intervallo = {
+      text:'intervallo',
+      handler:this.Filters.alertAction(txt => this.filterText = txt,fn=>this.shoppingCartDateFilter= fn)() //la closure evita che alertController  subisca l'interferenza di actionSheetController 
+      
+    }
     let actionSheet = this.actionSheetCtrl.create({
       title: 'limita a ',
       enableBackdropDismiss: true,
-      buttons: this.Filters.getFilterActionSheetsButtons(txt => this.filterText = txt, fn => this.shoppingCartDateFilter = fn)
+      buttons: this.Filters.getFilterActionSheetsButtons(txt => this.filterText = txt, fn => this.shoppingCartDateFilter = fn,intervallo)
     });
     actionSheet.present()
   }

@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { ShoppingCartModel } from '../../models/shoppingCart.model';
 import { Observable } from 'videogular2/node_modules/rxjs/Observable';
+import { AlertController } from 'ionic-angular';
 import * as _ from 'lodash';
 import { ShoppingCartsProvider } from '../shopping-carts/shopping-carts';
 import { UtilitiesProvider } from '../utilities/utilities';
@@ -16,8 +17,8 @@ import { UtilitiesProvider } from '../utilities/utilities';
 @Injectable()
 export class FilterFactoryProvider {
 
-  getFilterActionSheetsButtons(setFilterText: (txt: string) => {}, setShoppingCartDateFilter: (fn:(cart:ShoppingCartModel)=>boolean)=>{}) {
-
+  getFilterActionSheetsButtons(setFilterText: (txt: string) => {}, setShoppingCartDateFilter: (fn:(cart:ShoppingCartModel)=>boolean)=>{},intervallo?) {
+intervallo = intervallo||{};
     return [
       {
         text: 'da ieri',
@@ -68,6 +69,7 @@ export class FilterFactoryProvider {
 
         }
       },
+      intervallo,
       {
         text: 'dal primo acquisto registrato',
         role: 'cancel',
@@ -83,12 +85,61 @@ export class FilterFactoryProvider {
 
 
   }
+  alertAction(setFilterText,setShoppingCartDateFilter){
+    let alert = this.alertCtrl.create({enableBackdropDismiss: true});
+    alert.setTitle('seleziona INTERVALLO');
+    alert.addInput({
+      type: 'date',
+      label: 'data inizio',
+      value: new Date().toDateString()
+    });
+    alert.addInput({
+      type: 'date',
+      label: 'data fine',
+      value: new Date().toDateString()
+    });
+    const clearAlert = ()=>{
+      alert.dismiss()
+    }
+    alert.addButton({text:'Set',
+    handler:(data:any)=>{
+      console.log('handler',data)
+      console.log(alert)
+      setFilterText('dal '+this.utils.formatDate(data[0])+' al '+this.utils.formatDate(data[1]));
+      setShoppingCartDateFilter(this.shoppingCartIntervalFilter(data[0],data[1],'dataAcquisto'))
+    }});
+    alert.addButton({text:'Cancel',
+    handler:()=>{console.log('cancel')
+                        const o = alert.dismiss();
+                        clearAlert();
+    
+                        console.log('dismissed?',o)
+                        o.then((a)=>{
+                          console.log('donno',a)
+                          
+                        }).catch(e=>{
+                          console.log('catched',e)
+                        })
+                        console.log('dismissed',o)
+    
+    }})
+    return ()=>{alert.present()}
+  }
 
   constructor(public http: Http,
     public utils: UtilitiesProvider,
+    public alertCtrl:AlertController,
     public Carts: ShoppingCartsProvider) {
   }
 
+  shoppingCartIntervalFilter(dataInizio,dataFine,data){
+    const DataInizio = new Date(dataInizio);
+    const DataFine = new Date(dataFine)
+    return (cart:ShoppingCartModel)=>{
+      const DataAcquisto = new Date(cart[data])
+      return (DataInizio<=DataAcquisto) &&(DataFine>=DataAcquisto)
+    }
+  }
   shoppingCartDateFilter(days: number, data: string) {
     /*
      factory di filtri sui campi data di ShoppingCartModel 
