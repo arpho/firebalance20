@@ -87,7 +87,6 @@ export class FilterFactoryProvider {
   constructor(public http: Http,
     public utils: UtilitiesProvider,
     public Carts: ShoppingCartsProvider) {
-    console.log('Hello FilterFactoryProvider Provider');
   }
 
   shoppingCartDateFilter(days: number, data: string) {

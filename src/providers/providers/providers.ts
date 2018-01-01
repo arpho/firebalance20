@@ -33,24 +33,18 @@ export class ProvidersProvider {
   }
 
 
-  calculateTotal(filterShoppingCart: (cart: ShoppingCartModel) => boolean, providerKey: string,cb:any){
-    console.log('calcolo totale per',providerKey)
+  calculateTotal(filterShoppingCart: (cart: ShoppingCartModel) => boolean, providerKey: string,cb:(cart:ShoppingCartModel)=>any){
+   // var out:Observable<ShoppingCartModel> = new Observable<ShoppingCartModel>()
     this.Carts.shoppingCartSubject.subscribe(carts => {
-      console.log('got carts',carts)
       if(carts)// il primo valore puo' essere nullo
       {
-        console.log('non vuoto',filterShoppingCart,providerKey)
-        carts.filter(filterShoppingCart).subscribe(res=>console.log('filtered',res))
         carts.filter(filterShoppingCart).isEmpty().subscribe(empty => {
-            console.log('empty',empty)
             if (empty) { 
-              console.log('empty')
               cb(new ShoppingCartModel())
             }
             else {
               carts.filter(filterShoppingCart).scan((acc, x) => {
-                console.log('scanning cart,x')
-                if (x.key == providerKey)
+                if (x.fornitoreId == providerKey)
                   acc.totale += x.totale
                 return acc;
               },new ShoppingCartModel()).subscribe(total=>cb(total)).unsubscribe()
@@ -58,6 +52,7 @@ export class ProvidersProvider {
           }).unsubscribe() //empty
         }
     }).unsubscribe()//shoppingCartSubject
+
   }
 
   update(provider, cb) {

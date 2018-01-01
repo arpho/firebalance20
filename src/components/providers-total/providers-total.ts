@@ -29,7 +29,7 @@ export class ProvidersTotalComponent implements OnInit, OnChanges {
   private newMethod() {
     this.Providers.calculateTotal(this.shoppingCartDateFilter, this.ProviderKey, (total: ShoppingCartModel) => {
       this.total = total.totale;
-      console.log('total per', this.ProviderKey, this.total);
+      console.log(this.total)
     });
   }
 
