@@ -26,6 +26,8 @@
   "COMMENTS": "Comments",
   "FILTERS": "Filters",
   "RANGE": "Range",
+  "CREATION_NEW_PAYMENT":"Crea nuova forma di pagamento",
+  "UPDATE_PAYMENT":" Modifica forma di Pagamento ",
   "QUANTITY": "Quantity",
   "AMOUNT": "Amount",
   "MULTIPLE_ITEMS": "Multiple items",
