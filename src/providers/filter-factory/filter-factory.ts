@@ -17,8 +17,8 @@ import { UtilitiesProvider } from '../utilities/utilities';
 @Injectable()
 export class FilterFactoryProvider {
 
-  getFilterActionSheetsButtons(setFilterText: (txt: string) => {}, setShoppingCartDateFilter: (fn:(cart:ShoppingCartModel)=>boolean)=>{},intervallo?) {
-intervallo = intervallo||{};
+  getFilterActionSheetsButtons(setFilterText: (txt: string) => {}, setShoppingCartDateFilter: (fn: (cart: ShoppingCartModel) => boolean) => {}, intervallo?) {
+    intervallo = intervallo || {};
     return [
       {
         text: 'da ieri',
@@ -85,8 +85,8 @@ intervallo = intervallo||{};
 
 
   }
-  alertAction(setFilterText,setShoppingCartDateFilter){
-    let alert = this.alertCtrl.create({enableBackdropDismiss: true});
+  alertAction(setFilterText, setShoppingCartDateFilter) {
+    let alert = this.alertCtrl.create({ enableBackdropDismiss: true });
     alert.setTitle('seleziona INTERVALLO');
     alert.addInput({
       type: 'date',
@@ -98,46 +98,51 @@ intervallo = intervallo||{};
       label: 'data fine',
       value: new Date().toDateString()
     });
-    const clearAlert = ()=>{
+    const clearAlert = () => {
       alert.dismiss()
     }
-    alert.addButton({text:'Set',
-    handler:(data:any)=>{
-      console.log('handler',data)
-      console.log(alert)
-      setFilterText('dal '+this.utils.formatDate(data[0])+' al '+this.utils.formatDate(data[1]));
-      setShoppingCartDateFilter(this.shoppingCartIntervalFilter(data[0],data[1],'dataAcquisto'))
-    }});
-    alert.addButton({text:'Cancel',
-    handler:()=>{console.log('cancel')
-                        const o = alert.dismiss();
-                        clearAlert();
-    
-                        console.log('dismissed?',o)
-                        o.then((a)=>{
-                          console.log('donno',a)
-                          
-                        }).catch(e=>{
-                          console.log('catched',e)
-                        })
-                        console.log('dismissed',o)
-    
-    }})
-    return ()=>{alert.present()}
+    alert.addButton({
+      text: 'Set',
+      handler: (data: any) => {
+        console.log('handler', data)
+        console.log(alert)
+        setFilterText('dal ' + this.utils.formatDate(data[0]) + ' al ' + this.utils.formatDate(data[1]));
+        setShoppingCartDateFilter(this.shoppingCartIntervalFilter(data[0], data[1], 'dataAcquisto'))
+      }
+    });
+    alert.addButton({
+      text: 'Cancel',
+      handler: () => {
+        console.log('cancel')
+        const o = alert.dismiss();
+        clearAlert();
+
+        console.log('dismissed?', o)
+        o.then((a) => {
+          console.log('donno', a)
+
+        }).catch(e => {
+          console.log('catched', e)
+        })
+        console.log('dismissed', o)
+
+      }
+    })
+    return () => { alert.present() }
   }
 
   constructor(public http: Http,
     public utils: UtilitiesProvider,
-    public alertCtrl:AlertController,
+    public alertCtrl: AlertController,
     public Carts: ShoppingCartsProvider) {
   }
 
-  shoppingCartIntervalFilter(dataInizio,dataFine,data){
+  shoppingCartIntervalFilter(dataInizio, dataFine, data) {
     const DataInizio = new Date(dataInizio);
     const DataFine = new Date(dataFine)
-    return (cart:ShoppingCartModel)=>{
+    return (cart: ShoppingCartModel) => {
       const DataAcquisto = new Date(cart[data])
-      return (DataInizio<=DataAcquisto) &&(DataFine>=DataAcquisto)
+      return (DataInizio <= DataAcquisto) && (DataFine >= DataAcquisto)
     }
   }
   shoppingCartDateFilter(days: number, data: string) {
@@ -158,11 +163,11 @@ intervallo = intervallo||{};
     }
 
   }
-  
-  takeAllCarts(){
-    return(cart:ShoppingCartModel)=>{return true}
+
+  takeAllCarts() {
+    return (cart: ShoppingCartModel) => { return true }
   }
-  
+
   takeEmAll() {
     return (item: ShoppingCartModel) => {
       return true;

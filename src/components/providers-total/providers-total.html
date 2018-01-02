@@ -1,4 +1,5 @@
 <!-- Generated template for the ProvidersTotalComponent component -->
 <div>
-  <ion-chip class="total">{{total}}</ion-chip>
+  <div  *ngIf="totalObservable|async as cart; else loading" >
+    <ion-chip class="total">{{(cart.totale*100)/100}}</ion-chip>
 </div>

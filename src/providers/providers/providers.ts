@@ -32,27 +32,33 @@ export class ProvidersProvider {
     })
   }
 
-
- 
-
-  calculateTotal(filterShoppingCart: (cart: ShoppingCartModel) => boolean, providerKey: string,cb:(cart:ShoppingCartModel)=>any){
-   // var out:Observable<ShoppingCartModel> = new Observable<ShoppingCartModel>()
+  emptyCheck(filterShoppingCart: (cart: ShoppingCartModel) => boolean) {
     this.Carts.shoppingCartSubject.subscribe(carts => {
-      if(carts)// il primo valore puo' essere nullo
+      if (carts)
+        return carts.filter(filterShoppingCart).isEmpty()
+    })
+
+  }
+
+
+  calculateTotal(filterShoppingCart: (cart: ShoppingCartModel) => boolean, providerKey: string, cb: (cart: ShoppingCartModel) => any) {
+    // var out:Observable<ShoppingCartModel> = new Observable<ShoppingCartModel>()
+    this.Carts.shoppingCartSubject.subscribe(carts => {
+      if (carts)// il primo valore puo' essere nullo
       {
         carts.filter(filterShoppingCart).isEmpty().subscribe(empty => {
-            if (empty) { 
-              cb(new ShoppingCartModel())
-            }
-            else {
-              carts.filter(filterShoppingCart).scan((acc, x) => {
-                if (x.fornitoreId == providerKey)
-                  acc.totale += x.totale
-                return acc;
-              },new ShoppingCartModel()).subscribe(total=>cb(total)).unsubscribe()
-            }
-          }).unsubscribe() //empty
-        }
+          if (empty) {
+            cb(new ShoppingCartModel())
+          }
+          else {
+            carts.filter(filterShoppingCart).scan((acc, x) => {
+              if (x.fornitoreId == providerKey)
+                acc.totale += x.totale
+              return acc;
+            }, new ShoppingCartModel()).subscribe(total => cb(total)).unsubscribe()
+          }
+        }).unsubscribe() //empty
+      }
     }).unsubscribe()//shoppingCartSubject
 
   }

@@ -21,24 +21,32 @@ export class ProvidersTotalComponent implements OnInit, OnChanges {
   @Input() shoppingCartDateFilter: (cart: ShoppingCartModel) => boolean;
   text: string;
   total: number;
+  totalObservable: Observable<ShoppingCartModel>
 
   ngOnChanges(changes: SimpleChanges) {
-    //this.totale = this.Providers.calculateTotal(this.shoppingCartDateFilter, this.ProviderKey)
-    this.newMethod();
+    this.getTotal()
   }
-  private newMethod() {
-    this.Providers.calculateTotal(this.shoppingCartDateFilter, this.ProviderKey, (total: ShoppingCartModel) => {
-      this.total = total.totale;
-    });
+  getTotal() {
+    this.Carts.shoppingCartSubject.subscribe(carts => {
+      if (carts)
+        carts.filter(this.shoppingCartDateFilter).isEmpty().subscribe(empty => {
+          if (!empty)
+            this.totalObservable = carts.filter(this.shoppingCartDateFilter).scan((acc, x) => {
+              if (x.fornitoreId == this.ProviderKey)
+                acc.totale += x.totale
+              return acc;
+            }, new ShoppingCartModel())
+        })
+    })
   }
 
   ngOnInit() {
-    this.newMethod()
+    this.getTotal()
   }
 
   constructor(
     public Providers: ProvidersProvider,
-    Carts: ShoppingCartsProvider
+    public Carts: ShoppingCartsProvider
   ) {
     this.text = 'Hello World';
   }
