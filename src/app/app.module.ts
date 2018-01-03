@@ -8,6 +8,7 @@ import { Http } from '@angular/http';
 //import { BehaviorSubject} from 'rxjs/BehaviorSubject';
 import { ListingPage } from '../pages/listing/listing';
 import { FeedPage } from '../pages/feed/feed';
+import {ShoppingCartsPage} from '../pages/shopping-carts/shopping-carts';
 import { FollowersPage } from '../pages/followers/followers';
 import { LayoutsPage } from '../pages/layouts/layouts';
 import { FormsPage } from '../pages/forms/forms';
@@ -114,6 +115,13 @@ import { ProvidersProvider } from '../providers/providers/providers';
 import { SwitchTextPipe } from '../pipes/switch-text/switch-text';
 import { GeolocationProvider } from '../providers/geolocation/geolocation';
 import { ProvidersTotalComponent } from '../components/providers-total/providers-total';
+import { ShoppingCartsListComponent } from '../components/shopping-carts-list/shopping-carts-list';
+import { ShoppingCartsItemListComponent } from '../components/shopping-carts-item-list/shopping-carts-item-list';
+import { ShoppingCartDetailComponent } from '../components/shopping-cart-detail/shopping-cart-detail';
+import { PurchaisedListComponent } from '../components/purchaised-list/purchaised-list';
+import { PurchaisedItemComponent } from '../components/purchaised-item/purchaised-item';
+import { ProvidersChipComponent } from '../components/providers-chip/providers-chip';
+import { PaymentsChipComponent } from '../components/payments-chip/payments-chip';
 //import { PaymentProvider } from '../providers/payment/payment';
 //AngularFireModule.initializeApp(environment.firebaseConfig)
 export function createTranslateLoader(http: Http) {
@@ -125,6 +133,7 @@ export function createTranslateLoader(http: Http) {
   declarations: [
     MyApp,
     ListingPage,
+    ShoppingCartsPage,
     FeedPage,
     FollowersPage,
     LayoutsPage,
@@ -182,7 +191,14 @@ export function createTranslateLoader(http: Http) {
     ProvidersListComponent,
     ProvidersItemListComponent,
     SwitchTextPipe,
-    ProvidersTotalComponent
+    ProvidersTotalComponent,
+    ShoppingCartsListComponent,
+    ShoppingCartsItemListComponent,
+    ShoppingCartDetailComponent,
+    PurchaisedListComponent,
+    PurchaisedItemComponent,
+    ProvidersChipComponent,
+    PaymentsChipComponent
   ],
   imports: [
     SuiModule,
@@ -204,6 +220,7 @@ export function createTranslateLoader(http: Http) {
   entryComponents: [
     MyApp,
     ListingPage,
+    ShoppingCartsPage,
     FeedPage,
     FollowersPage,
     LayoutsPage,

@@ -1,6 +1,6 @@
 {
-  "name": "ion2-fullapp",
-  "short_name": "ion2FullApp",
+  "name": "fireBalance",
+  "short_name": "fireBalance",
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{

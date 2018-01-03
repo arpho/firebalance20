@@ -65,6 +65,7 @@ export class ShoppingCartModel {
             this.dataAcquisto = shoppingCart.dataAcquisto || new Date().toISOString();
             this.dataAddebito = shoppingCart.dataAddebito || new Date().toISOString();
             this.totale = shoppingCart.totale || 0;
+            this.moneta = shoppingCart.moneta || "€";
             this.online = shoppingCart.online || false;
             this.items = shoppingCart.items || [];
             this.key = shoppingCart.key || "";
@@ -75,6 +76,7 @@ export class ShoppingCartModel {
             this.dataAcquisto = new Date().toISOString();
             this.dataAddebito = new Date().toISOString();
             this.totale = 0;
+            this.moneta = "€";
             this.online = false;
             this.items = [];
             this.key = "";

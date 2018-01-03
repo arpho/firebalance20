@@ -6,8 +6,8 @@ import * as firebase from 'firebase/app';
 import * as _ from 'lodash';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ShoppingCartModel } from '../../models/shoppingCart.model';
-import { Observable } from 'videogular2/node_modules/rxjs/Observable';
 import { SharedStylesHost } from '@angular/platform-browser/src/dom/shared_styles_host';
+import {Observable} from 'rxjs/Observable'
 
 /*
   Generated class for the ProvidersProvider provider.
@@ -27,11 +27,20 @@ export class ProvidersProvider {
         const uid = user.uid;
         this.providersRef = firebase.database().ref((`/fornitori/${uid}`))
         this.subjectProvidersRef.next(this.providersRef);
+        console.log('startred')
+        
 
       }
     })
   }
 
+  getProviderById(providerId:String,cb){
+    this.subjectProvidersRef.subscribe(ref=>{ 
+      if(ref){
+        ref.child(`/${providerId}/`).on('value',res=>cb(new BehaviorSubject(res.val())))
+      }
+    })
+  }
 
   update(provider, cb) {
     this.subjectProvidersRef.subscribe(Providers => {

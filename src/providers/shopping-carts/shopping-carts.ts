@@ -20,9 +20,10 @@ export class ShoppingCartsProvider {
   public Profile: ProfileService;
   public ShoppingCartObservable: Observable<ShoppingCartModel>
   public shoppingCarts: ShoppingCartModel[];
+  public shoppingcartsList:BehaviorSubject<ShoppingCartModel>= new BehaviorSubject<ShoppingCartModel>(null);
   subjectShoppingCart: BehaviorSubject<firebase.database.Reference> = new BehaviorSubject(null); /* instanzio il behaviorSubject, è definito subito, 
                                                                                                    onAuthStateChanged può essere lento*/
-  shoppingCartSubject: BehaviorSubject<Observable<ShoppingCartModel>> = new BehaviorSubject(null);
+  shoppingCartSubject: BehaviorSubject<Observable<ShoppingCartModel>> = new BehaviorSubject<Observable<ShoppingCartModel>>(null);
 
   start() {// inizializza il behaviorSubject
     firebase.auth().onAuthStateChanged(user => {
@@ -39,6 +40,7 @@ export class ShoppingCartsProvider {
           this.shoppingCarts = []
           snapshot.forEach(element => {
             const shoppingCart = new ShoppingCartModel(element.val());
+            this.shoppingcartsList.next(shoppingCart);
             //_.extend(shoppingCart, element.val())
             shoppingCart.key = element.key;
             this.shoppingCarts.push(shoppingCart)

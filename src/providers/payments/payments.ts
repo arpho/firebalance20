@@ -32,6 +32,13 @@ export class PaymentsProvider {
       }
     })
   }
+  getPaymentById(paymentId,cb){
+    return this.subjectPaymentsRef.subscribe(ref=>{ 
+      if(ref){
+        ref.child(`/${paymentId}/`).on('value',res=>cb(new BehaviorSubject(res.val())))
+      }
+    })
+  }
 
 
   calculateAmmount(filterShoppingCart: (cart: ShoppingCartModel) => boolean, pagamentoId, cb) {

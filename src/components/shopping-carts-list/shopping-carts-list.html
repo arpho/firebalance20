@@ -1,0 +1,12 @@
+<ion-list>
+  <ion-item-sliding *ngFor="let Cart of shoppingCarts " #slidingItem >
+    <ion-item>
+      <shopping-carts-item-list [Cart]="Cart" (click)="clicked(Cart)" ></shopping-carts-item-list>
+
+    </ion-item>
+    <ion-item-options side="left">
+        <button ion-button (click)="update(Cart,slidingItem)"><ion-icon name="create"></ion-icon>modifica</button>
+        <button ion-button color="danger" (click)="delete(Provider,slidingItem)">Cancella</button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
