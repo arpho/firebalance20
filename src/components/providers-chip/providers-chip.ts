@@ -25,7 +25,6 @@ export class ProvidersChipComponent implements OnInit {
   constructor(
     public Providers: ProvidersProvider
   ) {
-    console.log('Hello ProvidersChipComponent Component');
     this.text = 'Hello World';
   }
 

@@ -1,6 +1,6 @@
 <!-- Generated template for the ShoppingCartsItemListComponent component -->
-<div>
-  <article>
+<div [ngClass]="{selected:selected}">
+  <article >
       <providers-chip [ProviderId] ="Cart.fornitoreId"></providers-chip>
     <h2>{{Cart.dataAcquisto| date:"dd/MM/yyyy"}}</h2>
     <h2><payments-chip [PaymentId]="Cart.pagamentoId"></payments-chip></h2>

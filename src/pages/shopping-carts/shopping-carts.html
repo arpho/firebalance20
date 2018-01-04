@@ -7,24 +7,17 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{'SHOPPINGCARTS'|translate}}</ion-title>
+    <ion-title>{{'SHOPPINGCARTS'|translate}}<ion-button (click)="resize()">resize</ion-button></ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
-
-<ion-split-pane when="(min-width: 475px)">
-
-            <shopping-carts-list [shoppingCarts]="shoppingCarts"></shopping-carts-list>
-
-  
-    <!-- the main content -->
-    <ion-nav [root]="root" main #content>
-    <shopping-cart-detail [Cart]="selectedCart" ></shopping-cart-detail>
-    </ion-nav>  
-    
-  </ion-split-pane>
+<div *ngIf="landscape" class="shoppingCartDetail">
+  <shopping-cart-detail [selectedCart]="selectedCart"></shopping-cart-detail>
+</div>
+<div [ngClass]="{bigList:portrait,smallList:landscape}"  >
+ <shopping-carts-list [shoppingCarts]="shoppingCarts"(selectedCart)="selectedCartEvent($event)"></shopping-carts-list>
+</div>
 </ion-content>

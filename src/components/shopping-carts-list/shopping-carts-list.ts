@@ -1,4 +1,4 @@
-import { Component,Input,OnInit,OnChanges } from '@angular/core';
+import { Component,Input,OnInit,OnChanges,Output,EventEmitter } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import { ShoppingCartModel } from '../../models/shoppingCart.model';
 import { SimpleChanges } from '@angular/core/src/metadata/lifecycle_hooks';
@@ -15,18 +15,29 @@ import { SimpleChanges } from '@angular/core/src/metadata/lifecycle_hooks';
 })
 export class ShoppingCartsListComponent  implements OnInit,OnChanges{
   @Input() shoppingCarts:ShoppingCartModel[]
+  @Output() selectedCart = new EventEmitter()
+  selected:boolean
+  
   text: string;
-  ngOnInit(){
+  @Input() SelectedCart:ShoppingCartModel;
 
+  isSelected(cart,selectedCart){
+    if(cart&&selectedCart)
+      return cart.key==selectedCart.key
+    else
+      return false
+  }
+  ngOnInit(){
   }
   clicked(cart){
-    console.log('clicked',cart)
+    this.SelectedCart = cart;
+    this.selectedCart.emit(cart)
   }
   ngOnChanges(changes:SimpleChanges){
+
   }
 
   constructor() {
-    console.log('Hello ShoppingCartsListComponent Component');
     this.text = 'Hello World';
   }
 

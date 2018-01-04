@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component,Input } from '@angular/core';
+import { ShoppingCartModel } from '../../models/shoppingCart.model';
 
 /**
  * Generated class for the ShoppingCartDetailComponent component.
@@ -11,7 +12,7 @@ import { Component } from '@angular/core';
   templateUrl: 'shopping-cart-detail.html'
 })
 export class ShoppingCartDetailComponent {
-
+  @Input() selectedCart:ShoppingCartModel
   text: string;
 
   constructor() {

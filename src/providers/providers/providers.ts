@@ -27,7 +27,6 @@ export class ProvidersProvider {
         const uid = user.uid;
         this.providersRef = firebase.database().ref((`/fornitori/${uid}`))
         this.subjectProvidersRef.next(this.providersRef);
-        console.log('startred')
         
 
       }
