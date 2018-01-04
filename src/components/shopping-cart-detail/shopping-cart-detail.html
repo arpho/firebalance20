@@ -1,4 +1,17 @@
 <!-- Generated template for the ShoppingCartDetailComponent component -->
 
-  {{text}}
-  sqwertyuikloò
+<div class=" ui form" [formGroup]="cartForm">
+
+    <label for="pagamentoId">Pagamento</label>
+    <ion-input type="text" id="nomeInput" placeholder="Pagamento" formControlName="pagamentoId">
+    </ion-input>
+    <label for="dataAcquisto">data di acquisto</label>
+    <ion-input type="date" id="acquistoInput"  formControlName="dataAcquisto">
+    </ion-input><label for="addebito">Note</label>
+    <ion-input type="text" id="noteInput" placeholder="note" formControlName="note">
+    </ion-input>
+    <ion-fab bottom right>
+        <button ion-fab color="primary" (click)="create()"><ion-icon name="add"></ion-icon>
+        </button>
+      </ion-fab>
+  </div>

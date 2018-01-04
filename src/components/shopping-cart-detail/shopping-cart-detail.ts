@@ -1,5 +1,7 @@
-import { Component,Input } from '@angular/core';
+import { Component, Input,OnChanges } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators, AbstractControl, ReactiveFormsModule } from '@angular/forms';
 import { ShoppingCartModel } from '../../models/shoppingCart.model';
+import { SimpleChanges } from '@angular/core/src/metadata/lifecycle_hooks';
 
 /**
  * Generated class for the ShoppingCartDetailComponent component.
@@ -11,13 +13,34 @@ import { ShoppingCartModel } from '../../models/shoppingCart.model';
   selector: 'shopping-cart-detail',
   templateUrl: 'shopping-cart-detail.html'
 })
-export class ShoppingCartDetailComponent {
-  @Input() selectedCart:ShoppingCartModel
+export class ShoppingCartDetailComponent implements OnChanges{
+  @Input() selectedCart: ShoppingCartModel
   text: string;
+  Cart: ShoppingCartModel;
+  public cartForm: FormGroup;
+  ngOnChanges(changes:SimpleChanges){
+    if(this.selectedCart)
+      this.cartForm = this.getForm(this.selectedCart)
+  }
 
-  constructor() {
+  getForm(cart: ShoppingCartModel) {
+    return this.fb.group({
+      dataAcquisto: new FormControl(cart.dataAcquisto),
+      fornitoreId: new FormControl(cart.fornitoreId),
+      moneta: new FormControl(cart.moneta),
+      pagamentoId: new FormControl(cart.pagamentoId),
+      note: new FormControl(cart.note)
+    }, Validators.required);
+  }
+
+  constructor(
+    public fb: FormBuilder,
+  ) {
     console.log('Hello ShoppingCartDetailComponent Component');
     this.text = 'Hello World detail ';
+   
+      this.cartForm =  this.getForm(new ShoppingCartModel())
+
   }
 
 }

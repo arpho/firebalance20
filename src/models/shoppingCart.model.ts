@@ -58,6 +58,7 @@ export class ShoppingCartModel {
     dataAddebito: string;
     items: Array<ItemModel>;
     key: string;
+    note: string;
     constructor(shoppingCart?: any) {
         if (shoppingCart) {
             this.fornitoreId = shoppingCart.fornitoreId || "";
@@ -69,6 +70,7 @@ export class ShoppingCartModel {
             this.online = shoppingCart.online || false;
             this.items = shoppingCart.items || [];
             this.key = shoppingCart.key || "";
+            this.note = shoppingCart.note || "";
         }
         else {
             this.fornitoreId = "";
@@ -92,6 +94,7 @@ export class ShoppingCartModel {
         totale: number,
         key: string,
         items: [ItemModel],
+        note?: string
     }) {
         this.fornitoreId = shoppingCart.fornitoreId || "";
         this.pagamentoId = shoppingCart.pagamentoId || "";
@@ -101,6 +104,7 @@ export class ShoppingCartModel {
         this.online = shoppingCart.online || false;
         this.items = shoppingCart.items || [];
         this.key = shoppingCart.key || "";
+        this.note = shoppingCart.note;
         return this;
     }
 }

@@ -23,8 +23,8 @@ export class ShoppingCartsPage implements OnDestroy {
   cartArray: [ShoppingCartModel] = [null];
   selectedCart: any = CreatePaymentPage;
   subscription: Subscription;
-  portrait: boolean=true;
-  landscape:boolean=false;
+  portrait: boolean=false;
+  landscape:boolean=true;
 
   ngOnDestroy(){
     if(this.subscription)

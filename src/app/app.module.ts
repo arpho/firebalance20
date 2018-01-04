@@ -5,6 +5,7 @@ import { MyApp } from './app.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { Http } from '@angular/http';
+import {FormGroup } from '@angular/forms';
 //import { BehaviorSubject} from 'rxjs/BehaviorSubject';
 import { ListingPage } from '../pages/listing/listing';
 import { FeedPage } from '../pages/feed/feed';
