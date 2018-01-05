@@ -123,6 +123,8 @@ import { PurchaisedListComponent } from '../components/purchaised-list/purchaise
 import { PurchaisedItemComponent } from '../components/purchaised-item/purchaised-item';
 import { ProvidersChipComponent } from '../components/providers-chip/providers-chip';
 import { PaymentsChipComponent } from '../components/payments-chip/payments-chip';
+import { FieldFilterComponent } from '../components/field-filter/field-filter';
+import { SelectorComponent } from '../components/selector/selector';
 //import { PaymentProvider } from '../providers/payment/payment';
 //AngularFireModule.initializeApp(environment.firebaseConfig)
 export function createTranslateLoader(http: Http) {
@@ -199,7 +201,9 @@ export function createTranslateLoader(http: Http) {
     PurchaisedListComponent,
     PurchaisedItemComponent,
     ProvidersChipComponent,
-    PaymentsChipComponent
+    PaymentsChipComponent,
+    FieldFilterComponent,
+    SelectorComponent
   ],
   imports: [
     SuiModule,

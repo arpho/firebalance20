@@ -29,6 +29,7 @@ export class ShoppingCartDetailComponent implements OnChanges{
       fornitoreId: new FormControl(cart.fornitoreId),
       moneta: new FormControl(cart.moneta),
       pagamentoId: new FormControl(cart.pagamentoId),
+      online:new FormControl(cart.online),
       note: new FormControl(cart.note)
     }, Validators.required);
   }

@@ -36,7 +36,7 @@ export class ShoppingCartsPage implements OnDestroy {
     public ShoppingCarts: ShoppingCartsProvider
 
   ) {
-    this.selectedCart= CreatePaymentPage
+    this.selectedCart= new ShoppingCartModel(); //inizializzo il nuovo carrello della spesa
 
     this.subscription = this.ShoppingCarts.shoppingCartSubject.subscribe(obs => {
       if (obs) {
@@ -48,8 +48,8 @@ export class ShoppingCartsPage implements OnDestroy {
     })
   }
   selectedCartEvent(cart){
-    console.log('ricevuto cart',cart)
-    this.selectedCart = cart
+    this.selectedCart = cart; // carrello della spesa selezionato
+    console.log('selezionato',cart)
 
   }
 

@@ -1,0 +1,23 @@
+<div>
+    <selected-item [fieldId]=fieldId [db]=db >
+    </selected-item>
+    <field-filter [placeholder]=placeholder (doFilter)="doFilter($event.filterString)">
+    </field-filter>
+  </div>
+  <div class="list elenco">
+    <list-items [items]=items (selected)="selectedEvent($event) " [filterString]=filterString *ngIf="filterString">
+        
+    </list-items>
+    <div class="loader-wrapper" id="loader-3" *ngIf="spinning" >
+        <div id="loader"></div>
+        <div id="loader"></div>
+        <div id="loader"></div>
+        <div id="loader"></div>
+        <div id="loader"></div>
+    </div>
+    <ion-fab top right>
+      <button  ion-fab mini color="primary" (click)="add()">
+          <ion-icon name="add"></ion-icon>
+        </button>
+      </ion-fab>
+  </div>

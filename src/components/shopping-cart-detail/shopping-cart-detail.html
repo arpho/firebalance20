@@ -1,17 +1,43 @@
 <!-- Generated template for the ShoppingCartDetailComponent component -->
-
+  
+<md-input-container>
+                <ion-item>
+              </ion-item>
+                <ion-item>
+                  <ion-label>Data Acquisto</ion-label>
+                  <ion-datetime  [(ngModel)]="selectedCart.dataAcquisto">
+                  </ion-datetime>
+                </ion-item>
+                    <data-fiscale [(dataAcquisto)]=selectedCart.dataAcquisto  ></data-fiscale>
+                <!--input mdInput [mdDatepicker]="picker" [(ngModel)]="date" placeholder="Choose a date">
+                <button mdSuffix [mdDatepickerToggle]="picker"></button-->
+              </md-input-container>
+    <ion-fab   middle right >
+        <button ion-fab  mini color="primary" (click)="create()"><ion-icon name="attach"></ion-icon>
+        </button>
+      </ion-fab>
 <div class=" ui form" [formGroup]="cartForm">
+  <ion-label>{{ this.cartForm.controls.online.value|switchText:'acquisto onLine':'acqisto tradizionale'}}</ion-label>
+  <ion-icon name="body" *ngIf="!cartForm.controls.online.value"></ion-icon> <ion-icon name="wifi" *ngIf="cartForm.controls.online.value"></ion-icon> 
+                  <ion-toggle formControlName="online"></ion-toggle>
+        
 
     <label for="pagamentoId">Pagamento</label>
     <ion-input type="text" id="nomeInput" placeholder="Pagamento" formControlName="pagamentoId">
     </ion-input>
-    <label for="dataAcquisto">data di acquisto</label>
-    <ion-input type="date" id="acquistoInput"  formControlName="dataAcquisto">
-    </ion-input><label for="addebito">Note</label>
+    <label>Totale</label>
+    <h2>{{selectedCart.moneta}}{{selectedCart.totale}}</h2>
+      
+    <label for="addebito">Note</label>
     <ion-input type="text" id="noteInput" placeholder="note" formControlName="note">
     </ion-input>
-    <ion-fab bottom right>
-        <button ion-fab color="primary" (click)="create()"><ion-icon name="add"></ion-icon>
-        </button>
-      </ion-fab>
   </div>
+  <section class="acquisti">
+  <ion-list>
+        <ion-item *ngFor="let item of selectedCart.items" >
+          <h2>{{item.descrizione}}  {{item.moneta}} {{item.prezzo}}</h2>
+        </ion-item>
+      </ion-list>
+    </section>
+    <button ion-button full><ion-icon name="checkmark"></ion-icon></button>
+

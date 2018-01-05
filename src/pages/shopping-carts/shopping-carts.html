@@ -18,6 +18,12 @@
   <shopping-cart-detail [selectedCart]="selectedCart"></shopping-cart-detail>
 </div>
 <div [ngClass]="{bigList:portrait,smallList:landscape}"  >
- <shopping-carts-list [shoppingCarts]="shoppingCarts"(selectedCart)="selectedCartEvent($event)"></shopping-carts-list>
+ <shopping-carts-list [shoppingCarts]="shoppingCarts"(selectedCart)="selectedCartEvent($event)">
+
+ </shopping-carts-list>
 </div>
+   <ion-fab bottom left >
+  <button ion-fab color="primary" (click)="create()"><ion-icon name="add"></ion-icon>
+  </button>
+</ion-fab>
 </ion-content>
