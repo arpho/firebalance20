@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,  ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { ShoppingCartsProvider } from '../../providers/shopping-carts/shopping-carts';
 import { Observable } from 'rxjs/Observable';
 import { ShoppingCartModel } from '../../models/shoppingCart.model';
@@ -23,35 +23,35 @@ export class ShoppingCartsPage implements OnDestroy {
   cartArray: [ShoppingCartModel] = [null];
   selectedCart: any = DetailShoppingCartPage;
   subscription: Subscription;
-  portrait: boolean=false;
-  landscape:boolean=true;
+  portrait: boolean = false;
+  landscape: boolean = true;
 
-  ngOnDestroy(){
-    if(this.subscription)
+  ngOnDestroy() {
+    if (this.subscription)
       this.subscription.unsubscribe();
   }
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public modal:ModalController,
+    public modal: ModalController,
     public ShoppingCarts: ShoppingCartsProvider
 
   ) {
-    this.selectedCart= new ShoppingCartModel(); //inizializzo il nuovo carrello della spesa
+    this.selectedCart = new ShoppingCartModel(); //inizializzo il nuovo carrello della spesa
 
     this.subscription = this.ShoppingCarts.shoppingCartSubject.subscribe(obs => {
       if (obs) {
         this.shoppingCarts = this.ShoppingCarts.shoppingCarts;
-        console.log('shoppingCart',this.shoppingCarts)
+        console.log('shoppingCart', this.shoppingCarts)
 
       }
 
     })
   }
-  selectedCartEvent(cart){
+  selectedCartEvent(cart) {
     this.selectedCart = cart; // carrello della spesa selezionato
-    console.log('selezionato',cart);
-    let modal = this.modal.create(DetailShoppingCartPage,cart);
+    console.log('selezionato', cart);
+    let modal = this.modal.create(DetailShoppingCartPage, cart);
     modal.present();
 
   }
@@ -61,9 +61,9 @@ export class ShoppingCartsPage implements OnDestroy {
     modal.present();
   }
 
-  resize(){
-    this.portrait=!this.portrait;
-    this.landscape=!this.landscape;
+  resize() {
+    this.portrait = !this.portrait;
+    this.landscape = !this.landscape;
     console.log('resize')
   }
 

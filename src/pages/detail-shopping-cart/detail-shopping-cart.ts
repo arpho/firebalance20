@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { ShoppingCartModel } from '../../models/shoppingCart.model';
 
 /**
@@ -14,16 +14,16 @@ import { ShoppingCartModel } from '../../models/shoppingCart.model';
   templateUrl: 'detail-shopping-cart.html',
 })
 export class DetailShoppingCartPage {
-  selectedCart:ShoppingCartModel
+  selectedCart: ShoppingCartModel
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public view:ViewController) {
+    public view: ViewController) {
     this.selectedCart = new ShoppingCartModel();
-    console.log('params',this.navParams.data)
-    this.selectedCart = this.navParams.data ||new ShoppingCartModel()
+    console.log('params', this.navParams.data)
+    this.selectedCart = this.navParams.data || new ShoppingCartModel()
   }
 
-  dismiss(){
+  dismiss() {
     this.view.dismiss();
   }
   ionViewDidLoad() {
