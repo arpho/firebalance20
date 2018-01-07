@@ -74,10 +74,15 @@ export class CategoriesPage {
   }
 
   filter() {
+    const intervallo = {
+      text:'intervallo',
+      handler:this.Filters.alertAction(txt => this.filterText = txt,fn=>this.shoppingCartDateFilter= fn)() //la closure evita che alertController  subisca l'interferenza di actionSheetController 
+      
+    }
     let actionSheet = this.actionSheetCtrl.create({
       title: 'limita a ',
       enableBackdropDismiss: true,
-      buttons: this.Filters.getFilterActionSheetsButtons(txt => this.filterText, fn => this.shoppingCartDateFilter = fn)
+      buttons: this.Filters.getFilterActionSheetsButtons(txt => this.filterText, fn => this.shoppingCartDateFilter = fn,intervallo)
     });
     actionSheet.present()
   }
