@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges,ChangeDetectionStrategy } from '@angular/core';
 import { ShoppingCartModel } from '../../models/shoppingCart.model';
 
 /**
@@ -9,7 +9,8 @@ import { ShoppingCartModel } from '../../models/shoppingCart.model';
  */
 @Component({
   selector: 'categories-list',
-  templateUrl: 'categories-list.html'
+  templateUrl: 'categories-list.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoriesListComponent implements OnChanges {
  @Input() Categorie:any
@@ -17,11 +18,9 @@ export class CategoriesListComponent implements OnChanges {
   text: string;
 
   ngOnChanges(changes:SimpleChanges){
-    console.log('changes',changes)
 
   }
   constructor() {
-    console.log('Hello CategoriesListComponent Component');
     this.text = 'Hello World categories list';
   }
 

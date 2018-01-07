@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit,ChangeDetectionStrategy } from '@angular/core';
 import { ShoppingCartModel } from '../../models/shoppingCart.model';
 import { ProvidersProvider } from '../../providers/providers/providers';
 import { Observable } from 'rxjs/Observable';
@@ -14,7 +14,8 @@ import { ShoppingCartsProvider } from '../../providers/shopping-carts/shopping-c
  */
 @Component({
   selector: 'providers-total',
-  templateUrl: 'providers-total.html'
+  templateUrl: 'providers-total.html',
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class ProvidersTotalComponent implements OnInit, OnChanges {
   @Input() ProviderKey: string;

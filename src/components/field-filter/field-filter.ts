@@ -1,5 +1,5 @@
 //import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter,ChangeDetectionStrategy } from '@angular/core';
 import { Validators, FormGroup, FormControl, FormBuilder, AbstractControl } from '@angular/forms';
 
 /**
@@ -10,7 +10,8 @@ import { Validators, FormGroup, FormControl, FormBuilder, AbstractControl } from
  */
 @Component({
   selector: 'field-filter',
-  templateUrl: 'field-filter.html'
+  templateUrl: 'field-filter.html',
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class FieldFilterComponent {
 

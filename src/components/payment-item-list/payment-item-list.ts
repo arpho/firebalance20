@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges,ChangeDetectionStrategy } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { PaymentsProvider } from '../../providers/payments/payments';
 import { PaymentsModel } from '../../models/payment.model';
@@ -12,7 +12,8 @@ import { ShoppingCartModel } from '../../models/shoppingCart.model';
  */
 @Component({
   selector: 'payment-item-list',
-  templateUrl: 'payment-item-list.html'
+  templateUrl: 'payment-item-list.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaymentItemListComponent implements OnInit, OnChanges {
   @Input() Payment: PaymentsModel;

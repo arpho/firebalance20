@@ -1,6 +1,6 @@
 import { CategoriesProvider } from '../../providers/categories/categories';
 import { ShoppingCartsProvider } from '../../providers/shopping-carts/shopping-carts';
-import { Component, Input, OnInit,OnChanges } from '@angular/core';
+import { Component, Input, OnInit,OnChanges,ChangeDetectionStrategy } from '@angular/core';
 import { ShoppingCartModel } from '../../models/shoppingCart.model';
 import { SimpleChanges } from '@angular/core/src/metadata/lifecycle_hooks';
 
@@ -12,7 +12,8 @@ import { SimpleChanges } from '@angular/core/src/metadata/lifecycle_hooks';
  */
 @Component({
   selector: 'category-counter',
-  templateUrl: 'category-counter.html'
+  templateUrl: 'category-counter.html',
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class CategoryCounterComponent implements OnInit,OnChanges {
   @Input() dataFilter: string;

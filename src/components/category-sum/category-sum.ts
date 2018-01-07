@@ -1,6 +1,6 @@
 import { CategoriesProvider } from '../../providers/categories/categories';
 import { ShoppingCartsProvider } from '../../providers/shopping-carts/shopping-carts';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit,ChangeDetectionStrategy } from '@angular/core';
 import { ShoppingCartModel } from '../../models/shoppingCart.model';
 import { OnChanges, SimpleChanges } from '@angular/core/src/metadata/lifecycle_hooks';
 
@@ -12,7 +12,8 @@ import { OnChanges, SimpleChanges } from '@angular/core/src/metadata/lifecycle_h
  */
 @Component({
   selector: 'category-sum',
-  templateUrl: 'category-sum.html'
+  templateUrl: 'category-sum.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategorySumComponent implements OnInit,OnChanges {
 

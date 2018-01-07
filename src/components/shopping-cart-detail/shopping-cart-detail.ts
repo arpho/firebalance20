@@ -1,4 +1,4 @@
-import { Component, Input,OnChanges } from '@angular/core';
+import { Component, Input,OnChanges,ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, AbstractControl, ReactiveFormsModule } from '@angular/forms';
 import { ShoppingCartModel } from '../../models/shoppingCart.model';
 import { SimpleChanges } from '@angular/core/src/metadata/lifecycle_hooks';
@@ -11,7 +11,8 @@ import { SimpleChanges } from '@angular/core/src/metadata/lifecycle_hooks';
  */
 @Component({
   selector: 'shopping-cart-detail',
-  templateUrl: 'shopping-cart-detail.html'
+  templateUrl: 'shopping-cart-detail.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShoppingCartDetailComponent implements OnChanges{
   @Input() selectedCart: ShoppingCartModel

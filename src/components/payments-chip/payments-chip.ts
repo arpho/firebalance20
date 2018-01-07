@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy,ChangeDetectionStrategy } from '@angular/core';
 import { PaymentsProvider } from '../../providers/payments/payments';
 import { Observable } from 'rxjs/Observable';
 import { PaymentsModel } from '../../models/payment.model';
@@ -12,7 +12,8 @@ import { Subscription } from 'rxjs/Subscription';
  */
 @Component({
   selector: 'payments-chip',
-  templateUrl: 'payments-chip.html'
+  templateUrl: 'payments-chip.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaymentsChipComponent implements OnInit, OnDestroy {
   @Input() PaymentId: string;

@@ -1,6 +1,6 @@
 import { ShoppingCartsProvider } from '../../providers/shopping-carts/shopping-carts';
 import { CategoriesProvider } from '../../providers/categories/categories';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit,ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Category } from '../../pages/categories/categories.model';
 import { ShoppingCartModel } from '../../models/shoppingCart.model';
@@ -13,7 +13,9 @@ import { ShoppingCartModel } from '../../models/shoppingCart.model';
  */
 @Component({
   selector: 'categories-list-item',
-  templateUrl: 'categories-list-item.html'
+  templateUrl: 'categories-list-item.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
+  
 })
 export class CategoriesListItemComponent implements OnInit {
   @Input() categoria: Category;

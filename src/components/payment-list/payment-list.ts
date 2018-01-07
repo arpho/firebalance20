@@ -1,5 +1,5 @@
 import { ShoppingCartModel } from '../../models/shoppingCart.model';
-import { Component,Input,OnChanges,SimpleChanges,OnInit } from '@angular/core';
+import { Component,Input,OnChanges,SimpleChanges,OnInit,ChangeDetectionStrategy } from '@angular/core';
 import { IonicPage, NavController, NavParams,ModalController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import {UpdatePaymentPage} from '../../pages/update-payment/update-payment';
@@ -12,7 +12,8 @@ import {UpdatePaymentPage} from '../../pages/update-payment/update-payment';
  */
 @Component({
   selector: 'payment-list',
-  templateUrl: 'payment-list.html'
+  templateUrl: 'payment-list.html',
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class PaymentListComponent implements OnInit, OnChanges{
  @Input() paymentsList:any

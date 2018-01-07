@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input ,ChangeDetectionStrategy} from '@angular/core';
 import { AlertController, ModalController } from 'ionic-angular';
 import { ProviderModel } from '../../models/providers/provider.model';
 import { ShoppingCartModel } from '../../models/shoppingCart.model';
@@ -15,7 +15,8 @@ import { ProvidersProvider } from '../../providers/providers/providers';
  */
 @Component({
   selector: 'providers-list',
-  templateUrl: 'providers-list.html'
+  templateUrl: 'providers-list.html',
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class ProvidersListComponent {
   @Input() ProvidersList: Array<ProviderModel>

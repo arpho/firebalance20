@@ -1,4 +1,4 @@
-import { Component,Input,OnInit,OnChanges,Output,EventEmitter } from '@angular/core';
+import { Component,Input,OnInit,OnChanges,Output,EventEmitter,ChangeDetectionStrategy } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import { ShoppingCartModel } from '../../models/shoppingCart.model';
 import { SimpleChanges } from '@angular/core/src/metadata/lifecycle_hooks';
@@ -11,7 +11,8 @@ import { SimpleChanges } from '@angular/core/src/metadata/lifecycle_hooks';
  */
 @Component({
   selector: 'shopping-carts-list',
-  templateUrl: 'shopping-carts-list.html'
+  templateUrl: 'shopping-carts-list.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShoppingCartsListComponent  implements OnInit,OnChanges{
   @Input() shoppingCarts:ShoppingCartModel[]

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,ChangeDetectionStrategy } from '@angular/core';
 
 /**
  * Generated class for the PurchaisedListComponent component.
@@ -8,7 +8,8 @@ import { Component } from '@angular/core';
  */
 @Component({
   selector: 'purchaised-list',
-  templateUrl: 'purchaised-list.html'
+  templateUrl: 'purchaised-list.html',
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class PurchaisedListComponent {
 

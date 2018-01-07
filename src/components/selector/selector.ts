@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit,ChangeDetectionStrategy } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { DbLayer } from '../../app/dbLayer.interface';
 import { SuppliersService } from '../../pages/fornitori/fornitori.service';
@@ -16,7 +16,8 @@ import { ProvidersProvider } from '../../providers/providers/providers';
  */
 @Component({
   selector: 'selector',
-  templateUrl: 'selector.html'
+  templateUrl: 'selector.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectorComponent implements OnInit {
   @Input() db: DbLayer;//servizio di  backend
