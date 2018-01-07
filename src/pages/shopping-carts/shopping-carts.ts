@@ -57,7 +57,7 @@ export class ShoppingCartsPage implements OnDestroy {
   }
 
   create() {
-    let modal = this.modal.create(DetailShoppingCartPage);
+    let modal = this.modal.create(DetailShoppingCartPage,new ShoppingCartModel());
     modal.present();
   }
 
