@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,  ModalController } from 'ionic-angular';
 import { ShoppingCartsProvider } from '../../providers/shopping-carts/shopping-carts';
 import { Observable } from 'rxjs/Observable';
 import { ShoppingCartModel } from '../../models/shoppingCart.model';
-import { CreatePaymentPage } from '../create-payment/create-payment';
+import { DetailShoppingCartPage } from '../detail-shopping-cart/detail-shopping-cart';
 import { Subscription } from 'rxjs/Subscription';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 
@@ -21,7 +21,7 @@ import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 export class ShoppingCartsPage implements OnDestroy {
   shoppingCarts: ShoppingCartModel[]// = new Observable<ShoppingCartModel>();
   cartArray: [ShoppingCartModel] = [null];
-  selectedCart: any = CreatePaymentPage;
+  selectedCart: any = DetailShoppingCartPage;
   subscription: Subscription;
   portrait: boolean=false;
   landscape:boolean=true;
@@ -33,6 +33,7 @@ export class ShoppingCartsPage implements OnDestroy {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
+    public modal:ModalController,
     public ShoppingCarts: ShoppingCartsProvider
 
   ) {
@@ -49,8 +50,15 @@ export class ShoppingCartsPage implements OnDestroy {
   }
   selectedCartEvent(cart){
     this.selectedCart = cart; // carrello della spesa selezionato
-    console.log('selezionato',cart)
+    console.log('selezionato',cart);
+    let modal = this.modal.create(DetailShoppingCartPage,cart);
+    modal.present();
 
+  }
+
+  create() {
+    let modal = this.modal.create(DetailShoppingCartPage);
+    modal.present();
   }
 
   resize(){

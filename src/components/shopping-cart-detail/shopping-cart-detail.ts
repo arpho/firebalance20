@@ -11,8 +11,7 @@ import { SimpleChanges } from '@angular/core/src/metadata/lifecycle_hooks';
  */
 @Component({
   selector: 'shopping-cart-detail',
-  templateUrl: 'shopping-cart-detail.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: 'shopping-cart-detail.html'
 })
 export class ShoppingCartDetailComponent implements OnChanges{
   @Input() selectedCart: ShoppingCartModel

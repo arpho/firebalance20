@@ -5,11 +5,12 @@ import { MyApp } from './app.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { Http } from '@angular/http';
-import {FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 //import { BehaviorSubject} from 'rxjs/BehaviorSubject';
 import { ListingPage } from '../pages/listing/listing';
 import { FeedPage } from '../pages/feed/feed';
-import {ShoppingCartsPage} from '../pages/shopping-carts/shopping-carts';
+import { ShoppingCartsPage } from '../pages/shopping-carts/shopping-carts';
+import { DetailShoppingCartPage } from '../pages/detail-shopping-cart/detail-shopping-cart';
 import { FollowersPage } from '../pages/followers/followers';
 import { LayoutsPage } from '../pages/layouts/layouts';
 import { FormsPage } from '../pages/forms/forms';
@@ -32,12 +33,12 @@ import { FiltersPage } from '../pages/filters/filters';
 import { TermsOfServicePage } from '../pages/terms-of-service/terms-of-service';
 import { PrivacyPolicyPage } from '../pages/privacy-policy/privacy-policy';
 import { FormValidationsPage } from '../pages/form-validations/form-validations';
-import {CategoriesPage} from '../pages/categories/categories';
-import {CategoriesService} from '../pages/categories/categories.service';
-import {PaymentPage} from '../pages/payment/payment'
+import { CategoriesPage } from '../pages/categories/categories';
+import { CategoriesService } from '../pages/categories/categories.service';
+import { PaymentPage } from '../pages/payment/payment'
 import { CreatePaymentPage } from '../pages/create-payment/create-payment';
 import { CreateProviderPage } from '../pages/create-provider/create-provider';
-import {UpdatePaymentPage } from '../pages/update-payment/update-payment'
+import { UpdatePaymentPage } from '../pages/update-payment/update-payment'
 import { UpdateProviderPage } from '../pages/update-provider/update-provider'
 import { PreloadImage } from '../components/preload-image/preload-image';
 import { BackgroundImage } from '../components/background-image/background-image';
@@ -59,7 +60,7 @@ import { FacebookLoginService } from '../pages/facebook-login/facebook-login.ser
 import { GoogleLoginService } from '../pages/google-login/google-login.service';
 import { TwitterLoginService } from '../pages/twitter-login/twitter-login.service';
 import { GoogleMapsService } from '../pages/maps/maps.service';
-import {UserModel} from '../pages/profile/profile.model'
+import { UserModel } from '../pages/profile/profile.model'
 
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
@@ -97,7 +98,7 @@ import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
-import {SuiModule} from 'ng2-semantic-ui';
+import { SuiModule } from 'ng2-semantic-ui';
 import { AuthService } from '../providers/auth/auth';
 import { UtilitiesProvider } from '../providers/utilities/utilities';
 import { CategoriesProvider } from '../providers/categories/categories';
@@ -128,7 +129,7 @@ import { SelectorComponent } from '../components/selector/selector';
 //import { PaymentProvider } from '../providers/payment/payment';
 //AngularFireModule.initializeApp(environment.firebaseConfig)
 export function createTranslateLoader(http: Http) {
-	return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 
@@ -137,6 +138,7 @@ export function createTranslateLoader(http: Http) {
     MyApp,
     ListingPage,
     ShoppingCartsPage,
+    DetailShoppingCartPage,
     FeedPage,
     FollowersPage,
     LayoutsPage,
@@ -170,10 +172,10 @@ export function createTranslateLoader(http: Http) {
     UpdateProviderPage,
     CreateProviderPage,
     CategoriesPage,
-    
+
     PaymentPage,
-		FormValidationsPage,
-		VideoPlaylistPage,
+    FormValidationsPage,
+    VideoPlaylistPage,
 
     PreloadImage,
     BackgroundImage,
@@ -211,21 +213,22 @@ export function createTranslateLoader(http: Http) {
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
-		TranslateModule.forRoot({
-    loader: {
+    TranslateModule.forRoot({
+      loader: {
         provide: TranslateLoader,
-      	useFactory: (createTranslateLoader),
+        useFactory: (createTranslateLoader),
         deps: [Http]
-		    }
-		}),
-		VideoPlayerModule,
-		ValidatorsModule
+      }
+    }),
+    VideoPlayerModule,
+    ValidatorsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     ListingPage,
     ShoppingCartsPage,
+    DetailShoppingCartPage,
     FeedPage,
     FollowersPage,
     LayoutsPage,
@@ -260,18 +263,18 @@ export function createTranslateLoader(http: Http) {
     AdsPage,
     CategoriesPage,
     PaymentPage,
-		FormValidationsPage,
-		VideoPlaylistPage
+    FormValidationsPage,
+    VideoPlaylistPage
   ],
   providers: [
     //BehaviorSubject,
     AlertController,
     { provide: "GoogleKey", useValue: environment.googleKey },
     { provide: "FIREBASE_CONFIG", useValue: environment.firebaseConfig },
-    { provide: "OutpanKey",useValue: environment.outpanKey},
-    {provide:"production",useValue:environment.production},
-    {provide:"emailDev",useValue:environment.emailDev},
-    {provide:"passwordDev",useValue:environment.passwordDev},
+    { provide: "OutpanKey", useValue: environment.outpanKey },
+    { provide: "production", useValue: environment.production },
+    { provide: "emailDev", useValue: environment.emailDev },
+    { provide: "passwordDev", useValue: environment.passwordDev },
     Toast,
     AngularFireDatabase,
     UserModel,
@@ -290,10 +293,10 @@ export function createTranslateLoader(http: Http) {
     GoogleLoginService,
     TwitterLoginService,
     GoogleMapsService,
-		LanguageService,
+    LanguageService,
 
-	  SplashScreen,
-	  StatusBar,
+    SplashScreen,
+    StatusBar,
     SocialSharing,
     NativeStorage,
     InAppBrowser,
@@ -302,11 +305,11 @@ export function createTranslateLoader(http: Http) {
     Keyboard,
     Geolocation,
     TwitterConnect,
-		AdMobFree,
-		AppRate,
-		ImagePicker,
-		Crop,
-		EmailComposer,
+    AdMobFree,
+    AppRate,
+    ImagePicker,
+    Crop,
+    EmailComposer,
     UtilitiesProvider,
     UtilitiesProvider,
     CategoriesProvider,
@@ -318,6 +321,6 @@ export function createTranslateLoader(http: Http) {
     GeolocationProvider,
     //PaymentProvider
   ],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class AppModule {}
+export class AppModule { }
