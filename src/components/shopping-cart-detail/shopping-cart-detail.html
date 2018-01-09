@@ -18,7 +18,7 @@
       </ion-fab>
 <div class=" ui form" [formGroup]="cartForm">
   <ion-label>{{ this.cartForm.controls.online.value|switchText:'acquisto onLine':'acqisto tradizionale'}}</ion-label>
-  <ion-icon name="body" *ngIf="!cartForm.controls.online.value"></ion-icon> <ion-icon name="wifi" *ngIf="cartForm.controls.online.value"></ion-icon> 
+  <ion-icon name="body" *ngIf="!cartForm.controls.online.value"></ion-icon> <ion-icon name="pulse" *ngIf="cartForm.controls.online.value"></ion-icon> 
                   <ion-toggle formControlName="online"></ion-toggle>
         
 
