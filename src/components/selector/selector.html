@@ -8,6 +8,7 @@
     <list-items [items]=items (selected)="selectedEvent($event) " [filterString]=filterString *ngIf="filterString">
         
     </list-items>
+    <p *ngIf="pagamento|async as pagamento" >Pagamento:<b>{{pagamento.nome}}</b></p>
     <div class="loader-wrapper" id="loader-3" *ngIf="spinning" >
         <div id="loader"></div>
         <div id="loader"></div>
@@ -15,9 +16,4 @@
         <div id="loader"></div>
         <div id="loader"></div>
     </div>
-    <ion-fab top right>
-      <button  ion-fab mini color="primary" (click)="add()">
-          <ion-icon name="add"></ion-icon>
-        </button>
-      </ion-fab>
   </div>

@@ -4,11 +4,13 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import * as firebase from 'firebase/app';
 import * as _ from 'lodash';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Category } from '../../pages/categories/categories.model';
 import { PaymentsModel } from '../../models/payment.model'
 import { ShoppingCartsProvider } from '../shopping-carts/shopping-carts';
+import { DbLayer } from '../DbLayer.interface'
 
 /*
   Generated class for the PaymentsProvider provider.
@@ -17,7 +19,7 @@ import { ShoppingCartsProvider } from '../shopping-carts/shopping-carts';
   for more info on providers and Angular DI.
 */
 @Injectable()
-export class PaymentsProvider {
+export class PaymentsProvider implements DbLayer{
   public paymentsRef: firebase.database.Reference
   paymentsList: any;
   subjectPaymentsRef = new BehaviorSubject(null) // instanzio il behaviorSubject, è definito subito
@@ -30,6 +32,29 @@ export class PaymentsProvider {
         this.subjectPaymentsRef.next(this.paymentsRef);
 
       }
+    })
+  }
+  getElementById(id:string,cb){
+    return this.getPaymentById(id,cb);
+  }
+  getComponentType()
+  {
+    return  'pagamenti'
+  }
+
+  isReady(){
+    return !!this.paymentsRef
+    
+  }
+  getType(){
+    return this.getComponentType
+  }
+  getElements(cb){
+    
+    return this.paymentsRef.on('value',snapshot=> {
+      const  itemArray = [];
+      snapshot.val().forEach(item=>itemArray.push(new PaymentsModel(item)))
+      cb( Observable.from(itemArray))
     })
   }
   getPaymentById(paymentId,cb){

@@ -66,6 +66,8 @@
             </div>
           </ion-fab>
             <label for="onLIne">{{ this.providerForm.controls.onLine.value|switchText:'Venditore onLine':'venditore tradizionale'}}</label>
+             <ion-icon name="body" *ngIf="!providerForm.controls.onLine.value"></ion-icon> <ion-icon name="paper-plane" *ngIf="providerForm.controls.onLine.value"></ion-icon> 
+                  
             <ion-toggle formControlName="onLine"
                         placeholder="online" >
                       </ion-toggle>

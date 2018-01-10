@@ -1,13 +1,17 @@
-import { Component, Input, Output, EventEmitter, OnInit,ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
-import { DbLayer } from '../../app/dbLayer.interface';
+import { DbLayer } from '../../providers/DbLayer.interface';
 import { SuppliersService } from '../../pages/fornitori/fornitori.service';
 import { Observable } from 'rxjs/Rx';
 import { UtilitiesService } from '../../app/utilities.service'
-import { CreateProviderPage} from '../../pages/create-provider/create-provider';
-import { CreatePaymentPage} from '../../pages/create-payment/create-payment';
+import { CreateProviderPage } from '../../pages/create-provider/create-provider';
+import { CreatePaymentPage } from '../../pages/create-payment/create-payment';
 import { UtilitiesProvider } from '../../providers/utilities/utilities';
 import { ProvidersProvider } from '../../providers/providers/providers';
+import { OnChanges, SimpleChanges } from '@angular/core/src/metadata/lifecycle_hooks';
+import { PaymentsProvider } from '../../providers/payments/payments';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { PaymentsModel } from '../../models/payment.model';
 /**
  * Generated class for the SelectorComponent component.
  *
@@ -16,29 +20,33 @@ import { ProvidersProvider } from '../../providers/providers/providers';
  */
 @Component({
   selector: 'selector',
-  templateUrl: 'selector.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: 'selector.html'
 })
-export class SelectorComponent implements OnInit {
-  @Input() db: DbLayer;//servizio di  backend
+export class SelectorComponent implements OnInit, OnChanges {
   @Input() fieldId: string;
   @Input() placeholder: string;
   @Input() CreatePage: any;
   @Input() component: string;// componente di cui aprire il popup di creazione
   @Output() selected: EventEmitter<string> = new EventEmitter<string>(); // segnale emesso al componente father in caso di selezione nei componenti figli
   Components: any //oggetto usato per la selezione del popup da visualzzare
+  Dbs
   filterString: string;
   spinning: boolean;
+  pagamento:BehaviorSubject<PaymentsModel>;
+  db: DbLayer
   items: Observable<any> // items visualizzati nella lista
 
   add() {
-    console.log('adding');
-    let modal = this.modal.create(this.Components[this.db.getComponentType()]);
-    modal.onDidDismiss(data => {
-      this.fieldId = data.key
-      this.selected.emit(data.key);
-    });
-    modal.present();
+    console.log('adding Item');
+  }
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.fieldId) {console.log('cambio fieldId', changes)
+      if(this.Dbs[this.component].isReady())
+      this.Dbs[this.component].getElementById(this.fieldId,res=>{
+        this.pagamento = res;
+        console.log('got payment',res)
+      })
+  }
   }
 
   doFilter(filterString) {
@@ -46,14 +54,13 @@ export class SelectorComponent implements OnInit {
     this.filterString = filterString;
   }
   ngOnInit() {
-    this.spinning = true;
-    console.log('fieldId in selector',this.fieldId);
-    this.db.getElements().subscribe(a => {
-      this.spinning = false;
-    })
-    this.items = this.db.getElements();
-    if (this.fieldId)
-    null
+    console.log('placeholder', this.component)
+    /* this.spinning = true;
+     console.log('fieldId in selector',this.fieldId);
+     this.db.getElements(res=> {
+       this.items = res})
+     if (this.fieldId)
+     null*/
 
   }
 
@@ -67,10 +74,14 @@ export class SelectorComponent implements OnInit {
 
     public modal: ModalController,
     public Utilities: UtilitiesProvider,
+    public Payments: PaymentsProvider,
     public Suppliers: ProvidersProvider) {
     //this.placeholder = 'seleziona fornitore';
     this.spinning = false;
-    this.Components = { "supplier": CreateProviderPage, "payment": CreatePaymentPage };
+    this.Components = { "fornitori": CreateProviderPage, "pagamenti": CreatePaymentPage };
+    this.Dbs = { "fornitori": Suppliers, "pagamenti": Payments }
+    
+
   }
 
 }

@@ -16,6 +16,7 @@ import { SimpleChanges } from '@angular/core/src/metadata/lifecycle_hooks';
 export class ShoppingCartDetailComponent implements OnChanges{
   @Input() selectedCart: ShoppingCartModel
   text: string;
+  selectorPayment:string= 'pagamenti'
   Cart: ShoppingCartModel;
   public cartForm: FormGroup;
   ngOnChanges(changes:SimpleChanges){
