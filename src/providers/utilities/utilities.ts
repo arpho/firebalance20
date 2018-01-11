@@ -13,7 +13,6 @@ import { ShoppingCartModel } from '../../models/shoppingCart.model';
 */
 @Injectable()
 export class UtilitiesProvider {
-
   constructor(
     public http: Http,
     private toast: Toast,
@@ -36,6 +35,7 @@ export class UtilitiesProvider {
     const oneDay = 24 * 60 * 60 * 1000;
     return new Date(today.getTime() - oneDay * days)
   }
+
 
   shoppingCartDateComparer(cartX: ShoppingCartModel, cartY: ShoppingCartModel) {
     if (cartX.dataAcquisto > cartY.dataAcquisto) {

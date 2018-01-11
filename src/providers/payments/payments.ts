@@ -11,6 +11,7 @@ import { Category } from '../../pages/categories/categories.model';
 import { PaymentsModel } from '../../models/payment.model'
 import { ShoppingCartsProvider } from '../shopping-carts/shopping-carts';
 import { DbLayer } from '../DbLayer.interface'
+import { ProfileService } from '../../pages/profile/profile.service';
 
 /*
   Generated class for the PaymentsProvider provider.
@@ -24,15 +25,29 @@ export class PaymentsProvider implements DbLayer{
   paymentsList: any;
   subjectPaymentsRef = new BehaviorSubject(null) // instanzio il behaviorSubject, è definito subito
   constructor(public http: Http,
+    private Profiles:ProfileService,
     public Carts: ShoppingCartsProvider) {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        const uid = user.uid;
-        this.paymentsRef = firebase.database().ref((`/pagamenti/${uid}`))
-        this.subjectPaymentsRef.next(this.paymentsRef);
+      console.log('check user',this.Profiles.getUser())
+      if(!this.Profiles.getUser())
+        {
+          console.log('no user profile')
+          firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+              this.Profiles.setUser(user)
+              const uid = user.uid;
+              this.paymentsRef = firebase.database().ref((`/pagamenti/${uid}`))
+              this.subjectPaymentsRef.next(this.paymentsRef);
 
-      }
-    })
+            }
+            })
+        }
+        else{
+          console.log('logged user',this.Profiles.getUser())
+          const uid = this.Profiles.getUser().uid;
+          this.paymentsRef = firebase.database().ref((`/pagamenti/${uid}`))
+          this.subjectPaymentsRef.next(this.paymentsRef)
+        
+    }
   }
   getElementById(id:string,cb){
     return this.getPaymentById(id,cb);

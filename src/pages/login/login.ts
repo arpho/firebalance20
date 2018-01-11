@@ -57,7 +57,6 @@ export class LoginPage {
       console.log('logged user',a)
       
       const user = new UserModel().build(a);
-      //this.Auth.setCurrentUser(user);
       this.Profiles.setUser(user)
       console.log('LOGGED',this.Profiles.getUser());
     this.Utilities.showToast('benvenuto ','5000','top');
