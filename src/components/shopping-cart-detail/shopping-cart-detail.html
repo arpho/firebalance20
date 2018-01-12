@@ -23,9 +23,12 @@
         
 
     <label for="pagamentoId">Pagamento</label>
-    <ion-input type="text" id="nomeInput" placeholder="Pagamento" formControlName="pagamentoId">
+    <ion-input type="text" id="pagamentoInput" placeholder="Pagamento" formControlName="pagamentoId">
     </ion-input>
-    <selector [fieldId]= "selectedCart.pagamentoId" [component]="selectorPayment"></selector>
+    <ion-input type="text" id="nomeInput" placeholder="Fornitore" formControlName="fornitoreId">
+    </ion-input>
+    <selector [fieldId]= "selectedCart.fornitoreId" [component]="selectorProvider" [label]="labelFornitore"></selector>
+    <selector [fieldId]= "selectedCart.pagamentoId" [component]="selectorPayment" [label]="labelPagamento"></selector>
     <label>Totale</label>
     <h2>{{selectedCart.moneta}}{{selectedCart.totale}}</h2>
       

@@ -1,4 +1,4 @@
-import { Component, Input,OnChanges,ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, OnChanges, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, AbstractControl, ReactiveFormsModule } from '@angular/forms';
 import { ShoppingCartModel } from '../../models/shoppingCart.model';
 import { SimpleChanges } from '@angular/core/src/metadata/lifecycle_hooks';
@@ -13,14 +13,17 @@ import { SimpleChanges } from '@angular/core/src/metadata/lifecycle_hooks';
   selector: 'shopping-cart-detail',
   templateUrl: 'shopping-cart-detail.html'
 })
-export class ShoppingCartDetailComponent implements OnChanges{
+export class ShoppingCartDetailComponent implements OnChanges {
   @Input() selectedCart: ShoppingCartModel
   text: string;
-  selectorPayment:string= 'pagamenti'
+  selectorPayment: string = 'pagamenti'
+  selectorProvider: string = 'fornitori'
+  labelFornitore: string = "Fornitore"
+  labelPagamento: string = "Pagamento"
   Cart: ShoppingCartModel;
   public cartForm: FormGroup;
-  ngOnChanges(changes:SimpleChanges){
-    if(this.selectedCart)
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.selectedCart)
       this.cartForm = this.getForm(this.selectedCart)
   }
 
@@ -30,7 +33,7 @@ export class ShoppingCartDetailComponent implements OnChanges{
       fornitoreId: new FormControl(cart.fornitoreId),
       moneta: new FormControl(cart.moneta),
       pagamentoId: new FormControl(cart.pagamentoId),
-      online:new FormControl(cart.online),
+      online: new FormControl(cart.online),
       note: new FormControl(cart.note)
     }, Validators.required);
   }
@@ -40,8 +43,8 @@ export class ShoppingCartDetailComponent implements OnChanges{
   ) {
     console.log('Hello ShoppingCartDetailComponent Component');
     this.text = 'Hello World detail ';
-   
-      this.cartForm =  this.getForm(new ShoppingCartModel())
+
+    this.cartForm = this.getForm(new ShoppingCartModel())
 
   }
 

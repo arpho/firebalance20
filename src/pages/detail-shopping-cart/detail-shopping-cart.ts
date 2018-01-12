@@ -19,7 +19,6 @@ export class DetailShoppingCartPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public view: ViewController) {
     this.selectedCart = new ShoppingCartModel();
-    console.log('params', this.navParams.data)
     this.selectedCart = this.navParams.data || new ShoppingCartModel()
   }
 
@@ -27,7 +26,6 @@ export class DetailShoppingCartPage {
     this.view.dismiss();
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad DetailShoppingCartPage');
   }
 
 }

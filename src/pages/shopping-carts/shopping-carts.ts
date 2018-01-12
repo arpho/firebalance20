@@ -42,7 +42,6 @@ export class ShoppingCartsPage implements OnDestroy {
     this.subscription = this.ShoppingCarts.shoppingCartSubject.subscribe(obs => {
       if (obs) {
         this.shoppingCarts = this.ShoppingCarts.shoppingCarts;
-        console.log('shoppingCart', this.shoppingCarts)
 
       }
 
@@ -50,7 +49,6 @@ export class ShoppingCartsPage implements OnDestroy {
   }
   selectedCartEvent(cart) {
     this.selectedCart = cart; // carrello della spesa selezionato
-    console.log('selezionato', cart);
     let modal = this.modal.create(DetailShoppingCartPage, cart);
     modal.present();
 
@@ -68,7 +66,6 @@ export class ShoppingCartsPage implements OnDestroy {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ShoppingCartsPage');
   }
 
 }

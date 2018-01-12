@@ -27,7 +27,6 @@ export class PaymentsProvider implements DbLayer{
   constructor(public http: Http,
     private Profiles:ProfileService,
     public Carts: ShoppingCartsProvider) {
-      console.log('check user',this.Profiles.getUser())
       if(!this.Profiles.getUser())
         {
           console.log('no user profile')
@@ -42,7 +41,6 @@ export class PaymentsProvider implements DbLayer{
             })
         }
         else{
-          console.log('logged user',this.Profiles.getUser())
           const uid = this.Profiles.getUser().uid;
           this.paymentsRef = firebase.database().ref((`/pagamenti/${uid}`))
           this.subjectPaymentsRef.next(this.paymentsRef)

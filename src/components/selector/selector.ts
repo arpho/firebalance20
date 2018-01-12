@@ -25,6 +25,7 @@ import { PaymentsModel } from '../../models/payment.model';
 export class SelectorComponent implements OnInit, OnChanges {
   @Input() fieldId: string;
   @Input() placeholder: string;
+  @Input() label:string
   @Input() CreatePage: any;
   @Input() component: string;// componente di cui aprire il popup di creazione
   @Output() selected: EventEmitter<string> = new EventEmitter<string>(); // segnale emesso al componente father in caso di selezione nei componenti figli
@@ -32,7 +33,7 @@ export class SelectorComponent implements OnInit, OnChanges {
   Dbs
   filterString: string;
   spinning: boolean;
-  pagamento:BehaviorSubject<PaymentsModel>;
+  item:BehaviorSubject<PaymentsModel>;
   db: DbLayer
   items: Observable<any> // items visualizzati nella lista
 
@@ -40,11 +41,12 @@ export class SelectorComponent implements OnInit, OnChanges {
     console.log('adding Item');
   }
   ngOnChanges(changes: SimpleChanges) {
+
     if (changes.fieldId) {console.log('cambio fieldId', changes)
       if(this.Dbs[this.component].isReady())
       this.Dbs[this.component].getElementById(this.fieldId,res=>{
-        this.pagamento = res;
-        console.log('got payment',res)
+        this.item = res;
+        console.log('got item by id',res)
       })
   }
   }

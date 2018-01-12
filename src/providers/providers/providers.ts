@@ -9,6 +9,7 @@ import { ShoppingCartModel } from '../../models/shoppingCart.model';
 import { SharedStylesHost } from '@angular/platform-browser/src/dom/shared_styles_host';
 import { Observable } from 'rxjs/Observable'
 import { DbLayer } from '../DbLayer.interface';
+import { ProfileService } from '../../pages/profile/profile.service';
 
 /*
   Generated class for the ProvidersProvider provider.
@@ -22,16 +23,24 @@ export class ProvidersProvider implements DbLayer {
   subjectProvidersRef = new BehaviorSubject(null) // instanzio il behaviorSubject, è definito subito
   providersList = Array<ProviderModel>();
   constructor(public http: Http,
+    public Profile:ProfileService,
     public Carts: ShoppingCartsProvider) {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        const uid = user.uid;
-        this.providersRef = firebase.database().ref((`/fornitori/${uid}`))
-        this.subjectProvidersRef.next(this.providersRef);
+      if(!this.Profile.getUser())
+        firebase.auth().onAuthStateChanged(user => {
+          if (user) this.setFirebaseRef(user.uid);
+        })
+      else
+        this.setFirebaseRef(this.Profile.getUser().uid)
 
 
-      }
-    })
+  }
+
+  private setFirebaseRef(uid:string) {
+    {
+      
+      this.providersRef = firebase.database().ref((`/fornitori/${uid}`));
+      this.subjectProvidersRef.next(this.providersRef);
+    }
   }
 
   getElements(cb) {
@@ -49,12 +58,12 @@ export class ProvidersProvider implements DbLayer {
   getComponentType(){
     return 'fornitori'
   }
-  getElementById(id: string) {
-    const cb = (res) => { return new ProviderModel(res.val()) };
-    this.providersRef.child('/${id}/').on('value', cb)
+  getElementById(id: string,cb) {
+    return this.getProviderById(id,cb)
   }
 
   getProviderById(providerId: String, cb) {
+    if(providerId!="")
     this.subjectProvidersRef.subscribe(ref => {
       if (ref) {
         ref.child(`/${providerId}/`).on('value', res => cb(new BehaviorSubject(res.val())))
@@ -64,7 +73,6 @@ export class ProvidersProvider implements DbLayer {
 
   update(provider, cb) {
     this.subjectProvidersRef.subscribe(Providers => {
-      if (Providers)
         Providers.child(`/${provider.key}/`).update(provider).then(cb);
     }).unsubscribe()
   }

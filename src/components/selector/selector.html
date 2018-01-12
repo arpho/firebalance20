@@ -8,7 +8,7 @@
     <list-items [items]=items (selected)="selectedEvent($event) " [filterString]=filterString *ngIf="filterString">
         
     </list-items>
-    <p *ngIf="pagamento|async as pagamento" >Pagamento:<b>{{pagamento.nome}}</b></p>
+    <p *ngIf="item|async as item" >{{label}}:<b>{{item.nome}}</b></p>
     <div class="loader-wrapper" id="loader-3" *ngIf="spinning" >
         <div id="loader"></div>
         <div id="loader"></div>
