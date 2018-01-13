@@ -23,57 +23,61 @@ export class ProvidersProvider implements DbLayer {
   subjectProvidersRef = new BehaviorSubject(null) // instanzio il behaviorSubject, è definito subito
   providersList = Array<ProviderModel>();
   constructor(public http: Http,
-    public Profile:ProfileService,
+    public Profile: ProfileService,
     public Carts: ShoppingCartsProvider) {
-      if(!this.Profile.getUser())
-        firebase.auth().onAuthStateChanged(user => {
-          if (user) this.setFirebaseRef(user.uid);
-        })
-      else
-        this.setFirebaseRef(this.Profile.getUser().uid)
+    if (!this.Profile.getUser())
+      firebase.auth().onAuthStateChanged(user => {
+        if (user) this.setFirebaseRef(user.uid);
+      })
+    else
+      this.setFirebaseRef(this.Profile.getUser().uid)
 
 
   }
 
-  private setFirebaseRef(uid:string) {
+  private setFirebaseRef(uid: string) {
     {
-      
+
       this.providersRef = firebase.database().ref((`/fornitori/${uid}`));
       this.subjectProvidersRef.next(this.providersRef);
     }
   }
 
   getElements(cb) {
+    return this.getProvidersArray(cb)
+    /* this.providersRef.on('value', snapshot => {
+       const itemArray = [];
+       console.log('snapshot',snapshot)
+       snapshot.forEach(item => {itemArray.push(new ProviderModel(item.val()))
+         console.log('item',item.val())
+       return true;
+       })
+       cb(itemArray)
+     })*/
 
-    this.providersRef.on('value', snapshot => {
-      const itemArray = [];
-      snapshot.val().forEach(item => itemArray.push(new ProviderModel(item)))
-      cb(Observable.from(itemArray))
-    })
-
   }
-  isReady(){
-    return !! this.providersRef
+  isReady() {
+    return !!this.providersRef
   }
-  getComponentType(){
-    return 'fornitori'
+  getComponentType() {
+    return 'fornitore'
   }
-  getElementById(id: string,cb) {
-    return this.getProviderById(id,cb)
+  getElementById(id: string, cb) {
+    return this.getProviderById(id, cb)
   }
 
   getProviderById(providerId: String, cb) {
-    if(providerId!="")
-    this.subjectProvidersRef.subscribe(ref => {
-      if (ref) {
-        ref.child(`/${providerId}/`).on('value', res => cb(new BehaviorSubject(res.val())))
-      }
-    })
+    if (providerId != "")
+      this.subjectProvidersRef.subscribe(ref => {
+        if (ref) {
+          ref.child(`/${providerId}/`).on('value', res => cb(new BehaviorSubject(res.val())))
+        }
+      })
   }
 
   update(provider, cb) {
     this.subjectProvidersRef.subscribe(Providers => {
-        Providers.child(`/${provider.key}/`).update(provider).then(cb);
+      Providers.child(`/${provider.key}/`).update(provider).then(cb);
     }).unsubscribe()
   }
 

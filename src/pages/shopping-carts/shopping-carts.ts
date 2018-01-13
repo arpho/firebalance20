@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Platform } from 'ionic-angular';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { ShoppingCartsProvider } from '../../providers/shopping-carts/shopping-carts';
 import { Observable } from 'rxjs/Observable';
@@ -34,9 +35,11 @@ export class ShoppingCartsPage implements OnDestroy {
     public navCtrl: NavController,
     public navParams: NavParams,
     public modal: ModalController,
+    public platform:Platform,
     public ShoppingCarts: ShoppingCartsProvider
 
   ) {
+    //this.landscape= this.platform.width()>2000;
     this.selectedCart = new ShoppingCartModel(); //inizializzo il nuovo carrello della spesa
 
     this.subscription = this.ShoppingCarts.shoppingCartSubject.subscribe(obs => {
@@ -48,6 +51,7 @@ export class ShoppingCartsPage implements OnDestroy {
     })
   }
   selectedCartEvent(cart) {
+    console.log('selected',cart)
     this.selectedCart = cart; // carrello della spesa selezionato
     let modal = this.modal.create(DetailShoppingCartPage, cart);
     modal.present();

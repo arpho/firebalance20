@@ -30,7 +30,8 @@ export class SelectorComponent implements OnInit, OnChanges {
   @Input() component: string;// componente di cui aprire il popup di creazione
   @Output() selected: EventEmitter<string> = new EventEmitter<string>(); // segnale emesso al componente father in caso di selezione nei componenti figli
   Components: any //oggetto usato per la selezione del popup da visualzzare
-  Dbs
+  Dbs:any;
+  public field:string;
   filterString: string;
   spinning: boolean;
   item:BehaviorSubject<PaymentsModel>;
@@ -41,13 +42,16 @@ export class SelectorComponent implements OnInit, OnChanges {
     console.log('adding Item');
   }
   ngOnChanges(changes: SimpleChanges) {
-
     if (changes.fieldId) {console.log('cambio fieldId', changes)
-      if(this.Dbs[this.component].isReady())
+      if(this.Dbs[this.component].isReady()){
+    this.field =this.component
+    console.log('field',this.component,this.field)
+
       this.Dbs[this.component].getElementById(this.fieldId,res=>{
         this.item = res;
         console.log('got item by id',res)
       })
+    }
   }
   }
 
@@ -80,8 +84,8 @@ export class SelectorComponent implements OnInit, OnChanges {
     public Suppliers: ProvidersProvider) {
     //this.placeholder = 'seleziona fornitore';
     this.spinning = false;
-    this.Components = { "fornitori": CreateProviderPage, "pagamenti": CreatePaymentPage };
-    this.Dbs = { "fornitori": Suppliers, "pagamenti": Payments }
+    this.Components = { "fornitore": CreateProviderPage, "pagamento": CreatePaymentPage };
+    this.Dbs = { "fornitore": Suppliers, "pagamento": Payments }
     
 
   }

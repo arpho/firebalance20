@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import * as firebase from 'firebase/app';
 import * as _ from 'lodash';
-import {Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Category } from '../../pages/categories/categories.model';
@@ -20,60 +20,58 @@ import { ProfileService } from '../../pages/profile/profile.service';
   for more info on providers and Angular DI.
 */
 @Injectable()
-export class PaymentsProvider implements DbLayer{
+export class PaymentsProvider implements DbLayer {
   public paymentsRef: firebase.database.Reference
   paymentsList: any;
   subjectPaymentsRef = new BehaviorSubject(null) // instanzio il behaviorSubject, è definito subito
   constructor(public http: Http,
-    private Profiles:ProfileService,
+    private Profiles: ProfileService,
     public Carts: ShoppingCartsProvider) {
-      if(!this.Profiles.getUser())
-        {
-          console.log('no user profile')
-          firebase.auth().onAuthStateChanged(user => {
-            if (user) {
-              this.Profiles.setUser(user)
-              const uid = user.uid;
-              this.paymentsRef = firebase.database().ref((`/pagamenti/${uid}`))
-              this.subjectPaymentsRef.next(this.paymentsRef);
-
-            }
-            })
-        }
-        else{
-          const uid = this.Profiles.getUser().uid;
+    if (!this.Profiles.getUser()) {
+      console.log('no user profile')
+      firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+          this.Profiles.setUser(user)
+          const uid = user.uid;
           this.paymentsRef = firebase.database().ref((`/pagamenti/${uid}`))
-          this.subjectPaymentsRef.next(this.paymentsRef)
-        
+          this.subjectPaymentsRef.next(this.paymentsRef);
+
+        }
+      })
+    }
+    else {
+      const uid = this.Profiles.getUser().uid;
+      this.paymentsRef = firebase.database().ref((`/pagamenti/${uid}`))
+      this.subjectPaymentsRef.next(this.paymentsRef)
+
     }
   }
-  getElementById(id:string,cb){
-    return this.getPaymentById(id,cb);
+  getElementById(id: string, cb) {
+    return this.getPaymentById(id, cb);
   }
-  getComponentType()
-  {
-    return  'pagamenti'
+  getComponentType() {
+    return 'pagamento'
   }
 
-  isReady(){
+  isReady() {
     return !!this.paymentsRef
-    
+
   }
-  getType(){
+  getType() {
     return this.getComponentType
   }
-  getElements(cb){
-    
-    return this.paymentsRef.on('value',snapshot=> {
-      const  itemArray = [];
-      snapshot.val().forEach(item=>itemArray.push(new PaymentsModel(item)))
-      cb( Observable.from(itemArray))
+  getElements(cb) {
+
+    return this.paymentsRef.on('value', snapshot => {
+      const itemArray = [];
+      snapshot.val().forEach(item => itemArray.push(new PaymentsModel(item)))
+      cb(Observable.from(itemArray))
     })
   }
-  getPaymentById(paymentId,cb){
-    return this.subjectPaymentsRef.subscribe(ref=>{ 
-      if(ref){
-        ref.child(`/${paymentId}/`).on('value',res=>cb(new BehaviorSubject(res.val())))
+  getPaymentById(paymentId, cb) {
+    return this.subjectPaymentsRef.subscribe(ref => {
+      if (ref) {
+        ref.child(`/${paymentId}/`).on('value', res => cb(new BehaviorSubject(res.val())))
       }
     })
   }

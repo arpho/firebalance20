@@ -13,7 +13,7 @@
                 <button mdSuffix [mdDatepickerToggle]="picker"></button-->
               </md-input-container>
     <ion-fab   middle right >
-        <button ion-fab  mini color="primary" (click)="create()"><ion-icon name="basket"></ion-icon>
+        <button ion-fab  mini color="primary" (click)="create()"><ion-icon name="add"></ion-icon>
         </button>
       </ion-fab>
 <div class=" ui form" [formGroup]="cartForm">
@@ -22,13 +22,8 @@
                   <ion-toggle formControlName="online"></ion-toggle>
         
 
-    <label for="pagamentoId">Pagamento</label>
-    <ion-input type="text" id="pagamentoInput" placeholder="Pagamento" formControlName="pagamentoId">
-    </ion-input>
-    <ion-input type="text" id="nomeInput" placeholder="Fornitore" formControlName="fornitoreId">
-    </ion-input>
     <selector [fieldId]= "selectedCart.fornitoreId" [component]="selectorProvider" [label]="labelFornitore"></selector>
-    <selector [fieldId]= "selectedCart.pagamentoId" [component]="selectorPayment" [label]="labelPagamento"></selector>
+    <!--selector [fieldId]= "selectedCart.pagamentoId" [component]="selectorPayment" [label]="labelPagamento"></selector-->
     <label>Totale</label>
     <h2>{{selectedCart.moneta}}{{selectedCart.totale}}</h2>
       

@@ -15,7 +15,7 @@ export class ProviderModel {
         longitudine: string,
         key: string,
         onLine: boolean,
-       
+
     }) {
         this.key = fornitore && fornitore.key || "";
         this.nome = fornitore && fornitore.nome || "";
@@ -25,7 +25,15 @@ export class ProviderModel {
         this.longitudine = fornitore && fornitore.longitudine || "";
         this.onLine = fornitore && fornitore.onLine || false;
     }
-    buildFromActiveForm(fornitore:{
+    build(item) {
+        this.key = item.key || "";
+        this.nome = item.nome || "";
+        this.note = item.note || "";
+        this.latitudine = item.latitudine || "";
+        this.longitudine = item.longitudine || "";
+        this.onLine = this.onLine;
+    }
+    buildFromActiveForm(fornitore: {
         nome: FormControl,
         note: FormControl,
         key: FormControl,
@@ -33,7 +41,7 @@ export class ProviderModel {
         longitudine: FormControl,
         latitudine: FormControl,
         onLine: FormControl
-    }){
+    }) {
         this.key = fornitore && fornitore.key.value || "";
         this.nome = fornitore && fornitore.nome.value || "";
         this.note = fornitore && fornitore.note.value || "";

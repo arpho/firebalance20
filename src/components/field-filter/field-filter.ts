@@ -1,7 +1,6 @@
 //import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
-import { Component, Input, Output, EventEmitter,ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, Output, EventEmitter,ChangeDetectionStrategy,OnInit } from '@angular/core';
 import { Validators, FormGroup, FormControl, FormBuilder, AbstractControl } from '@angular/forms';
-
 /**
  * Generated class for the FieldFilterComponent component.
  *
@@ -13,7 +12,7 @@ import { Validators, FormGroup, FormControl, FormBuilder, AbstractControl } from
   templateUrl: 'field-filter.html',
   changeDetection:ChangeDetectionStrategy.OnPush
 })
-export class FieldFilterComponent {
+export class FieldFilterComponent implements OnInit{
 
   text: string;
   field: AbstractControl;
@@ -24,6 +23,9 @@ export class FieldFilterComponent {
   click() {
     if (this.filterForm.controls.field)
       this.selected.emit(this.filterForm.controls.field.value)
+  }
+  ngOnInit(){
+    console.log('placeholder',this.placeholder)
   }
   constructor(
     fb: FormBuilder

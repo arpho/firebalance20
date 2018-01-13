@@ -127,6 +127,7 @@ import { PaymentsChipComponent } from '../components/payments-chip/payments-chip
 import { FieldFilterComponent } from '../components/field-filter/field-filter';
 import { SelectorComponent } from '../components/selector/selector';
 import { ListItemComponent } from '../components/list-item/list-item';
+import { ItemsListComponent } from '../components/items-list/items-list';
 //import { PaymentProvider } from '../providers/payment/payment';
 //AngularFireModule.initializeApp(environment.firebaseConfig)
 export function createTranslateLoader(http: Http) {
@@ -207,7 +208,8 @@ export function createTranslateLoader(http: Http) {
     PaymentsChipComponent,
     FieldFilterComponent,
     SelectorComponent,
-    ListItemComponent
+    ListItemComponent,
+    ItemsListComponent
   ],
   imports: [
     SuiModule,
