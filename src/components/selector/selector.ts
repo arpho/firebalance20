@@ -12,6 +12,8 @@ import { OnChanges, SimpleChanges } from '@angular/core/src/metadata/lifecycle_h
 import { PaymentsProvider } from '../../providers/payments/payments';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { PaymentsModel } from '../../models/payment.model';
+import {ProviderSelectorPage} from '../../pages/provider-selector/provider-selector';
+import {PaymentSelectorPage} from '../../pages/payment-selector/payment-selector';
 /**
  * Generated class for the SelectorComponent component.
  *
@@ -31,6 +33,7 @@ export class SelectorComponent implements OnInit, OnChanges {
   @Output() selected: EventEmitter<string> = new EventEmitter<string>(); // segnale emesso al componente father in caso di selezione nei componenti figli
   Components: any //oggetto usato per la selezione del popup da visualzzare
   Dbs:any;
+  selectorPages:any;
   public field:string;
   filterString: string;
   spinning: boolean;
@@ -41,15 +44,19 @@ export class SelectorComponent implements OnInit, OnChanges {
   add() {
     console.log('adding Item');
   }
+  select(){
+    console.log('select')
+    let modal = this.modal.create(this.selectorPages[this.component])
+    modal.present()
+  }
   ngOnChanges(changes: SimpleChanges) {
+    console.log('selector changes',changes)
     if (changes.fieldId) {console.log('cambio fieldId', changes)
       if(this.Dbs[this.component].isReady()){
     this.field =this.component
-    console.log('field',this.component,this.field)
 
       this.Dbs[this.component].getElementById(this.fieldId,res=>{
         this.item = res;
-        console.log('got item by id',res)
       })
     }
   }
@@ -60,7 +67,6 @@ export class SelectorComponent implements OnInit, OnChanges {
     this.filterString = filterString;
   }
   ngOnInit() {
-    console.log('placeholder', this.component)
     /* this.spinning = true;
      console.log('fieldId in selector',this.fieldId);
      this.db.getElements(res=> {
@@ -81,12 +87,14 @@ export class SelectorComponent implements OnInit, OnChanges {
     public modal: ModalController,
     public Utilities: UtilitiesProvider,
     public Payments: PaymentsProvider,
-    public Suppliers: ProvidersProvider) {
+    public Suppliers: ProvidersProvider,
+    public navCtrl: NavController,
+    public navParams: NavParams,) {
     //this.placeholder = 'seleziona fornitore';
     this.spinning = false;
     this.Components = { "fornitore": CreateProviderPage, "pagamento": CreatePaymentPage };
     this.Dbs = { "fornitore": Suppliers, "pagamento": Payments }
-    
+    this.selectorPages= {fornitore:ProviderSelectorPage,pagamento:PaymentSelectorPage}
 
   }
 

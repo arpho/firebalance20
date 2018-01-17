@@ -1,0 +1,21 @@
+<!--
+  Generated template for the PaymentSelectorPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>paymentSelector</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <items-list (selected)="selectedEvent($event) " [filterString]=filterString  [placeholder]="field" [component]="component">
+        
+      </items-list>
+
+</ion-content>

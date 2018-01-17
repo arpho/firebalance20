@@ -4,10 +4,11 @@
     <field-filter [placeholder]="field" (doFilter)="doFilter($event.filterString)">
     </field-filter>
   </div>
-  <div class="list_elenco">
+  <list-item (click)="select()"[fieldId]="fieldId" [db]= "component"></list-item>
+  <!--div class="list_elenco">
     <items-list (selected)="selectedEvent($event) " [filterString]=filterString  [placeholder]="field" [component]="component">
         
     </items-list>
   
     
-  </div>
+  </div-->

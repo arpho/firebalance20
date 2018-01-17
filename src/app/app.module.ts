@@ -6,7 +6,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { Http } from '@angular/http';
 import { FormGroup } from '@angular/forms';
-//import { BehaviorSubject} from 'rxjs/BehaviorSubject';
+//import { BehaviorSubject} from 'rxjs/BehaviorSubject'; ProviderSelectorPage
 import { ListingPage } from '../pages/listing/listing';
 import { FeedPage } from '../pages/feed/feed';
 import { ShoppingCartsPage } from '../pages/shopping-carts/shopping-carts';
@@ -14,6 +14,8 @@ import { DetailShoppingCartPage } from '../pages/detail-shopping-cart/detail-sho
 import { FollowersPage } from '../pages/followers/followers';
 import { LayoutsPage } from '../pages/layouts/layouts';
 import { FormsPage } from '../pages/forms/forms';
+import { ProviderSelectorPage } from '../pages/provider-selector/provider-selector';
+import { PaymentSelectorPage } from '../pages/payment-selector/payment-selector';
 import { LoginPage } from '../pages/login/login';
 import { NotificationsPage } from '../pages/notifications/notifications';
 import { ProfilePage } from '../pages/profile/profile';
@@ -150,6 +152,8 @@ export function createTranslateLoader(http: Http) {
     ProfilePage,
     CreatePaymentPage,
     ProvidersPage,
+    ProviderSelectorPage,
+    PaymentSelectorPage,
     UpdatePaymentPage,
     TabsNavigationPage,
     WalkthroughPage,
@@ -243,6 +247,8 @@ export function createTranslateLoader(http: Http) {
     CreatePaymentPage,
     CreateProviderPage,
     ProvidersPage,
+    PaymentSelectorPage,
+    ProviderSelectorPage,
     UpdatePaymentPage,
     UpdateProviderPage,
     TabsNavigationPage,

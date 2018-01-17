@@ -1,5 +1,7 @@
 <!-- Generated template for the ListItemComponent component -->
 <div>
-  {{text}}
-  asdfghjklò
-</div>
+  <h3>{{db}}</h3>
+  <p *ngIf="item| async as item " >
+    {{item.nome}}
+    </p>
+  </div>
