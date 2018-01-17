@@ -1,3 +1,10 @@
 selector {
-
+     div.list_elenco {
+        width: 25em;
+        height: 300px;
+        overflow: scroll;
+        border: double;
+        border-radius: 13px;
+        background-color: aquamarine;
+    }
 }

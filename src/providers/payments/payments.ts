@@ -62,11 +62,7 @@ export class PaymentsProvider implements DbLayer {
   }
   getElements(cb) {
 
-    return this.paymentsRef.on('value', snapshot => {
-      const itemArray = [];
-      snapshot.val().forEach(item => itemArray.push(new PaymentsModel(item)))
-      cb(Observable.from(itemArray))
-    })
+    return this.getPaymentsArray(cb)
   }
   getPaymentById(paymentId, cb) {
     return this.subjectPaymentsRef.subscribe(ref => {
