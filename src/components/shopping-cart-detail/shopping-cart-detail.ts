@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, ChangeDetectionStrategy} from '@angular/core';
+import { Component, Input, OnChanges, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, AbstractControl, ReactiveFormsModule } from '@angular/forms';
 import { ShoppingCartModel } from '../../models/shoppingCart.model';
 import { SimpleChanges } from '@angular/core/src/metadata/lifecycle_hooks';
@@ -27,6 +27,19 @@ export class ShoppingCartDetailComponent implements OnChanges {
       this.cartForm = this.getForm(this.selectedCart)
   }
 
+  eventFornitore(data) {
+    if(data){
+      this.cartForm.controls.fornitoreId.setValue(data.itemId)
+      this.selectedCart.fornitoreId = data.itemId
+    }
+  }
+
+  eventPagamento(data) {
+    if(data){
+    this.cartForm.controls.pagamentoId.setValue(data.itemId)
+      this.selectedCart.pagamentoId = data.itemId
+    }
+  }
   getForm(cart: ShoppingCartModel) {
     return this.fb.group({
       dataAcquisto: new FormControl(cart.dataAcquisto),

@@ -7,17 +7,17 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>providerSelector</ion-title>
-    <ion-button>
-        <ion-icon name="close" (click)="dismiss()"></ion-icon>
-      </ion-button>
+    <ion-title><ion-button>
+      <ion-icon name="close" (click)="dismiss()"></ion-icon>{{'providerSelector'|translate}}</ion-button></ion-title>
+    
   </ion-navbar>
+  <field-filter (doFilter)="doFilter($event)" [placeholder]="placeholder"></field-filter>
 
 </ion-header>
 
 
 <ion-content padding>
-    <items-list (selected)="selectedEvent($event) " [filterString]=filterString  [placeholder]="field" [component]="component">
+    <items-list (selectedEvent)="selected($event)"[filterString]=filterString  [placeholder]="field" [component]="component">
         
       </items-list>
 

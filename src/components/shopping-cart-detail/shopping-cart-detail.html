@@ -18,8 +18,8 @@
                   <ion-toggle formControlName="online"></ion-toggle>
         
 
-                  <selector class="fornitore"[fieldId]= "selectedCart.fornitoreId" [component]="selectorProvider" [label]="labelFornitore"></selector>
-                  <selector class="pagamento" [fieldId]= "selectedCart.pagamentoId" [component]="selectorPayment" [label]="labelPagamento"></selector>
+                  <selector class="fornitore"[fieldId]= "selectedCart.fornitoreId" [component]="selectorProvider" [label]="labelFornitore" (selected)="eventFornitore($event)"></selector>
+                  <selector class="pagamento" [fieldId]= "selectedCart.pagamentoId" [component]="selectorPayment" [label]="labelPagamento"(selected)="eventPagamento($event)"></selector>
     <label>Totale</label>
     <h2>{{selectedCart.moneta}}{{selectedCart.totale}}</h2>
       

@@ -40,7 +40,7 @@ export class FieldFilterComponent implements OnInit{
     this.field.valueChanges.subscribe(
       (value: string) => {
         //console.log('stringa di ricerca',value);
-        this.doFilter.emit({ filterString: value });
+        this.doFilter.emit({ data: value });
       })
   }
 

@@ -27,6 +27,8 @@
   "COMMENTS": "Commenti",
   "FILTERS": "Filtri",
   "RANGE": "Range",
+  "providerSelector":"Seleziona fornitore",
+  "paymentSelector":" Seleziona Metodo di Pagamento",
   "DETAILSHOPPINGCART":" Dettaglio Carrello",
   "CREATION_NEW_PAYMENT":"Crea nuova forma di pagamento",
   "UPDATE_PAYMENT":" Modifica forma di Pagamento ",

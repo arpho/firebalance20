@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
 
 /**
  * Generated class for the ProviderSelectorPage page.
@@ -13,8 +13,24 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'provider-selector.html',
 })
 export class ProviderSelectorPage {
-component:string= "fornitore"
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  filterString: string;
+  component: string = "fornitore"
+  constructor(public navCtrl: NavController, public navParams: NavParams, public view: ViewController) {
+  }
+  selected(item) {
+    console.log('got', item)
+    this.view.dismiss({ itemId: item })
+  }
+
+  dismiss() {
+    this.view.dismiss();
+
+  }
+
+
+  doFilter(filterString) {
+    console.log('filterString', filterString)
+    this.filterString = filterString.data
   }
 
   ionViewDidLoad() {

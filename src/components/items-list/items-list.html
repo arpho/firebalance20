@@ -1,8 +1,8 @@
 <!-- Generated template for the ItemsListComponent component -->
 <div>
   <ionic-list>
-    <ion-item *ngFor="let item of items">
-      <article class="item">
+    <ion-item *ngFor="let item of items|filter_items:filterString">
+      <article class="item" (click)="selected(item)">
         {{item.nome}}
       </article>
     </ion-item> 

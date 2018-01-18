@@ -12,8 +12,8 @@ import { OnChanges, SimpleChanges } from '@angular/core/src/metadata/lifecycle_h
 import { PaymentsProvider } from '../../providers/payments/payments';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { PaymentsModel } from '../../models/payment.model';
-import {ProviderSelectorPage} from '../../pages/provider-selector/provider-selector';
-import {PaymentSelectorPage} from '../../pages/payment-selector/payment-selector';
+import { ProviderSelectorPage } from '../../pages/provider-selector/provider-selector';
+import { PaymentSelectorPage } from '../../pages/payment-selector/payment-selector';
 /**
  * Generated class for the SelectorComponent component.
  *
@@ -27,39 +27,37 @@ import {PaymentSelectorPage} from '../../pages/payment-selector/payment-selector
 export class SelectorComponent implements OnInit, OnChanges {
   @Input() fieldId: string;
   @Input() placeholder: string;
-  @Input() label:string
+  @Input() label: string
   @Input() CreatePage: any;
   @Input() component: string;// componente di cui aprire il popup di creazione
   @Output() selected: EventEmitter<string> = new EventEmitter<string>(); // segnale emesso al componente father in caso di selezione nei componenti figli
   Components: any //oggetto usato per la selezione del popup da visualzzare
-  Dbs:any;
-  selectorPages:any;
-  public field:string;
+  Dbs: any;
+  selectorPages: any;
+  public field: string;
   filterString: string;
   spinning: boolean;
-  item:BehaviorSubject<PaymentsModel>;
+  item: BehaviorSubject<PaymentsModel>;
   db: DbLayer
   items: Observable<any> // items visualizzati nella lista
 
   add() {
-    console.log('adding Item');
   }
-  select(){
-    console.log('select')
+  select() {
     let modal = this.modal.create(this.selectorPages[this.component])
+    modal.onDidDismiss(data => this.selected.emit(data))
     modal.present()
   }
   ngOnChanges(changes: SimpleChanges) {
-    console.log('selector changes',changes)
-    if (changes.fieldId) {console.log('cambio fieldId', changes)
-      if(this.Dbs[this.component].isReady()){
-    this.field =this.component
+    if (changes.fieldId) {
+      if (this.Dbs[this.component].isReady()) {
+        this.field = this.component
 
-      this.Dbs[this.component].getElementById(this.fieldId,res=>{
-        this.item = res;
-      })
+        this.Dbs[this.component].getElementById(this.fieldId, res => {
+          this.item = res;
+        })
+      }
     }
-  }
   }
 
   doFilter(filterString) {
@@ -89,12 +87,12 @@ export class SelectorComponent implements OnInit, OnChanges {
     public Payments: PaymentsProvider,
     public Suppliers: ProvidersProvider,
     public navCtrl: NavController,
-    public navParams: NavParams,) {
+    public navParams: NavParams, ) {
     //this.placeholder = 'seleziona fornitore';
     this.spinning = false;
     this.Components = { "fornitore": CreateProviderPage, "pagamento": CreatePaymentPage };
     this.Dbs = { "fornitore": Suppliers, "pagamento": Payments }
-    this.selectorPages= {fornitore:ProviderSelectorPage,pagamento:PaymentSelectorPage}
+    this.selectorPages = { fornitore: ProviderSelectorPage, pagamento: PaymentSelectorPage }
 
   }
 

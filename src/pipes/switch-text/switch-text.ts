@@ -11,7 +11,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class SwitchTextPipe implements PipeTransform {
   /**
-   * Takes a value and makes it lowercase.
+   *controlla la CONDIZIONE E RITORNA il testo relativo
    */
   transform(control: boolean, trueValue: string, falseValue: string) {
     return control ? trueValue : falseValue;

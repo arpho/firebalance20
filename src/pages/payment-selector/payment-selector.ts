@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ViewController } from 'ionic-angular';
 
 /**
  * Generated class for the PaymentSelectorPage page.
@@ -14,10 +14,22 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class PaymentSelectorPage {
   component:string='pagamento' //impongo che usi paymentProvider
+  filterString:string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public view:ViewController) {
+  }
+  selected(item){
+    console.log('got',item)
+    this.view.dismiss({itemId:item})
   }
 
+   doFilter(filterString){
+     console.log('filterString',filterString)
+     this.filterString = filterString.data
+   }
+  dismiss() {
+    this.view.dismiss();
+  }
   
 
   ionViewDidLoad() {
