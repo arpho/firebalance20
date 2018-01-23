@@ -1,5 +1,7 @@
 <ion-list>
-  <ion-item-sliding *ngFor="let Provider of ProvidersList|distance_sorter:location" #slidingItem >
+
+    <field-filter [placeholder]='segnaposto' (doFilter)="filterFornitore= $event.data"></field-filter>
+  <ion-item-sliding *ngFor="let Provider of ProvidersList|filter_items:filterFornitore|distance_sorter:location" #slidingItem >
     <ion-item>
       <providers-item-list [Provider]="Provider" [shoppingCartDateFilter]="shoppingCartDateFilter"></providers-item-list>
 

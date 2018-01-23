@@ -20,7 +20,7 @@ export class ShoppingCartsProvider {
   public Profile: ProfileService;
   public ShoppingCartObservable: Observable<ShoppingCartModel>
   public shoppingCarts: ShoppingCartModel[];
-  public shoppingcartsList:BehaviorSubject<ShoppingCartModel>= new BehaviorSubject<ShoppingCartModel>(null);
+  public shoppingcartsList: BehaviorSubject<ShoppingCartModel> = new BehaviorSubject<ShoppingCartModel>(null);
   subjectShoppingCart: BehaviorSubject<firebase.database.Reference> = new BehaviorSubject(null); /* instanzio il behaviorSubject, è definito subito, 
                                                                                                    onAuthStateChanged può essere lento*/
   shoppingCartSubject: BehaviorSubject<Observable<ShoppingCartModel>> = new BehaviorSubject<Observable<ShoppingCartModel>>(null);
@@ -28,7 +28,6 @@ export class ShoppingCartsProvider {
   start() {// inizializza il behaviorSubject
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        console.log('got user', user)
         const uid = user.uid || this.Profile.getUser().uid;
         this.shoppingCartRef = firebase.database().ref(`/acquisti/${uid}`);
         this.subjectShoppingCart.next(this.shoppingCartRef); // inserisco il riferimento

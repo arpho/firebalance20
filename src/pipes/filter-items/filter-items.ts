@@ -13,10 +13,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class FilterItemsPipe implements PipeTransform {
 
   transform(value: any, filterString: string, ...args) {
-    console.log('filterString', filterString)
     if (value && filterString) {
-      console.log('filtered', value.filter(item => item.nome.match(filterString)))
-      return value.filter(item => item.nome.match(filterString))
+      return value.filter(item => item.nome.toUpperCase().match(filterString.toUpperCase()))
     }
     else // nessuna ricerca
       return value
