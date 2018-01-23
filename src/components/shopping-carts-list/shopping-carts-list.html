@@ -1,5 +1,5 @@
 <ion-list>
-  <ion-item-sliding *ngFor="let Cart of shoppingCarts " #slidingItem >
+  <ion-item-sliding *ngFor="let Cart of shoppingCarts|date_sorter " #slidingItem >
     <ion-item [ngClass]="{selected:isSelected(Cart,SelectedCart)}"  >
       <shopping-carts-item-list [Cart]="Cart" (click)="clicked(Cart)" [SelectedCart]="SelectedCart" ></shopping-carts-item-list>
 
