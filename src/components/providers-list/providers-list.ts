@@ -28,7 +28,6 @@ export class ProvidersListComponent implements OnInit, OnDestroy {
   subscription: Subscription
   update(provider: ProviderModel, slidingItem: ItemSliding,
   ) {
-    console.log('updating', provider)
     slidingItem.close();
     let modal = this.modal.create(UpdateProviderPage, provider);
     modal.present()
@@ -42,8 +41,6 @@ export class ProvidersListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.geolocation.refreshLocation().then(coords => {
       this.location = { longitude: coords.coords.longitude, latitude: coords.coords.latitude }
-
-      console.log('coords', coords)
     })
   }
 

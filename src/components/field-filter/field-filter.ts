@@ -24,6 +24,11 @@ export class FieldFilterComponent implements OnInit {
     if (this.filterForm.controls.field)
       this.selected.emit(this.filterForm.controls.field.value)
   }
+
+  showAll() { //reset the filter
+    this.field.setValue("");
+  }
+
   ngOnInit() {
     console.log('placeholder', this.placeholder)
   }
@@ -35,6 +40,7 @@ export class FieldFilterComponent implements OnInit {
     })
     this.field = this.filterForm.controls['field']
     this.doFilter = new EventEmitter<string>();
+
 
     //console.log('valueChange',this.field.valueChanges);
     this.field.valueChanges.subscribe(
