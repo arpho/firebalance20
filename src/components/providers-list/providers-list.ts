@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
 import { AlertController, ModalController } from 'ionic-angular';
 import { ProviderModel } from '../../models/providers/provider.model';
 import { ShoppingCartModel } from '../../models/shoppingCart.model';
@@ -6,6 +6,8 @@ import { ItemSliding } from 'ionic-angular/components/item/item-sliding';
 import { UpdateProviderPage } from '../../pages/update-provider/update-provider';
 import { CreateProviderPage } from '../../pages/create-provider/create-provider'
 import { ProvidersProvider } from '../../providers/providers/providers';
+import { GeolocationProvider } from '../../providers/geolocation/geolocation';
+import { Subscription } from 'rxjs/Subscription';
 //import { UpdateProviderPage } from '../pages/update-provider';
 /**
  * Generated class for the ProvidersListComponent component.
@@ -18,16 +20,31 @@ import { ProvidersProvider } from '../../providers/providers/providers';
   templateUrl: 'providers-list.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProvidersListComponent {
+export class ProvidersListComponent implements OnInit, OnDestroy {
   @Input() ProvidersList: Array<ProviderModel>
   @Input() shoppingCartDateFilter: (cart: ShoppingCartModel) => boolean
   text: string;
+  location: { latitude: number, longitude: number };
+  subscription: Subscription
   update(provider: ProviderModel, slidingItem: ItemSliding,
   ) {
     console.log('updating', provider)
     slidingItem.close();
     let modal = this.modal.create(UpdateProviderPage, provider);
     modal.present()
+  }
+
+  ngOnDestroy() {
+    if (this.subscription)
+      this.subscription.unsubscribe()
+  }
+
+  ngOnInit() {
+    this.geolocation.refreshLocation().then(coords => {
+      this.location = { longitude: coords.coords.longitude, latitude: coords.coords.latitude }
+
+      console.log('coords', coords)
+    })
   }
 
   create() {
@@ -67,6 +84,7 @@ export class ProvidersListComponent {
 
   constructor(
     public modal: ModalController,
+    public geolocation: GeolocationProvider,
     public Providers: ProvidersProvider,
     private alertCtrl: AlertController
   ) {

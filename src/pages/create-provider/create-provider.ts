@@ -33,6 +33,7 @@ export class CreateProviderPage {
       note: new FormControl(navParams.get('note')),
       key: new FormControl(navParams.get('key')),
       indirizzo: new FormControl(navParams.get('indirizzo')),
+      altitude:new FormControl(navParams.get('altitude')),
       latitudine: new FormControl(navParams.get('longitudine')),
       longitudine: new FormControl(navParams.get('longitudine')),
       onLine: new FormControl(false)
@@ -46,7 +47,9 @@ export class CreateProviderPage {
       this.busy = true;
       // resp.coords.latitude
       // resp.coords.longitude
-      console.log(resp, this.providerForm)
+      console.log('coords', resp)
+      var coords = new Coordinates();
+      //coords.se = resp.coords.latitude
       this.providerForm.controls.latitudine.setValue(resp.coords.latitude);
       this.providerForm.controls.longitudine.setValue(resp.coords.longitude);
       this.geolocation.inverseGeoLocation(resp.coords.latitude, resp.coords.longitude).subscribe(address => {
@@ -67,7 +70,7 @@ export class CreateProviderPage {
         })
         console.log("lista indirizzi", this.listaIndirizzi)
         let actionSheet = this.actionSheetCtrl.create({
-          title: 'limita a ',
+          title: 'seleziona un indirizzo',
           enableBackdropDismiss: true,
           buttons: buttons
         });

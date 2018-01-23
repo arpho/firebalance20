@@ -7,6 +7,7 @@ import { UtilitiesProvider } from '../../providers/utilities/utilities';
 import { FilterFactoryProvider } from '../../providers/filter-factory/filter-factory';
 import { ShoppingCartModel } from '../../models/shoppingCart.model';
 import { ShoppingCartsProvider } from '../../providers/shopping-carts/shopping-carts';
+import { GeolocationProvider } from '../../providers/geolocation/geolocation';
 
 /**
  * Generated class for the ProvidersPage page.
@@ -29,6 +30,7 @@ export class ProvidersPage {
     public Utilities: UtilitiesProvider,
     public Carts: ShoppingCartsProvider,
     public alertCtrl:AlertController,
+    public geolocation:GeolocationProvider,
     public actionSheetCtrl: ActionSheetController,
     public Providers: ProvidersProvider) {
     this.shoppingCartDateFilter = this.Filters.takeAllCarts();
