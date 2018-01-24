@@ -39,7 +39,11 @@ export class ProvidersListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subscription = this.geolocation.subScribeLocation(coords=> {if (coords) this.location = { longitude: coords.coords.longitude, latitude: coords.coords.latitude }})
+    this.subscription = this.geolocation.subScribeLocation(coords => {
+      if (coords)
+        this.location = { longitude: coords.longitude, latitude: coords.latitude }
+    })
+    this.geolocation.refreshLocation()
   }
 
   create() {
