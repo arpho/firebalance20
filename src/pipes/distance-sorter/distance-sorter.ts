@@ -24,10 +24,15 @@ export class DistanceSorterPipe implements PipeTransform {
 
 
   transform(value: any, location) {
-    if (value && location)
+    if (value && location){
+     
+     
       return value.sort((a: ProviderModel, b: ProviderModel) => {
         return this.distance(a.latitudine, a.longitudine, location.latitude, location.longitude) -
-          this.distance(a.latitudine, a.longitudine, location.latitude, location.longitude)
-      })
+          this.distance(b.latitudine, b.longitudine, location.latitude, location.longitude)
+      });
+    }
+    else
+    return value
   }
 }

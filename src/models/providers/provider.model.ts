@@ -49,7 +49,7 @@ export class ProviderModel {
         this.key = fornitore && fornitore.key.value || "";
         this.nome = fornitore && fornitore.nome.value || "";
         this.note = fornitore && fornitore.note.value || "";
-        this.altitude = fornitore && fornitore.altitude.value ||"";
+        this.altitude = fornitore && fornitore.altitude && fornitore.altitude.value ||"";
         this.indirizzo = fornitore && fornitore.indirizzo.value || "";
         this.latitudine = fornitore && fornitore.latitudine.value || "";
         this.longitudine = fornitore && fornitore.longitudine.value || "";

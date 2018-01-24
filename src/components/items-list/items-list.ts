@@ -3,6 +3,7 @@ import { PaymentsProvider } from '../../providers/payments/payments';
 import { ProvidersProvider } from '../../providers/providers/providers';
 import { Observable } from 'rxjs/Observable';
 import { SimpleChanges } from '@angular/core/src/metadata/lifecycle_hooks';
+import { Subscription } from 'rxjs/Subscription';
 
 /**
  * Generated class for the ItemsListComponent component.
@@ -18,10 +19,13 @@ export class ItemsListComponent implements OnInit, OnChanges {
   @Input() component: string;
   @Output() selectedEvent: EventEmitter<string> = new EventEmitter<string>()
   @Input() filterString: string;
+  subscription: Subscription;
   text: string;
   Dbs: any;
   items: Observable<any>
   db: PaymentsProvider | ProvidersProvider
+
+
 
   ngOnChanges(changes: SimpleChanges) {
     /* if(changes.filterString)
@@ -32,11 +36,11 @@ export class ItemsListComponent implements OnInit, OnChanges {
      }*/
   }
   ngOnInit() {
+
     this.db = this.Dbs[this.component]
-    console.log('db', this.db)
+
     this.db.getElements(res => {
       this.items = res
-      console.log('result', res)
     })
   }
   selected(item) {

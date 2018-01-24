@@ -44,7 +44,9 @@ export class GeolocationProvider {
   }
 
   refreshLocation(){
-    return this.locate()
+     this.locate().then(coords=>{
+       this.LocationObserver.next( { longitude: coords.coords.longitude, latitude: coords.coords.latitude })
+     })
 
   }
 

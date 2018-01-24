@@ -30,7 +30,6 @@ export class FieldFilterComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('placeholder', this.placeholder)
   }
   constructor(
     fb: FormBuilder
