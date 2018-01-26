@@ -2,11 +2,5 @@
     <selected-item [fieldId]=fieldId [db]=db >
     </selected-item>
   </div>
+  <ion-icon name="funnel" (click)="select()"></ion-icon>
   <list-item (click)="select()"[fieldId]="fieldId" [db]= "component"></list-item>
-  <!--div class="list_elenco">
-    <items-list (selected)="selectedEvent($event) " [filterString]=filterString  [placeholder]="field" [component]="component">
-        
-    </items-list>
-  
-    
-  </div-->

@@ -59,6 +59,8 @@ export class GeolocationProvider {
   ) {
     this.LocationObserver = new BehaviorSubject<{latitude:number,longitude:number}>(null)
       this.googleKey = GoogleKey;
-
-      
-    }  }
+    
+      this.refreshLocation() // localizzo immediatamente il dispositivo
+    }
+  
+  }

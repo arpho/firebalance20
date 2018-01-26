@@ -1,7 +1,7 @@
 <!-- Generated template for the ItemsListComponent component -->
 <div>
   <ionic-list>
-    <ion-item *ngFor="let item of items|filter_items:filterString">
+    <ion-item *ngFor="let item of items|filter_items:filterString|distance_sorter:location">
       <article class="item" (click)="selected(item)">
         {{item.nome}}
       </article>

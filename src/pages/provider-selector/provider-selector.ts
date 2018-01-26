@@ -14,6 +14,7 @@ import { IonicPage, NavController, NavParams, ViewController, ModalController } 
 })
 export class ProviderSelectorPage {
   filterString: string;
+  provider: boolean = true;
   component: string = "fornitore"
   constructor(public navCtrl: NavController, public navParams: NavParams, public view: ViewController) {
   }

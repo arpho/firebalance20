@@ -17,7 +17,7 @@
 
 
 <ion-content padding>
-    <items-list (selectedEvent)="selected($event)"[filterString]=filterString  [placeholder]="field" [component]="component">
+    <items-list (selectedEvent)="selected($event)"[filterString]=filterString  [placeholder]="field" [component]="component"[provider]="provider">
         
       </items-list>
 
