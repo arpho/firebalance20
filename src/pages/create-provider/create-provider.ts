@@ -42,13 +42,12 @@ export class CreateProviderPage {
   }
 
   locate() {
+      this.busy = true;
 
     this.geolocation.locate().then((resp) => {
       this.busy = true;
       // resp.coords.latitude
       // resp.coords.longitude
-      console.log('coords', resp)
-      var coords = new Coordinates();
       //coords.se = resp.coords.latitude
       this.providerForm.controls.latitudine.setValue(resp.coords.latitude);
       this.providerForm.controls.longitudine.setValue(resp.coords.longitude);
@@ -77,6 +76,7 @@ export class CreateProviderPage {
         actionSheet.present()
       })
     }).catch((error) => {
+      this.busy= false
       console.log('Error getting location', error);
     });
   }

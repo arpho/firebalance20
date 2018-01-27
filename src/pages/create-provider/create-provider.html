@@ -15,7 +15,7 @@
 
 
 <ion-content padding>
-
+  
 
     <div class=" ui form"  [formGroup]="providerForm">
         <label for="nome">Nome del fornitore</label>
@@ -61,9 +61,6 @@
             <button ion-fab mini color="primary" (click)="locate()"><ion-icon name="navigate"></ion-icon>
 
             </button>
-            <div *ngIf="busy">
-            <ion-spinner name="crescent"></ion-spinner>
-            </div>
           </ion-fab>
             <label for="onLIne">{{ this.providerForm.controls.onLine.value|switchText:'Venditore onLine':'venditore tradizionale'}}</label>
              <ion-icon name="body" *ngIf="!providerForm.controls.onLine.value"></ion-icon> <ion-icon name="paper-plane" *ngIf="providerForm.controls.onLine.value"></ion-icon> 
@@ -73,6 +70,12 @@
                       </ion-toggle>
             <button type="submit" ion-button block icon-right class="choose-category-button" (click)="create(providerForm)">Crea</button>
       </div>
+            <div *ngIf="busy">
+      <div class="loader-wrapper" id="loader-1">
+        <div id="loader"></div>
+    </div>
+              
+            </div>
 
       
 </ion-content>
