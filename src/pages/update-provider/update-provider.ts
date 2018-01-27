@@ -73,7 +73,6 @@ export class UpdateProviderPage {
     this.geolocation.locate().then((resp) => {
       // resp.coords.latitude
       // resp.coords.longitude
-      console.log(resp, this.providerForm)
       this.providerForm.controls.latitudine.setValue(resp.coords.latitude);
       this.providerForm.controls.longitudine.setValue(resp.coords.longitude);
       this.geolocation.inverseGeoLocation(resp.coords.latitude, resp.coords.longitude).subscribe(address => {

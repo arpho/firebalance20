@@ -74,8 +74,15 @@
             placeholder="online" >
           </ion-toggle>
             <button type="submit" ion-button block icon-right class="choose-category-button" (click)="update(providerForm)">Update</button>
-      </div>
 
+            <div *ngIf="busy">
+              <div class="loader-wrapper" id="loader-1">
+                <div id="loader"></div>
+            </div>
+                      
+
+      </div>
+</div>
 
 
 </ion-content>

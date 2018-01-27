@@ -55,7 +55,7 @@ export class ProvidersListComponent implements OnInit, OnDestroy {
 
     let alert = this.alertCtrl.create({
       title: 'Conferma Cancellazione',
-      message: 'Do you want to buy this book?',
+      message: `Vuoi cancellare ${provider.nome}?`,
       buttons: [
         {
           text: 'Annulla',
