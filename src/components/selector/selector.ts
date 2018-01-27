@@ -45,7 +45,9 @@ export class SelectorComponent implements OnInit, OnChanges {
   }
   select() {
     let modal = this.modal.create(this.selectorPages[this.component])
-    modal.onDidDismiss(data => this.selected.emit(data))
+    modal.onDidDismiss(data => {
+      this.selected.emit(data)
+    })
     modal.present()
   }
   ngOnChanges(changes: SimpleChanges) {

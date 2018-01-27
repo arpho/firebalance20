@@ -28,15 +28,15 @@ export class ShoppingCartDetailComponent implements OnChanges {
   }
 
   eventFornitore(data) {
-    if(data){
+    if (data) {
       this.cartForm.controls.fornitoreId.setValue(data.itemId)
       this.selectedCart.fornitoreId = data.itemId
     }
   }
 
   eventPagamento(data) {
-    if(data){
-    this.cartForm.controls.pagamentoId.setValue(data.itemId)
+    if (data) {
+      this.cartForm.controls.pagamentoId.setValue(data.itemId)
       this.selectedCart.pagamentoId = data.itemId
     }
   }

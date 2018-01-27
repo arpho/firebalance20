@@ -63,11 +63,9 @@ export class CreateProviderPage {
             text: item.formatted_address,
             handler: () => {
               this.providerForm.controls.indirizzo.setValue(item.formatted_address);
-              console.log('selected addreess', item.formatted_address)
             }
           })
         })
-        console.log("lista indirizzi", this.listaIndirizzi)
         let actionSheet = this.actionSheetCtrl.create({
           title: 'seleziona un indirizzo',
           enableBackdropDismiss: true,
@@ -80,15 +78,15 @@ export class CreateProviderPage {
       console.log('Error getting location', error);
     });
   }
-  dismiss() {
-    this.view.dismiss();
+  dismiss(data?) {
+    this.view.dismiss(data);
   }
 
   create(provider) {
     const Provider = new ProviderModel().buildFromActiveForm(provider.controls)
     this.Providers.create(Provider, result => {
-      console.log('rersult push', result)
-      this.dismiss()
+      console.log('result createProvider',result)
+      this.dismiss(result.key)
     })
   }
 

@@ -20,5 +20,9 @@
     <items-list (selectedEvent)="selected($event)"[filterString]=filterString  [placeholder]="field" [component]="component"[provider]="provider">
         
       </items-list>
+      <ion-fab bottom right >
+     <button ion-fab color="primary" (click)="create()"><ion-icon name="add"></ion-icon>
+     </button>
+   </ion-fab>
 
 </ion-content>
