@@ -8,6 +8,7 @@ import { CreateProviderPage } from '../../pages/create-provider/create-provider'
 import { ProvidersProvider } from '../../providers/providers/providers';
 import { GeolocationProvider } from '../../providers/geolocation/geolocation';
 import { Subscription } from 'rxjs/Subscription';
+import { UtilitiesProvider } from '../../providers/utilities/utilities';
 //import { UpdateProviderPage } from '../pages/update-provider';
 /**
  * Generated class for the ProvidersListComponent component.
@@ -61,16 +62,17 @@ export class ProvidersListComponent implements OnInit, OnDestroy {
           text: 'Annulla',
           role: 'cancel',
           handler: () => {
-            console.log('Annula clicked');
             slidingItem.close();
           }
         },
         {
           text: 'Cancella',
           handler: () => {
-            console.log('cancella clicked');
             this.Providers.delete(provider, res => {
-              console.log('deleted', provider, res)
+              this.utilities.showToast(`provider ${provider.nome} cancellato`,'2000','top')
+            },fail=>{
+              this.utilities.showToast(`qualcosa non è andata bene`,'1000','top')
+
             })
             slidingItem.close();
 
@@ -85,7 +87,8 @@ export class ProvidersListComponent implements OnInit, OnDestroy {
     public modal: ModalController,
     public geolocation: GeolocationProvider,
     public Providers: ProvidersProvider,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private utilities:UtilitiesProvider
   ) {
   }
 

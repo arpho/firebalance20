@@ -52,6 +52,18 @@ export class PaymentsProvider implements DbLayer {
   getComponentType() {
     return 'pagamento'
   }
+  delete(payment:PaymentsModel,success,failure?){
+    /*
+    @parameter payment:PaymentsModel
+    @parameter cb: callback for success
+    @parameter cb2: callback for failure
+     */
+
+  this.subjectPaymentsRef.subscribe(Payments=> {
+    if(Payments)
+       Payments.child(`/${payment.key}/`).remove().then(success).catch(failure)
+  }
+)}
 
   isReady() {
     return !!this.paymentsRef
