@@ -1,9 +1,9 @@
 import { ShoppingCartModel } from '../../models/shoppingCart.model';
-import { Component,Input,OnChanges,SimpleChanges,OnInit,ChangeDetectionStrategy } from '@angular/core';
-import { IonicPage, NavController, NavParams,ModalController } from 'ionic-angular';
+import { Component, Input, OnChanges, SimpleChanges, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { ItemSliding } from 'ionic-angular/components/item/item-sliding';
-import {UpdatePaymentPage} from '../../pages/update-payment/update-payment';
+import { UpdatePaymentPage } from '../../pages/update-payment/update-payment';
 import { PaymentsModel } from '../../models/payment.model';
 import { PaymentsProvider } from '../../providers/payments/payments';
 import { UtilitiesProvider } from '../../providers/utilities/utilities';
@@ -17,17 +17,17 @@ import { UtilitiesProvider } from '../../providers/utilities/utilities';
 @Component({
   selector: 'payment-list',
   templateUrl: 'payment-list.html',
-  changeDetection:ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PaymentListComponent implements OnInit, OnChanges{
- @Input() paymentsList:any
- @Input() shoppingCartDateFilter:(cart:ShoppingCartModel)=>boolean
+export class PaymentListComponent implements OnInit, OnChanges {
+  @Input() paymentsList: any
+  @Input() shoppingCartDateFilter: (cart: ShoppingCartModel) => boolean
   text: string;
 
-  ngOnInit(){
+  ngOnInit() {
   }
-  delete(item:PaymentsModel,slidingItem: ItemSliding){
-    console.log('delete',item)
+  delete(item: PaymentsModel, slidingItem: ItemSliding) {
+    console.log('delete', item)
 
     let alert = this.alertCtrl.create({
       title: 'Conferma Cancellazione pagamento',
@@ -44,9 +44,9 @@ export class PaymentListComponent implements OnInit, OnChanges{
           text: 'Cancella',
           handler: () => {
             this.Payments.delete(item, res => {
-              this.utilities.showToast(`Forma di pagamento ${item.nome} cancellata`,'1000','top')
-            },fail=>{
-              this.utilities.showToast(`qualcosa non è andata bene`,'1000','top')
+              this.utilities.showToast(`Forma di pagamento ${item.nome} cancellata`, '1000', 'top')
+            }, fail => {
+              this.utilities.showToast(`qualcosa non è andata bene`, '1000', 'top')
 
             })
             slidingItem.close();
@@ -58,24 +58,24 @@ export class PaymentListComponent implements OnInit, OnChanges{
     alert.present();
   }
 
-  update(payment){
-    let modal = this.modal.create(UpdatePaymentPage,payment);
+  update(payment) {
+    let modal = this.modal.create(UpdatePaymentPage, payment);
     modal.present();
-    
+
   }
-  logDrag(event){
+  logDrag(event) {
     //console.log('drag',event  );
   }
 
-  ngOnChanges(changes:SimpleChanges){
+  ngOnChanges(changes: SimpleChanges) {
   }
   constructor(
     private alertCtrl: AlertController,
-      public Payments:PaymentsProvider,
+    public Payments: PaymentsProvider,
     public modal: ModalController,
-    private utilities:UtilitiesProvider
+    private utilities: UtilitiesProvider
   ) {
-    this.paymentsList= [];
+    this.paymentsList = [];
   }
 
 }

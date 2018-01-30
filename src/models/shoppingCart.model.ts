@@ -1,5 +1,8 @@
 
 import { Timestamp } from 'rxjs/Rx';
+import * as _ from 'lodash'
+import {DiscountModel} from './discount.model'
+
 export class ItemModel {
     id: string;
     prezzo: number;
@@ -55,12 +58,14 @@ export class ShoppingCartModel {
     tassoConversione; number;
     dataAcquisto: string;
     online: boolean;
+    sconto: { percentuale: boolean, sconto: number }
     dataAddebito: string;
     items: Array<ItemModel>;
     key: string;
     note: string;
     constructor(shoppingCart?: any) {
         if (shoppingCart) {
+            this.sconto = shoppingCart.sconto ? shoppingCart.sconto : new DiscountModel()
             this.fornitoreId = shoppingCart.fornitoreId || "";
             this.pagamentoId = shoppingCart.pagamentoId || "";
             this.dataAcquisto = shoppingCart.dataAcquisto || new Date().toISOString();
@@ -75,6 +80,7 @@ export class ShoppingCartModel {
         else {
             this.fornitoreId = "";
             this.pagamentoId = "";
+            this.sconto = new DiscountModel();
             this.dataAcquisto = new Date().toISOString();
             this.dataAddebito = new Date().toISOString();
             this.totale = 0;
@@ -85,6 +91,25 @@ export class ShoppingCartModel {
 
         }
     }
+
+    addItem(item: ItemModel) {
+        item.id = String(new Date().getTime())// setto lo id dello item
+        this.items.push(item);
+        this.items = _.map(this.items, _.clone)
+
+
+    }
+
+    updateItem(item) {
+        this.items = _.map(this.items, article => {
+            return article.id == item.id ? article : item
+        })
+    }
+
+    removeItem(item: ItemModel) {
+        this.items = this.items.filter(article => article.id != item.id)
+    }
+
     build(shoppingCart: {
         fornitoreId: string,
         pagamentoId: string,

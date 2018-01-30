@@ -21,7 +21,8 @@
                   <selector class="fornitore"[fieldId]= "selectedCart.fornitoreId" [component]="selectorProvider" [label]="labelFornitore" (selected)="eventFornitore($event)"></selector>
                   <selector class="pagamento" [fieldId]= "selectedCart.pagamentoId" [component]="selectorPayment" [label]="labelPagamento"(selected)="eventPagamento($event)"></selector>
     <label>Totale</label>
-    <h2>{{selectedCart.moneta}}{{selectedCart.totale}}</h2>
+    <h2>
+      <totale-spesa [items]="selectedCart.items" [sconto]="selectedCart.sconto" [moneta]="selectedCart.moneta"></totale-spesa></h2>
       
     <label for="addebito">Note</label>
     <ion-input type="text" id="noteInput" placeholder="note" formControlName="note">

@@ -20,20 +20,20 @@ import * as _ from 'lodash'
 })
 export class CreateProviderPage {
   public providerForm: FormGroup;
-  public busy:boolean
+  public busy: boolean
   public listaIndirizzi: [string];
   constructor(public navCtrl: NavController, public navParams: NavParams, fb: FormBuilder,
     public Providers: ProvidersProvider,
     private geolocation: GeolocationProvider,
     public actionSheetCtrl: ActionSheetController,
     public view: ViewController) {
-      this.busy= false;
+    this.busy = false;
     this.providerForm = fb.group({
       nome: new FormControl(navParams.get('nome')),
       note: new FormControl(navParams.get('note')),
       key: new FormControl(navParams.get('key')),
       indirizzo: new FormControl(navParams.get('indirizzo')),
-      altitude:new FormControl(navParams.get('altitude')),
+      altitude: new FormControl(navParams.get('altitude')),
       latitudine: new FormControl(navParams.get('longitudine')),
       longitudine: new FormControl(navParams.get('longitudine')),
       onLine: new FormControl(false)
@@ -42,7 +42,7 @@ export class CreateProviderPage {
   }
 
   locate() {
-      this.busy = true;
+    this.busy = true;
 
     this.geolocation.locate().then((resp) => {
       this.busy = true;
@@ -57,7 +57,7 @@ export class CreateProviderPage {
         const buttons = [];
         address.json().results;
         _.each(address.json().results, item => {
-          
+
           this.listaIndirizzi.push(item.formatted_address)
           buttons.push({
             text: item.formatted_address,
@@ -74,7 +74,7 @@ export class CreateProviderPage {
         actionSheet.present()
       })
     }).catch((error) => {
-      this.busy= false
+      this.busy = false
       console.log('Error getting location', error);
     });
   }
@@ -85,7 +85,7 @@ export class CreateProviderPage {
   create(provider) {
     const Provider = new ProviderModel().buildFromActiveForm(provider.controls)
     this.Providers.create(Provider, result => {
-      console.log('result createProvider',result)
+      console.log('result createProvider', result)
       this.dismiss(result.key)
     })
   }

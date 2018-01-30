@@ -52,18 +52,19 @@ export class PaymentsProvider implements DbLayer {
   getComponentType() {
     return 'pagamento'
   }
-  delete(payment:PaymentsModel,success,failure?){
+  delete(payment: PaymentsModel, success, failure?) {
     /*
     @parameter payment:PaymentsModel
     @parameter cb: callback for success
     @parameter cb2: callback for failure
      */
 
-  this.subjectPaymentsRef.subscribe(Payments=> {
-    if(Payments)
-       Payments.child(`/${payment.key}/`).remove().then(success).catch(failure)
+    this.subjectPaymentsRef.subscribe(Payments => {
+      if (Payments)
+        Payments.child(`/${payment.key}/`).remove().then(success).catch(failure)
+    }
+    )
   }
-)}
 
   isReady() {
     return !!this.paymentsRef
@@ -129,9 +130,9 @@ export class PaymentsProvider implements DbLayer {
     */
     this.subjectPaymentsRef.subscribe(Payments => {
       if (Payments)
-        Payments.push(pagamento, (result => {
-          cb(result)
-        }))
+        Payments.push(pagamento).then(result => {
+          cb(result.key)
+        })
     }).unsubscribe()//cancello la sottoscrizione è un'operazione che non deve essere ripetuta
   }
 

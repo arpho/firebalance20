@@ -45,12 +45,10 @@ export class CreatePaymentPage {
   }
   createPayment(payment: any) {
     var Payment = new PaymentsModel(payment.controls);
-    console.log('pagamento', Payment)
     if (!Payment.key)
 
       this.Payments.pushNewPayment(Payment, err => {
-        console.log('creato', err);
-        this.view.dismiss();
+        this.view.dismiss(err);// ritorno la chiave del pagamento creato al chiamante
       });
 
   }

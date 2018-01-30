@@ -133,6 +133,7 @@ import { ItemsListComponent } from '../components/items-list/items-list';
 import { FilterItemsPipe } from '../pipes/filter-items/filter-items';
 import { DistanceSorterPipe } from '../pipes/distance-sorter/distance-sorter';
 import { DateSorterPipe } from '../pipes/date-sorter/date-sorter';
+import { TotaleSpesaComponent } from '../components/totale-spesa/totale-spesa';
 //import { PaymentProvider } from '../providers/payment/payment';
 //AngularFireModule.initializeApp(environment.firebaseConfig)
 export function createTranslateLoader(http: Http) {
@@ -219,7 +220,8 @@ export function createTranslateLoader(http: Http) {
     ItemsListComponent,
     FilterItemsPipe,
     DistanceSorterPipe,
-    DateSorterPipe
+    DateSorterPipe,
+    TotaleSpesaComponent
   ],
   imports: [
     SuiModule,

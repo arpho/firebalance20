@@ -81,7 +81,7 @@ export class ProvidersProvider implements DbLayer {
     }).unsubscribe()
   }
 
-  delete(provider, success,failure?) {
+  delete(provider, success, failure?) {
     this.subjectProvidersRef.subscribe(Providers => {
       if (Providers)
         //Providers.child(`/$provider.key}/`).remove().then(cb);

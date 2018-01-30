@@ -64,9 +64,6 @@
             <ion-fab right>
             <button ion-fab mini color="primary" (click)="locate()"><ion-icon name="navigate"></ion-icon>
               </button>
-              <div *ngIf="busy">
-                  <ion-spinner name="crescent"></ion-spinner>
-                  </div>
               </ion-fab>
             </div>
             <label for="onLIne">{{ this.providerForm.controls.onLine.value|switchText:'Venditore onLine':'venditore tradizionale'}}</label>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
+import { CreatePaymentPage } from '../../pages/create-payment/create-payment';
 
 /**
  * Generated class for the PaymentSelectorPage page.
@@ -13,24 +14,35 @@ import { IonicPage, NavController, NavParams,ViewController } from 'ionic-angula
   templateUrl: 'payment-selector.html',
 })
 export class PaymentSelectorPage {
-  component:string='pagamento' //impongo che usi paymentProvider
-  filterString:string;
+  component: string = 'pagamento' //impongo che usi paymentProvider
+  filterString: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public view:ViewController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public view: ViewController,
+    public modal: ModalController,
+  ) {
   }
-  selected(item){
-    console.log('got',item)
-    this.view.dismiss({itemId:item})
+  selected(item) {
+    console.log('got', item)
+    this.view.dismiss({ itemId: item })
   }
 
-   doFilter(filterString){
-     console.log('filterString',filterString)
-     this.filterString = filterString.data
-   }
-  dismiss() {
-    this.view.dismiss();
+
+  create() {
+    let modal = this.modal.create(CreatePaymentPage)
+    modal.onDidDismiss(data => {
+      this.dismiss(data)
+    })
+    modal.present()
   }
-  
+
+  doFilter(filterString) {
+    console.log('filterString', filterString)
+    this.filterString = filterString.data
+  }
+  dismiss(data?) {
+    this.view.dismiss({ itemId: data });// ritorno la nuova chiave al chiamante
+  }
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PaymentSelectorPage');
