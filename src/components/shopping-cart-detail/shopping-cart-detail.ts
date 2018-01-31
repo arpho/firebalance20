@@ -22,6 +22,15 @@ export class ShoppingCartDetailComponent implements OnChanges {
   labelPagamento: string = "Pagamento"
   Cart: ShoppingCartModel;
   public cartForm: FormGroup;
+  constructor(
+    public fb: FormBuilder,
+  ) {
+    console.log('Hello ShoppingCartDetailComponent Component');
+    this.text = 'Hello World detail ';
+
+    this.cartForm = this.getForm(new ShoppingCartModel())
+
+  }
   ngOnChanges(changes: SimpleChanges) {
     if (this.selectedCart)
       this.cartForm = this.getForm(this.selectedCart)
@@ -40,6 +49,15 @@ export class ShoppingCartDetailComponent implements OnChanges {
       this.selectedCart.pagamentoId = data.itemId
     }
   }
+
+  update(item){
+    console.log('updating',item)
+  }
+
+  delete(item,sli){
+    console.log('deleting',item,sli)
+    this.selectedCart.removeItem(item)
+  }
   getForm(cart: ShoppingCartModel) {
     return this.fb.group({
       dataAcquisto: new FormControl(cart.dataAcquisto),
@@ -51,14 +69,6 @@ export class ShoppingCartDetailComponent implements OnChanges {
     }, Validators.required);
   }
 
-  constructor(
-    public fb: FormBuilder,
-  ) {
-    console.log('Hello ShoppingCartDetailComponent Component');
-    this.text = 'Hello World detail ';
-
-    this.cartForm = this.getForm(new ShoppingCartModel())
-
-  }
+  
 
 }
