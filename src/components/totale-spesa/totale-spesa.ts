@@ -29,9 +29,9 @@ export class TotaleSpesaComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.items || changes.sconto) {
-      this.totale = this.sconto.calculateDiscount(_.reduce(this.items, (total, item) => {
+      this.totale = Math.round(this.sconto.calculateDiscount(_.reduce(this.items, (total, item) => {
         return Number(total) + Number(item.prezzo)
-      }, 0))
+      }, 0))*100)/100
     }
 
 
