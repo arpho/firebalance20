@@ -92,10 +92,16 @@ export class ShoppingCartModel {
         }
     }
 
-    addItem(item: ItemModel) {
-        item.id = String(new Date().getTime())// setto lo id dello item
-        this.items.push(item);
-        this.items = _.map(this.items, _.clone)
+    generateItemId(){
+        /*
+        genera un ItemId univoco
+        @return itemId:string
+        */
+        return String(new Date().getTime())
+    }
+    pushItem(item: ItemModel) {
+        //item.id = String(new Date().getTime())// setto lo id dello item
+        this.items = _.map(this.items, _.clone).push(item)
 
 
     }
