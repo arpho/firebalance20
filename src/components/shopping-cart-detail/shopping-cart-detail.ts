@@ -44,6 +44,8 @@ export class ShoppingCartDetailComponent implements OnChanges {
     let modal = this.modal.create(ItemCreatePage,new ItemModel);
     modal.onDidDismiss(item => {
       console.log('got item', item)
+      item.id = this.selectedCart.generateItemId()
+      this.selectedCart.pushItem(item)
     })
     modal.present();
   }

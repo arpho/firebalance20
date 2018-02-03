@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ViewController } from 'ionic-angular';
 import { ItemModel } from '../../models/shoppingCart.model';
 
 /**
@@ -16,9 +16,17 @@ import { ItemModel } from '../../models/shoppingCart.model';
 export class ItemCreatePage {
   item:ItemModel
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    public view: ViewController
+  ) {
 
     this.item = this.navParams.data
+  }
+
+
+  Done(item){
+    console.log('done',item)
+    this.view.dismiss(item)
   }
 
   ionViewDidLoad() {
