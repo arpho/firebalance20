@@ -41,7 +41,7 @@ export class ShoppingCartDetailComponent implements OnChanges {
   addItem() {
     console.log('adding item')
 
-    let modal = this.modal.create(ItemCreatePage);
+    let modal = this.modal.create(ItemCreatePage,new ItemModel);
     modal.onDidDismiss(item => {
       console.log('got item', item)
     })
@@ -70,7 +70,8 @@ export class ShoppingCartDetailComponent implements OnChanges {
     console.log('updating', item)
     let modal = this.modal.create(ItemViewPage,item);
     modal.onDidDismiss(item => {
-      console.log('got item', item)
+      console.log('got item updayed', item)
+      this.selectedCart.updateItem(item)
     })
     modal.present();
   }

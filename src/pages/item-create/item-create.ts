@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ItemModel } from '../../models/shoppingCart.model';
 
 /**
  * Generated class for the ItemCreatePage page.
@@ -13,8 +14,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'item-create.html',
 })
 export class ItemCreatePage {
+  item:ItemModel
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+
+    this.item = this.navParams.data
   }
 
   ionViewDidLoad() {

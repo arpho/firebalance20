@@ -1,7 +1,8 @@
 
 import { Timestamp } from 'rxjs/Rx';
 import * as _ from 'lodash'
-import {DiscountModel} from './discount.model'
+import { DiscountModel } from './discount.model'
+import { FormGroup } from '@angular/forms/src/model';
 
 export class ItemModel {
     id: string;
@@ -92,7 +93,7 @@ export class ShoppingCartModel {
         }
     }
 
-    generateItemId(){
+    generateItemId() {
         /*
         genera un ItemId univoco
         @return itemId:string
@@ -103,8 +104,8 @@ export class ShoppingCartModel {
         //item.id = String(new Date().getTime())// setto lo id dello item
         //this.items =
         this.items.push(item)
-         this.items = _.cloneDeep(this.items) //fa scattare il changedetection
-         
+        this.items = _.cloneDeep(this.items) //fa scattare il changedetection
+
     }
 
     updateItem(item) {

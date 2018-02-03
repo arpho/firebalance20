@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit,Output,EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, AbstractControl, ReactiveFormsModule } from '@angular/forms';
 import { ItemModel } from '../../models/shoppingCart.model';
 
@@ -13,8 +13,9 @@ import { ItemModel } from '../../models/shoppingCart.model';
   templateUrl: 'item-detail.html'
 })
 export class ItemDetailComponent implements OnInit {
-
+  @Output() Done:EventEmitter<ItemModel>= new EventEmitter<ItemModel>()
   text: string;
+  categories:string[]
   @Input() item: ItemModel;
   ItemForm: FormGroup;
   constructor(
@@ -24,14 +25,19 @@ export class ItemDetailComponent implements OnInit {
     this.text = 'Hello World';
   }
 
+done(){
+  console.log('done',this.item)
+  this.Done.emit(this.item)
+  
 
+}
 
   ngOnInit() {
     console.log('visualizzo', this.item)
     this.ItemForm = this.fb.group({
       descrizione: new FormControl(this.item.descrizione),
       prezzo: new FormControl(this.item.prezzo),
-      quantità: new FormControl(this.item.quantita),
+      quantita: new FormControl(this.item.quantita),
       barcode:new FormControl(this.item.barcode)
 
 

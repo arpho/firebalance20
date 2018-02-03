@@ -1,12 +1,15 @@
 <!-- Generated template for the ItemDetailComponent component -->
 <div class=" ui form" [formGroup]="ItemForm">
     <ion-label>Descrizione</ion-label>
-    <ion-input type="text" id="descrizioneInput" placeholder="descrizione" formControlName="descrizione"></ion-input>
+    <ion-input type="text" id="descrizioneInput" placeholder="descrizione" [(ngModel)]="item.descrizione" formControlName="descrizione"></ion-input>
 
-    <ion-label>Prezzo</ion-label>
-    <ion-input type="number" id="prezzoInput" placeholder="prezzo" formControlName="prezzo"></ion-input>{{item.moneta}}
+    <ion-label>Prezzo {{item.moneta}}</ion-label>
+  
+    <ion-input type="number" id="prezzoInput" placeholder="prezzo" [(ngModel)]="item.prezzo" formControlName="prezzo"></ion-input>
     <ion-label>barcode</ion-label>
-    <ion-input type="string" id="barcodeInput" placeholder="barcode" formControlName="barcode"></ion-input>
+    <ion-input type="string" id="barcodeInput" placeholder="barcode"  [(ngModel)]="item.barcode" formControlName="barcode"></ion-input>
+    <ion-label>quantità</ion-label>
+    <ion-input type="string" id="quantitaInput" placeholder="quantità"  [(ngModel)]="item.quantita" formControlName="quantita"></ion-input>
 </div>
 
-<button ion-button full><ion-icon name="done"></ion-icon></button>
+<button ion-button full (click)="done()"><ion-icon name="checkmark"></ion-icon></button>
