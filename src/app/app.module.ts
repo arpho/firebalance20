@@ -132,8 +132,13 @@ import { ListItemComponent } from '../components/list-item/list-item';
 import { ItemsListComponent } from '../components/items-list/items-list';
 import { FilterItemsPipe } from '../pipes/filter-items/filter-items';
 import { DistanceSorterPipe } from '../pipes/distance-sorter/distance-sorter';
+
+import { ItemViewPage } from '../pages/item-view/item-view';
+import { ItemCreatePage } from '../pages/item-create/item-create'
 import { DateSorterPipe } from '../pipes/date-sorter/date-sorter';
 import { TotaleSpesaComponent } from '../components/totale-spesa/totale-spesa';
+import { ItemDetailComponent } from '../components/item-detail/item-detail';
+import { DiscountComponent } from '../components/discount/discount';
 //import { PaymentProvider } from '../providers/payment/payment';
 //AngularFireModule.initializeApp(environment.firebaseConfig)
 export function createTranslateLoader(http: Http) {
@@ -174,6 +179,8 @@ export function createTranslateLoader(http: Http) {
     PrivacyPolicyPage,
     MapsPage,
     FunctionalitiesPage,
+    ItemCreatePage,
+    ItemViewPage,
     FacebookLoginPage,
     GoogleLoginPage,
     ContactCardPage,
@@ -221,7 +228,9 @@ export function createTranslateLoader(http: Http) {
     FilterItemsPipe,
     DistanceSorterPipe,
     DateSorterPipe,
-    TotaleSpesaComponent
+    TotaleSpesaComponent,
+    ItemDetailComponent,
+    DiscountComponent
   ],
   imports: [
     SuiModule,
@@ -274,6 +283,8 @@ export function createTranslateLoader(http: Http) {
     PrivacyPolicyPage,
     MapsPage,
     FunctionalitiesPage,
+    ItemCreatePage,
+    ItemViewPage,
     FacebookLoginPage,
     GoogleLoginPage,
     ContactCardPage,

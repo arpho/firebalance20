@@ -30,6 +30,10 @@
   </div>
   <section class="acquisti">
   <ion-list>
+    <ion-fab middle right >
+   <button ion-fab color="primary" (click)="addItem()"><ion-icon name="add-circle"></ion-icon>
+   </button>
+ </ion-fab>
         <ion-item-sliding *ngFor="let item of selectedCart.items" >
           <ion-item><article><h2>{{item.descrizione}}  {{item.moneta}} {{item.prezzo}}</h2> </article><ion-icon class='drag' name="more"></ion-icon></ion-item>
 
@@ -39,6 +43,7 @@
     </ion-item-options>
         </ion-item-sliding>
       </ion-list>
+      <ion-button><ion-icon name="refresh"*ngIf="removedItem" (click)="restoreItem()"></ion-icon> </ion-button>
     </section>
     <button ion-button full><ion-icon name="archive"></ion-icon></button>
 

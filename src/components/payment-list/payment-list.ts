@@ -24,6 +24,15 @@ export class PaymentListComponent implements OnInit, OnChanges {
   @Input() shoppingCartDateFilter: (cart: ShoppingCartModel) => boolean
   text: string;
 
+
+  constructor(
+    private alertCtrl: AlertController,
+    public Payments: PaymentsProvider,
+    public modal: ModalController,
+    private utilities: UtilitiesProvider
+  ) {
+    this.paymentsList = [];
+  }
   ngOnInit() {
   }
   delete(item: PaymentsModel, slidingItem: ItemSliding) {
@@ -68,14 +77,6 @@ export class PaymentListComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-  }
-  constructor(
-    private alertCtrl: AlertController,
-    public Payments: PaymentsProvider,
-    public modal: ModalController,
-    private utilities: UtilitiesProvider
-  ) {
-    this.paymentsList = [];
   }
 
 }
