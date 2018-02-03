@@ -101,9 +101,10 @@ export class ShoppingCartModel {
     }
     pushItem(item: ItemModel) {
         //item.id = String(new Date().getTime())// setto lo id dello item
-        this.items = _.map(this.items, _.clone).push(item)
-
-
+        //this.items =
+        this.items.push(item)
+         this.items = _.cloneDeep(this.items) //fa scattare il changedetection
+         
     }
 
     updateItem(item) {
