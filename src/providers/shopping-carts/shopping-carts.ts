@@ -57,6 +57,10 @@ export class ShoppingCartsProvider {
     return this.subjectShoppingCart
   }
 
+  delete(){
+    return this.subjectShoppingCart
+  }
+
   getMin(comparer: (cartx:
     ShoppingCartModel, carty: ShoppingCartModel) => number, cb: (cart: ShoppingCartModel) => void) {
     this.shoppingCartSubject.subscribe(carts => {
