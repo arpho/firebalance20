@@ -20,6 +20,7 @@ export class CreateShoppingCartPage implements OnDestroy {
   subscription: Subscription
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public utilities:UtilitiesProvider,
+    public view: ViewController,
     public ShoppingCarts: ShoppingCartsProvider) {
     this.createdCart = new ShoppingCartModel()
   }
@@ -28,10 +29,10 @@ export class CreateShoppingCartPage implements OnDestroy {
       this.subscription.unsubscribe()
   }
   Save(cart: ShoppingCartModel) {
-    console.log('saving', cart)
     this.subscription = this.ShoppingCarts.create().subscribe(ref => {
       if (ref)
         ref.push(cart).then(()=>{
+            this.view.dismiss()
           this.utilities.showToast('carrello creato correttamente','5000','top')
         })
     })

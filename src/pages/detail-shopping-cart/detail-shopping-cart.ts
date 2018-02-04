@@ -38,17 +38,15 @@ export class DetailShoppingCartPage implements OnDestroy {
   }
   
   Save(cart:ShoppingCartModel){
-    console.log("got",cart)
     this.subscription = this.ShoppingCarts.update().subscribe(ref=>{
       if(ref){
-        console.log('got ref',JSON.parse( JSON.stringify(cart ) ))
         cart = new ShoppingCartModel(cart)
-        console.log('sanitized cart',JSON.parse( JSON.stringify(cart ) ));
         ref.child(`/${cart.key}/`).update(cart).then(res=>{
           this.dismiss();
           this.utilities.showToast('carrello della spesa modificato','2000','top')
           
         }).catch(err=>{
+          this.dismiss()
           this.utilities.showToast('problemi'+err,'10000','top')
         })
       }
