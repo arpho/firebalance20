@@ -62,6 +62,10 @@ export class ShoppingCartsProvider {
     }).unsubscribe();
   }
 
+update(){
+  return this.subjectShoppingCart
+}
+
   flattenCarts(filter: (cart: ShoppingCartModel) => boolean, shoppingCarts: Observable<ShoppingCartModel>) {
     if (filter) // ci sono casi in cui il filtro non è definito
       //shoppingCarts.filter(filter).subscribe(result=>console.log('result filtro',result))

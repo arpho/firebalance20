@@ -25,7 +25,7 @@
       <totale-spesa [items]="selectedCart.items" [sconto]="selectedCart.sconto" [moneta]="selectedCart.moneta" (calculatedTotal)="calculatedTotal($event)"></totale-spesa></h2>
       
     <label for="addebito">Note</label>
-    <ion-input type="text" id="noteInput" placeholder="note" formControlName="note">
+    <ion-input type="text" id="noteInput" placeholder="note" formControlName="note"[(ngModel)]="selectedCart.note">
     </ion-input>
   </div>
   <section class="acquisti">
@@ -45,5 +45,5 @@
       </ion-list>
       <ion-button><ion-icon name="refresh"*ngIf="removedItem" (click)="restoreItem()"></ion-icon> </ion-button>
     </section>
-    <button ion-button full><ion-icon name="archive"></ion-icon></button>
+    <button ion-button full (click)="save(selectedCart)"><ion-icon name="archive"></ion-icon></button>
 

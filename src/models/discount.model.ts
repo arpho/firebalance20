@@ -4,7 +4,7 @@ export class DiscountModel {
     nota: string
 
     constructor(percentuale?: boolean, sconto?: number, nota?: string) {
-        this.percentuale = percentuale;
+        this.percentuale = !!percentuale;
         this.sconto = sconto || 0;
         this.nota = nota || "";
     }

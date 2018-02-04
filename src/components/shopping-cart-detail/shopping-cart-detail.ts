@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, OnChanges,Output, ChangeDetectionStrategy,EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, AbstractControl, ReactiveFormsModule } from '@angular/forms';
 import { IonicPage, NavController, NavParams, ModalController, AlertController } from 'ionic-angular';
 import { ShoppingCartModel, ItemModel } from '../../models/shoppingCart.model';
@@ -18,12 +18,13 @@ import { ItemViewPage } from '../../pages/item-view/item-view';
 })
 export class ShoppingCartDetailComponent implements OnChanges {
   @Input() selectedCart: ShoppingCartModel
+  @Output() Save:EventEmitter<ShoppingCartModel>= new EventEmitter<ShoppingCartModel>();
   text: string;
   selectorPayment: string = 'pagamento';
   selectorProvider: string = 'fornitore';
   labelFornitore: string = "Fornitore";
   labelPagamento: string = "Pagamento";
-  removedItem:ItemModel;
+  removedItem: ItemModel;
   Cart: ShoppingCartModel;
   public cartForm: FormGroup;
   constructor(
@@ -41,7 +42,7 @@ export class ShoppingCartDetailComponent implements OnChanges {
   addItem() {
     console.log('adding item')
 
-    let modal = this.modal.create(ItemCreatePage,new ItemModel);
+    let modal = this.modal.create(ItemCreatePage, new ItemModel);
     modal.onDidDismiss(item => {
       item.id = this.selectedCart.generateItemId()
       this.selectedCart.pushItem(item)
@@ -49,8 +50,8 @@ export class ShoppingCartDetailComponent implements OnChanges {
     modal.present();
   }
 
-  calculatedTotal(total:number){
-    console.log('totale',total)
+  calculatedTotal(total: number) {
+    this.selectedCart.totale = total;
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -65,6 +66,10 @@ export class ShoppingCartDetailComponent implements OnChanges {
     }
   }
 
+  save(cart:ShoppingCartModel){
+    this.Save.emit(cart);
+  }
+
   eventPagamento(data) {
     if (data) {
       this.cartForm.controls.pagamentoId.setValue(data.itemId)
@@ -73,7 +78,7 @@ export class ShoppingCartDetailComponent implements OnChanges {
   }
 
   update(item) {
-    let modal = this.modal.create(ItemViewPage,item);
+    let modal = this.modal.create(ItemViewPage, item);
     modal.onDidDismiss(item => {
       this.selectedCart.updateItem(item)
     })
@@ -82,10 +87,10 @@ export class ShoppingCartDetailComponent implements OnChanges {
 
   delete(item, sli) {
     this.selectedCart.removeItem(item)
-    this.removedItem= item;
+    this.removedItem = item;
   }
 
-  restoreItem(){
+  restoreItem() {
     this.selectedCart.pushItem(this.removedItem)
     this.removedItem = null;
   }

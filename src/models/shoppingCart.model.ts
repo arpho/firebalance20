@@ -66,7 +66,7 @@ export class ShoppingCartModel {
     note: string;
     constructor(shoppingCart?: any) {
         if (shoppingCart) {
-            this.sconto = shoppingCart.sconto ? shoppingCart.sconto : new DiscountModel()
+            this.sconto = shoppingCart.sconto ?  new DiscountModel(shoppingCart.sconto.percentuale,shoppingCart.sconto.sconto,shoppingCart.sconto.nota):new DiscountModel();
             this.fornitoreId = shoppingCart.fornitoreId || "";
             this.pagamentoId = shoppingCart.pagamentoId || "";
             this.dataAcquisto = shoppingCart.dataAcquisto || new Date().toISOString();
@@ -91,6 +91,20 @@ export class ShoppingCartModel {
             this.key = "";
 
         }
+    }
+
+    buildFrom(item:any){
+        this.fornitoreId = item.fornitoreId;
+        this.pagamentoId = item.pagamentoId
+        this.dataAcquisto = item.dataAcquisto;
+        this.sconto = item.sconto;
+        this.note = item.note;
+        this.dataAddebito = item.dataAddebito;
+        this.items = item.items;
+        this.key = item.key;
+        this.moneta = item.moneta;
+        this.online = item.online;
+        return this
     }
 
     generateItemId() {
