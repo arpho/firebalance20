@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
+import { Component,OnDestroy } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { ShoppingCartsProvider } from '../../providers/shopping-carts/shopping-carts';
 import { Observable } from 'rxjs/Observable';
 import { ShoppingCartModel } from '../../models/shoppingCart.model';
 import { DetailShoppingCartPage } from '../detail-shopping-cart/detail-shopping-cart';
+import { CreateShoppingCartPage} from '../../pages/create-shopping-cart/create-shopping-cart'
 import { Subscription } from 'rxjs/Subscription';
-import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 
 /**
  * Generated class for the ShoppingCartsPage page.
@@ -59,7 +59,7 @@ export class ShoppingCartsPage implements OnDestroy {
   }
 
   create() {
-    let modal = this.modal.create(DetailShoppingCartPage,new ShoppingCartModel());
+    let modal = this.modal.create(CreateShoppingCartPage,new ShoppingCartModel());
     modal.present();
   }
 

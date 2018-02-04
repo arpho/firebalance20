@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component,OnDestroy } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { ShoppingCartModel } from '../../models/shoppingCart.model';
 import { ShoppingCartsProvider } from '../../providers/shopping-carts/shopping-carts';
 import { UtilitiesProvider } from '../../providers/utilities/utilities';
+import { Subscription } from 'rxjs/Subscription';
 
 /**
  * Generated class for the DetailShoppingCartPage page.
@@ -15,8 +16,9 @@ import { UtilitiesProvider } from '../../providers/utilities/utilities';
   selector: 'page-detail-shopping-cart',
   templateUrl: 'detail-shopping-cart.html',
 })
-export class DetailShoppingCartPage {
+export class DetailShoppingCartPage implements OnDestroy {
   selectedCart: ShoppingCartModel
+  subscription:Subscription
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public ShoppingCarts:ShoppingCartsProvider,
@@ -27,18 +29,23 @@ export class DetailShoppingCartPage {
     console.log('received cart',this.selectedCart)
   }
 
+  ngOnDestroy(){
+    if(this.subscription)
+    this.subscription.unsubscribe();
+  }
   dismiss() {
     this.view.dismiss();
   }
   
   Save(cart:ShoppingCartModel){
     console.log("got",cart)
-    this.ShoppingCarts.update().subscribe(ref=>{
+    this.subscription = this.ShoppingCarts.update().subscribe(ref=>{
       if(ref){
         console.log('got ref',JSON.parse( JSON.stringify(cart ) ))
-        cart = new ShoppingCartModel().buildFrom(cart)
+        cart = new ShoppingCartModel(cart)
         console.log('sanitized cart',JSON.parse( JSON.stringify(cart ) ));
         ref.child(`/${cart.key}/`).update(cart).then(res=>{
+          this.dismiss();
           this.utilities.showToast('carrello della spesa modificato','2000','top')
           
         }).catch(err=>{

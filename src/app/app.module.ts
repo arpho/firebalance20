@@ -91,7 +91,7 @@ import { GoogleLoginPage } from '../pages/google-login/google-login';
 import { TwitterLoginPage } from '../pages/twitter-login/twitter-login';
 import { ContactCardPage } from '../pages/contact-card/contact-card';
 import { VideoPlaylistPage } from '../pages/video-playlist/video-playlist';
-
+import {CreateShoppingCartPage} from '../pages/create-shopping-cart/create-shopping-cart'
 import { VideoPlayerModule } from '../components/video-player/video-player.module';
 import { ValidatorsModule } from '../components/validators/validators.module';
 
@@ -193,6 +193,7 @@ export function createTranslateLoader(http: Http) {
     PaymentPage,
     FormValidationsPage,
     VideoPlaylistPage,
+    CreateShoppingCartPage,
 
     PreloadImage,
     BackgroundImage,
@@ -293,7 +294,8 @@ export function createTranslateLoader(http: Http) {
     CategoriesPage,
     PaymentPage,
     FormValidationsPage,
-    VideoPlaylistPage
+    VideoPlaylistPage,
+    CreateShoppingCartPage
   ],
   providers: [
     //BehaviorSubject,

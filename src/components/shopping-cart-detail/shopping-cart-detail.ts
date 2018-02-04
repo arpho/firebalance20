@@ -1,8 +1,7 @@
-import { Component, Input, OnChanges,Output, ChangeDetectionStrategy,EventEmitter } from '@angular/core';
+import { Component, Input, OnChanges,Output, ChangeDetectionStrategy,EventEmitter,SimpleChanges } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, AbstractControl, ReactiveFormsModule } from '@angular/forms';
 import { IonicPage, NavController, NavParams, ModalController, AlertController } from 'ionic-angular';
 import { ShoppingCartModel, ItemModel } from '../../models/shoppingCart.model';
-import { SimpleChanges } from '@angular/core/src/metadata/lifecycle_hooks';
 import { ItemCreatePage } from '../../pages/item-create/item-create';
 import { ItemViewPage } from '../../pages/item-view/item-view';
 
@@ -44,8 +43,10 @@ export class ShoppingCartDetailComponent implements OnChanges {
 
     let modal = this.modal.create(ItemCreatePage, new ItemModel);
     modal.onDidDismiss(item => {
-      item.id = this.selectedCart.generateItemId()
-      this.selectedCart.pushItem(item)
+      if(item){
+        item.id = this.selectedCart.generateItemId()
+        this.selectedCart.pushItem(item)
+      }
     })
     modal.present();
   }
@@ -80,7 +81,8 @@ export class ShoppingCartDetailComponent implements OnChanges {
   update(item) {
     let modal = this.modal.create(ItemViewPage, item);
     modal.onDidDismiss(item => {
-      this.selectedCart.updateItem(item)
+      if(item)
+        this.selectedCart.updateItem(item)
     })
     modal.present();
   }
