@@ -16,11 +16,12 @@ import * as _ from 'lodash'
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TotaleSpesaComponent implements OnChanges {
-  @Input() items: [ItemModel]
-  @Input() sconto: DiscountModel
-  @Input() moneta: string
+  @Input() items: [ItemModel];
+  @Input() sconto: DiscountModel;
+  @Input() moneta: string;
   text: string;
   totale: number;
+  @Output() calculatedTotal:EventEmitter<number>= new EventEmitter<number>()
 
   constructor() {
     console.log('Hello TotaleSpesaComponent Component');
@@ -32,6 +33,7 @@ export class TotaleSpesaComponent implements OnChanges {
       this.totale = Math.round(this.sconto.calculateDiscount(_.reduce(this.items, (total, item) => {
         return Number(total) + Number(item.prezzo)
       }, 0))*100)/100
+      this.calculatedTotal.emit(this.totale)
     }
 
 

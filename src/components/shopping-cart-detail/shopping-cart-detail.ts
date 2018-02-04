@@ -43,12 +43,16 @@ export class ShoppingCartDetailComponent implements OnChanges {
 
     let modal = this.modal.create(ItemCreatePage,new ItemModel);
     modal.onDidDismiss(item => {
-      console.log('got item', item)
       item.id = this.selectedCart.generateItemId()
       this.selectedCart.pushItem(item)
     })
     modal.present();
   }
+
+  calculatedTotal(total:number){
+    console.log('totale',total)
+  }
+
   ngOnChanges(changes: SimpleChanges) {
     if (this.selectedCart)
       this.cartForm = this.getForm(this.selectedCart)
@@ -69,24 +73,21 @@ export class ShoppingCartDetailComponent implements OnChanges {
   }
 
   update(item) {
-    console.log('updating', item)
     let modal = this.modal.create(ItemViewPage,item);
     modal.onDidDismiss(item => {
-      console.log('got item updayed', item)
       this.selectedCart.updateItem(item)
     })
     modal.present();
   }
 
   delete(item, sli) {
-    console.log('deleting', item, sli)
     this.selectedCart.removeItem(item)
     this.removedItem= item;
   }
 
   restoreItem(){
-    console.log('restoring',this.removedItem)
     this.selectedCart.pushItem(this.removedItem)
+    this.removedItem = null;
   }
   getForm(cart: ShoppingCartModel) {
     return this.fb.group({
