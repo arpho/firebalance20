@@ -9,13 +9,11 @@
                   </ion-datetime>
                 </ion-item>
                     <data-fiscale [(dataAcquisto)]=selectedCart.dataAcquisto  ></data-fiscale>
-                <!--input mdInput [mdDatepicker]="picker" [(ngModel)]="date" placeholder="Choose a date">
-                <button mdSuffix [mdDatepickerToggle]="picker"></button-->
               </md-input-container>
 <div class=" ui form" [formGroup]="cartForm">
   <ion-label>{{ this.cartForm.controls.online.value|switchText:'acquisto onLine':'acqisto tradizionale'}}</ion-label>
   <ion-icon name="body" *ngIf="!cartForm.controls.online.value"></ion-icon> <ion-icon name="paper-plane" *ngIf="cartForm.controls.online.value"></ion-icon> 
-                  <ion-toggle formControlName="online"></ion-toggle>
+                  <ion-toggle formControlName="online"[(ngModel)]="selectedCart.online"></ion-toggle>
         
 
                   <selector class="fornitore"[fieldId]= "selectedCart.fornitoreId" [component]="selectorProvider" [label]="labelFornitore" (selected)="eventFornitore($event)"></selector>

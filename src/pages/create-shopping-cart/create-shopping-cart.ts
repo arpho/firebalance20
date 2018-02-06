@@ -28,7 +28,12 @@ export class CreateShoppingCartPage implements OnDestroy {
     if (this.subscription)
       this.subscription.unsubscribe()
   }
+
+  close(){
+    this.view.dismiss();
+  }
   Save(cart: ShoppingCartModel) {
+    console.log('cart',cart)
     this.subscription = this.ShoppingCarts.create().subscribe(ref => {
       if (ref)
         ref.push(cart).then(()=>{

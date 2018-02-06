@@ -151,7 +151,7 @@ export class ShoppingCartModel {
         this.online = shoppingCart.online || false;
         this.items = shoppingCart.items || [];
         this.key = shoppingCart.key || "";
-        this.note = shoppingCart.note;
+        this.note = shoppingCart.note||"note";
         return this;
     }
 }

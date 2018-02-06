@@ -45,6 +45,7 @@ export class ShoppingCartDetailComponent implements OnChanges {
     modal.onDidDismiss(item => {
       if(item){
         item.id = this.selectedCart.generateItemId()
+        delete item.opts // campo aggiunto da angular che non piace  a firebase
         this.selectedCart.pushItem(item)
       }
     })
@@ -68,6 +69,8 @@ export class ShoppingCartDetailComponent implements OnChanges {
   }
 
   save(cart:ShoppingCartModel){
+    cart.note=cart.note||'nessuna nota'// il campo undefined rompe firebase
+    console.log('cart emitted',JSON.parse(JSON.stringify(cart)))
     this.Save.emit(cart);
   }
 
@@ -81,8 +84,10 @@ export class ShoppingCartDetailComponent implements OnChanges {
   update(item) {
     let modal = this.modal.create(ItemViewPage, item);
     modal.onDidDismiss(item => {
-      if(item)
+      if(item){
+        delete item.opts; // opts non va d'accordso con firebase
         this.selectedCart.updateItem(item)
+      }
     })
     modal.present();
   }

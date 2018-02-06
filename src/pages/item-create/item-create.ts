@@ -26,6 +26,7 @@ export class ItemCreatePage {
 
   Done(item){
     console.log('done',item)
+    delete item.component //sanitizing
     this.view.dismiss(item)
   }
 
