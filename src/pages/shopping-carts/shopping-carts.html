@@ -8,6 +8,10 @@
 
   <ion-navbar>
     <ion-title>{{'SHOPPINGCARTS'|translate}}<ion-button (click)="resize()">resize</ion-button></ion-title>
+   <ion-fab top right >
+  <button ion-fab color="primary" (click)="create()"><ion-icon name="add"></ion-icon>
+  </button>
+</ion-fab>
   </ion-navbar>
 
 </ion-header>
@@ -22,8 +26,4 @@
 
  </shopping-carts-list>
 </div>
-   <ion-fab top right >
-  <button ion-fab color="primary" (click)="create()"><ion-icon name="add"></ion-icon>
-  </button>
-</ion-fab>
 </ion-content>
