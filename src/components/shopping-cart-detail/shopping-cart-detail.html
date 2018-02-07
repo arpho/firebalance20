@@ -27,14 +27,15 @@
     </ion-input>
   </div>
   <section class="acquisti">
+           <discount [sconto]="selectedCart.sconto"[Discount]="changedDiscount($event)"></discount>
   <ion-list>
     <ion-fab middle right >
    <button ion-fab color="primary" (click)="addItem()"><ion-icon name="add-circle"></ion-icon>
    </button>
  </ion-fab>
         <ion-item-sliding *ngFor="let item of selectedCart.items" >
-          <ion-item><article><h2>{{item.descrizione}}  {{item.moneta}} {{item.prezzo}}</h2><h3>{{item.quantita}}</h3> </article><ion-icon class='drag' name="more"></ion-icon></ion-item>
-
+          <ion-item><article><h2>{{item.descrizione}}  {{item.moneta}} {{item.prezzo}}</h2><h3>{{item.quantita}}</h3>
+           </article><ion-icon class='drag' name="more"></ion-icon></ion-item>
   <ion-item-options side="right">
       <button ion-button (click)="update(item)"><ion-icon name="eye"></ion-icon>wiev</button>
       <button ion-button color="danger" (click)="delete(item,slidingItem )"><ion-icon name="remove-circle"></ion-icon>Remo</button>

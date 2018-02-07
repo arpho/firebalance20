@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges,Output, ChangeDetectionStrategy,EventEmitter,SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, Output, ChangeDetectionStrategy, EventEmitter, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, AbstractControl, ReactiveFormsModule } from '@angular/forms';
 import { IonicPage, NavController, NavParams, ModalController, AlertController } from 'ionic-angular';
 import { ShoppingCartModel, ItemModel } from '../../models/shoppingCart.model';
@@ -17,7 +17,7 @@ import { ItemViewPage } from '../../pages/item-view/item-view';
 })
 export class ShoppingCartDetailComponent implements OnChanges {
   @Input() selectedCart: ShoppingCartModel
-  @Output() Save:EventEmitter<ShoppingCartModel>= new EventEmitter<ShoppingCartModel>();
+  @Output() Save: EventEmitter<ShoppingCartModel> = new EventEmitter<ShoppingCartModel>();
   text: string;
   selectorPayment: string = 'pagamento';
   selectorProvider: string = 'fornitore';
@@ -38,12 +38,15 @@ export class ShoppingCartDetailComponent implements OnChanges {
 
   }
 
+  changedDiscount(sconto) {
+    console.log('sconto', sconto)
+  }
   addItem() {
     console.log('adding item')
 
     let modal = this.modal.create(ItemCreatePage, new ItemModel);
     modal.onDidDismiss(item => {
-      if(item){
+      if (item) {
         item.id = this.selectedCart.generateItemId()
         delete item.opts // campo aggiunto da angular che non piace  a firebase
         this.selectedCart.pushItem(item)
@@ -68,9 +71,9 @@ export class ShoppingCartDetailComponent implements OnChanges {
     }
   }
 
-  save(cart:ShoppingCartModel){
-    cart.note=cart.note||'nessuna nota'// il campo undefined rompe firebase
-    console.log('cart emitted',JSON.parse(JSON.stringify(cart)))
+  save(cart: ShoppingCartModel) {
+    cart.note = cart.note || 'nessuna nota'// il campo undefined rompe firebase
+    console.log('cart emitted', JSON.parse(JSON.stringify(cart)))
     this.Save.emit(cart);
   }
 
@@ -84,7 +87,7 @@ export class ShoppingCartDetailComponent implements OnChanges {
   update(item) {
     let modal = this.modal.create(ItemViewPage, item);
     modal.onDidDismiss(item => {
-      if(item){
+      if (item) {
         delete item.opts; // opts non va d'accordso con firebase
         this.selectedCart.updateItem(item)
       }
