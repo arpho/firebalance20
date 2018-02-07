@@ -8,10 +8,6 @@
 
   <ion-navbar>
     <ion-title>{{'SHOPPINGCARTS'|translate}}<ion-button (click)="resize()">resize</ion-button></ion-title>
-   <ion-fab top right >
-  <button ion-fab color="primary" (click)="create()"><ion-icon name="add"></ion-icon>
-  </button>
-</ion-fab>
   </ion-navbar>
 
 </ion-header>
@@ -22,7 +18,12 @@
   <shopping-cart-detail [selectedCart]="selectedCart"></shopping-cart-detail>
 </div>
 <div [ngClass]="{bigList:portrait,smallList:landscape}"  >
+   <ion-fab bottom   right >
+  <button ion-fab  mini color="primary" (click)="create()"><ion-icon name="add"></ion-icon>
+  </button>
+</ion-fab>
  <shopping-carts-list [shoppingCarts]="shoppingCarts"(selectedCart)="selectedCartEvent($event)">
+   
 
  </shopping-carts-list>
 </div>
