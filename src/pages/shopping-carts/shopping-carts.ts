@@ -51,7 +51,6 @@ export class ShoppingCartsPage implements OnDestroy {
     })
   }
   selectedCartEvent(cart) {
-    console.log('selected',cart)
     this.selectedCart = cart; // carrello della spesa selezionato
     let modal = this.modal.create(DetailShoppingCartPage, cart);
     modal.present();
@@ -66,7 +65,6 @@ export class ShoppingCartsPage implements OnDestroy {
   resize() {
     this.portrait = !this.portrait;
     this.landscape = !this.landscape;
-    console.log('resize')
   }
 
   ionViewDidLoad() {

@@ -20,10 +20,13 @@ export class ItemViewPage {
     public view: ViewController
   ) {
     this.item = this.navParams.data
-    console.log('item',this.navParams.data)
   }
+
+dismiss(){
+  this.view.dismiss()
+}
+
   Done(item){
-    console.log('done',item)
     this.view.dismiss(item)
   }
 
