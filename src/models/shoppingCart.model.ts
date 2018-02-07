@@ -124,7 +124,8 @@ export class ShoppingCartModel {
 
     updateItem(item) {
         this.items = _.map(this.items, article => {
-            return article.id == item.id ? article : item
+            return article.id == item.id ? item : article
+            
         })
     }
 
