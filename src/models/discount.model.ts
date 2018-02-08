@@ -17,7 +17,12 @@ export class DiscountModel {
         this.percentuale = form.controls.percentuale.value;
         return this;
     }
-    calculateDiscount(price: number) {
-        return this.percentuale ? price - this.sconto * price : price - this.sconto
+    calculateFinalPrice(price: number) {
+        return price - this.calculateDiscount(price);
     }
+
+    calculateDiscount(price:number){
+        return this.percentuale ? this.sconto* price : this.sconto;
+    }
+
 }

@@ -1,4 +1,4 @@
 <!-- Generated template for the TotaleSpesaComponent component -->
 <div>
-  {{moneta}}{{totale}}
+  {{moneta}} {{totale}}:<section *ngIf="sconto.sconto!=0"   class="discount">{{'DISCOUNT'|translate}} {{moneta}} {{discount}}</section>
 </div>

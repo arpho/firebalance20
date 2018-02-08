@@ -20,6 +20,7 @@ export class TotaleSpesaComponent implements OnChanges {
   @Input() sconto: DiscountModel;
   @Input() moneta: string;
   text: string;
+  discount:number;
   totale: number;
   @Output() calculatedTotal:EventEmitter<number>= new EventEmitter<number>()
 
@@ -30,13 +31,18 @@ export class TotaleSpesaComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.items || changes.sconto) {
-      this.totale = Math.round(this.sconto.calculateDiscount(_.reduce(this.items, (total, item) => {
-        return Number(total) + Number(item.prezzo)
-      }, 0))*100)/100
+      this.totale = Math.round(this.sconto.calculateFinalPrice(this.getTotal())*100)/100
+      this.discount = Math.round(this.sconto.calculateDiscount(this.getTotal())*100)/100
       this.calculatedTotal.emit(this.totale)
     }
 
 
   }
 
+
+  private getTotal(): number {
+    return _.reduce(this.items, (total, item) => {
+      return Number(total) + Number(item.prezzo);
+    }, 0);
+  }
 }
