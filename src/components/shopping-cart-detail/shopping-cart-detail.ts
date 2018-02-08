@@ -38,8 +38,9 @@ export class ShoppingCartDetailComponent implements OnChanges {
 
   }
 
-  changedDiscount(sconto) {
+  Sconto(sconto) {
     console.log('sconto', sconto)
+    this.selectedCart.sconto=sconto;
   }
   addItem() {
     console.log('adding item')

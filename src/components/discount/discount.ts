@@ -1,7 +1,8 @@
-import { Component, Input, Output, EventEmitter, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ChangeDetectionStrategy,OnDestroy } from '@angular/core';
 import {AlertController,ModalController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { DiscountModel } from '../../models/discount.model';
+import { Subscription } from 'rxjs/Subscription';
 
 /**
  * Generated class for the DiscountComponent component.
@@ -14,12 +15,13 @@ import { DiscountModel } from '../../models/discount.model';
   templateUrl: 'discount.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DiscountComponent implements OnInit {
+export class DiscountComponent implements OnInit,OnDestroy {
 
   text: string;
   public discountForm: FormGroup;
+  subscription:Subscription;
   @Input() sconto: DiscountModel;
-  @Output() Discount: EventEmitter<DiscountModel> = new EventEmitter<DiscountModel>()
+  @Output() Sconto:EventEmitter<DiscountModel> = new EventEmitter<DiscountModel>()
 
   constructor(
     public alertCtrl:AlertController,
@@ -29,10 +31,15 @@ export class DiscountComponent implements OnInit {
     this.text = 'Hello World';
   }
 
+  ngOnDestroy(){
+    if(this.subscription)
+      this.subscription.unsubscribe();
+  }
+
   changedDiscount(data){
     let sconto = new DiscountModel().buildFromForm(this.discountForm);
-    
-    this.Discount.emit(sconto)
+    console.log('change discount',data)
+    this.Sconto.emit(sconto)
 
   }
 
@@ -43,9 +50,7 @@ export class DiscountComponent implements OnInit {
       sconto:new FormControl(this.sconto.sconto),
       percentuale:new FormControl(this.sconto.percentuale)
     })
-    this.discountForm.controls['sconto'].valueChanges.subscribe(data=>this.changedDiscount(data))
-    this.discountForm.controls['descrizione'].valueChanges.subscribe(data=>this.changedDiscount(data))
-    this.discountForm.controls['percentuale'].valueChanges.subscribe(data=>this.changedDiscount(data))
+    this.subscription = this.discountForm.valueChanges.subscribe(form=>this.changedDiscount(form))
   }
 
 

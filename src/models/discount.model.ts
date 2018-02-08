@@ -11,8 +11,8 @@ export class DiscountModel {
         this.descrizione = descrizione || "";
     }
 
-    buildFromForm(form:FormGroup){
-        this.sconto= form.controls.sconto.value;
+    buildFromForm(form: FormGroup) {
+        this.sconto = form.controls.sconto.value;
         this.descrizione = form.controls.descrizione.value;
         this.percentuale = form.controls.percentuale.value;
         return this;
