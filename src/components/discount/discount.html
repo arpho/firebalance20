@@ -1,10 +1,16 @@
-<!-- Generated template for the DiscountComponent component -->
+ <!-- Generated template for the DiscountComponent component -->
 <div class="sconto" [formGroup]="discountForm">
+  <section class="discountType">
     <ion-label>{{ this.discountForm.controls.percentuale.value|switchText:'sconto percentuale':'sconto secco'}}</ion-label>
-  <ion-toggle formControlName="percentuale"[(ngModel)]="sconto.percentuale"></ion-toggle>
+    <ion-toggle formControlName="percentuale"[(ngModel)]="sconto.percentuale"></ion-toggle>
+  </section>
   <!--ion-icon name="star" [ngStyle]="{'applied': sconto.sconto!=0}" (click)="setDiscount()"></ion-icon-->
-  <label>sconto</label>
-  <ion-input  class="form-control"type="number" placeholder="sconto" formControlName="sconto" id="inputSconto"></ion-input>
-  <label>descrizione</label>
-  <ion-input type="text" placeholder="descrizione" formControlName="descrizione" id="inputDescrizione"  ></ion-input>
+  <section class="discountAmmount">
+    <label>sconto</label>
+    <ion-input  class="form-control"type="number" placeholder="sconto" formControlName="sconto" id="inputSconto"></ion-input>
+  </section>
+  <section class="discountDescription">
+    <label>descrizione</label>
+    <ion-input type="text" placeholder="descrizione" formControlName="descrizione" id="inputDescrizione"  ></ion-input>
+  </section>
 </div>

@@ -31,7 +31,6 @@ export class ShoppingCartDetailComponent implements OnChanges {
     private alertCtrl: AlertController,
     public modal: ModalController,
   ) {
-    console.log('Hello ShoppingCartDetailComponent Component');
     this.text = 'Hello World detail ';
 
     this.cartForm = this.getForm(new ShoppingCartModel())
@@ -39,11 +38,9 @@ export class ShoppingCartDetailComponent implements OnChanges {
   }
 
   Sconto(sconto) {
-    console.log('sconto', sconto)
-    this.selectedCart.sconto=sconto;
+    this.selectedCart.sconto = sconto;
   }
   addItem() {
-    console.log('adding item')
 
     let modal = this.modal.create(ItemCreatePage, new ItemModel);
     modal.onDidDismiss(item => {
@@ -74,7 +71,6 @@ export class ShoppingCartDetailComponent implements OnChanges {
 
   save(cart: ShoppingCartModel) {
     cart.note = cart.note || 'nessuna nota'// il campo undefined rompe firebase
-    console.log('cart emitted', JSON.parse(JSON.stringify(cart)))
     this.Save.emit(cart);
   }
 
