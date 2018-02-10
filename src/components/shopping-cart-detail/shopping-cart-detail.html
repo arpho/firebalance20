@@ -30,7 +30,7 @@
            <discount [sconto]="selectedCart.sconto" (Sconto)="Sconto($event)"></discount>
   <ion-list>
     <ion-fab top right >
-   <button ion-fab color="primary" (click)="addItem()"><ion-icon name="add-circle"></ion-icon>
+   <button ion-fab color="primary" (click)="addItem()"><ion-icon name="basket"></ion-icon>
    </button>
  </ion-fab>
         <ion-item-sliding *ngFor="let item of selectedCart.items" >
