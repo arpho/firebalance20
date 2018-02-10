@@ -81,11 +81,12 @@ export class ShoppingCartDetailComponent implements OnChanges {
     }
   }
 
-  update(item) {
+  update(item:ItemModel) {
     let modal = this.modal.create(ItemViewPage, item);
     modal.onDidDismiss(item => {
       if (item) {
         delete item.opts; // opts non va d'accordso con firebase
+        item = new ItemModel().build(item)
         this.selectedCart.updateItem(item)
       }
     })

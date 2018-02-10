@@ -40,6 +40,7 @@ export class ItemModel {
     tassoConversione:number}*/) {
         this.prezzo = item && item.prezzo || 0;
         this.barcode = item && item.barcode || '';
+        this.categorieId = item && item.categorieId || [];
         this.descrizione = item && item.descrizione || '';
         this.picture = item && item.picture || '';
         this.categorieId = item && item.categorieId || [];

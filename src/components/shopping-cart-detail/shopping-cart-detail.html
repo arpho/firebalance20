@@ -29,10 +29,7 @@
   <section class="acquisti">
            <discount [sconto]="selectedCart.sconto" (Sconto)="Sconto($event)"></discount>
   <ion-list>
-    <ion-fab top right >
-   <button ion-fab color="primary" (click)="addItem()"><ion-icon name="basket"></ion-icon>
-   </button>
- </ion-fab>
+    
         <ion-item-sliding *ngFor="let item of selectedCart.items" >
           <ion-item><article><h2>{{item.descrizione}}  {{item.moneta}} {{item.prezzo}}</h2><h3>{{item.quantita}}</h3>
            </article><ion-icon class='drag' name="more"></ion-icon></ion-item>

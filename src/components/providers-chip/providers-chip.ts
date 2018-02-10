@@ -1,4 +1,4 @@
-import { Component, Input, OnInit,ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs/Observable'
 import { ProviderModel } from '../../models/providers/provider.model';
 import { ProvidersProvider } from '../../providers/providers/providers';
@@ -12,7 +12,7 @@ import { ProvidersProvider } from '../../providers/providers/providers';
 @Component({
   selector: 'providers-chip',
   templateUrl: 'providers-chip.html',
-  changeDetection:ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProvidersChipComponent implements OnInit {
   @Input() ProviderId: String;
