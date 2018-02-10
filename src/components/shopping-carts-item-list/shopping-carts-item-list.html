@@ -6,5 +6,6 @@
     <h2>{{Cart.dataAcquisto| date:"dd/MM/yyyy"}}</h2>
     <h2><payments-chip [PaymentId]="Cart.pagamentoId"></payments-chip></h2>
     <h2 class="totale">{{Cart.moneta}}{{(Cart.totale*100)/100}}</h2>
+    <h3 class="note">{{Cart.note}}</h3>
   </article>
 </div>
