@@ -22,7 +22,6 @@ export class PaymentSelectorPage {
   ) {
   }
   selected(item) {
-    console.log('got', item)
     this.view.dismiss({ itemId: item })
   }
 
@@ -36,7 +35,6 @@ export class PaymentSelectorPage {
   }
 
   doFilter(filterString) {
-    console.log('filterString', filterString)
     this.filterString = filterString.data
   }
   dismiss(data?) {

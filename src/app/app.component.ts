@@ -49,7 +49,7 @@ export class MyApp {
     public splashScreen: SplashScreen,
     public statusBar: StatusBar,
     public translate: TranslateService,
-    public toastCtrl: ToastController
+    public toastCtrl: ToastController,
   ) {
     translate.setDefaultLang('it');
     translate.use('it');
