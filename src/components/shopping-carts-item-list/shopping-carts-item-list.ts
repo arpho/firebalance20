@@ -18,7 +18,7 @@ export class ShoppingCartsItemListComponent implements OnChanges {
   selected: boolean;
   text: string;
   ngOnChanges(changes: SimpleChanges) {
-    if(this.Cart&&this.SelectedCart)
+    if (this.Cart && this.SelectedCart)
       this.selected = this.Cart.key == this.SelectedCart.key
   }
 

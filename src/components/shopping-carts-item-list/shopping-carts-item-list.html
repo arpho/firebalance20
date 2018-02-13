@@ -7,5 +7,6 @@
     <h2><payments-chip [PaymentId]="Cart.pagamentoId"></payments-chip></h2>
     <h2 class="totale">{{Cart.moneta}}{{(Cart.totale*100)/100}}</h2>
     <h3 class="note">{{Cart.note}}</h3>
+    <ion-icon name="star" *ngIf="Cart.sconto.sconto!=0" class="sconto"></ion-icon>
   </article>
 </div>
