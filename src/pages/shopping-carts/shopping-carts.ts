@@ -24,8 +24,6 @@ export class ShoppingCartsPage implements OnDestroy {
   cartArray: [ShoppingCartModel] = [null];
   selectedCart: any = DetailShoppingCartPage;
   subscription: Subscription;
-  portrait: boolean = true;
-  landscape: boolean = false;
 
   ngOnDestroy() {
     if (this.subscription)
@@ -62,10 +60,7 @@ export class ShoppingCartsPage implements OnDestroy {
     modal.present();
   }
 
-  resize() {
-    this.portrait = !this.portrait;
-    this.landscape = !this.landscape;
-  }
+  
 
   ionViewDidLoad() {
   }
