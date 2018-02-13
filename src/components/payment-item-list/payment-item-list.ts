@@ -22,17 +22,18 @@ export class PaymentItemListComponent implements OnInit, OnChanges {
   totale: number;
 
 
-
+ round(value){
+   return Math.floor(value*100)/100
+ }
   ngOnChanges(changes: SimpleChanges) {
     this.Payments.calculateAmmount(this.shoppingCartDateFilter, this.Payment.key, acc => {
-      this.totale = acc.totale
-      //console.log('totale per '+this.Payment.nome,acc.totale);
+      this.totale = this.round(acc.totale)      //console.log('totale per '+this.Payment.nome,acc.totale);
     })
   }
 
   ngOnInit() {
     this.Payments.calculateAmmount(this.shoppingCartDateFilter, this.Payment.key, acc => {
-      this.totale = acc.totale
+      this.totale = this.round(acc.totale)
     })
   }
   constructor(
