@@ -35,6 +35,9 @@ export class ProvidersTotalComponent implements OnInit, OnChanges {
             this.totalObservable = carts.filter(this.shoppingCartDateFilter).scan((acc, x) => {
               if (x.fornitoreId == this.ProviderKey)
                 acc.totale += x.totale
+
+                
+                acc.totale = Math.floor(acc.totale*100)/100
               return acc;
             }, new ShoppingCartModel())
         })
