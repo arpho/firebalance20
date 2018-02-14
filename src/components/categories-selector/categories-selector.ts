@@ -24,12 +24,12 @@ export class CategoriesSelectorComponent {
     console.log('selectedCategories', this.selectedCategories)
   }
 
-clicked(){
-  console.log('clicked');
-}
+  clicked() {
+    console.log('clicked');
+  }
 
   getClass() {
-    const isvalid = this.selectedCategories.length != 0;
+    const isvalid = this.categories && this.categories.length != 0;
     return { selected: isvalid }
   }
 
