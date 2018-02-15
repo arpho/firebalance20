@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CategoriesProvider } from '../../providers/categories/categories';
 import { Category } from '../../pages/categories/categories.model';
 

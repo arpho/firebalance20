@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component,Output, EventEmitter } from '@angular/core';
+import { CategoryItemComponent } from '../category-item/category-item';
 
 /**
  * Generated class for the CategoryItemAvailableComponent component.
@@ -10,13 +11,10 @@ import { Component } from '@angular/core';
   selector: 'category-item-available',
   templateUrl: 'category-item-available.html'
 })
-export class CategoryItemAvailableComponent {
-
+export class CategoryItemAvailableComponent extends CategoryItemComponent {
+  @Output()removed:EventEmitter<string> = new EventEmitter<string>()
   text: string;
 
-  constructor() {
-    console.log('Hello CategoryItemAvailableComponent Component');
-    this.text = 'Hello World';
-  }
+  
 
 }
