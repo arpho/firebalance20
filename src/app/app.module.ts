@@ -142,6 +142,7 @@ import { DiscountComponent } from '../components/discount/discount';
 import { CategoriesSelectorComponent } from '../components/categories-selector/categories-selector';
 import { CategoryItemComponent } from '../components/category-item/category-item';
 import { CategoryItemAvailableComponent } from '../components/category-item-available/category-item-available';
+import { CategoryItemSelectedComponent } from '../components/category-item-selected/category-item-selected';
 //import { PaymentProvider } from '../providers/payment/payment';
 //AngularFireModule.initializeApp(environment.firebaseConfig)
 export function createTranslateLoader(http: Http) {
@@ -237,7 +238,8 @@ export function createTranslateLoader(http: Http) {
     DiscountComponent,
     CategoriesSelectorComponent,
     CategoryItemComponent,
-    CategoryItemAvailableComponent
+    CategoryItemAvailableComponent,
+    CategoryItemSelectedComponent
   ],
   imports: [
     SuiModule,
