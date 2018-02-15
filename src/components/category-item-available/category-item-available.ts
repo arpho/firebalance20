@@ -12,7 +12,7 @@ import { CategoryItemComponent } from '../category-item/category-item';
   templateUrl: 'category-item-available.html'
 })
 export class CategoryItemAvailableComponent extends CategoryItemComponent {
-  @Output()removed:EventEmitter<string> = new EventEmitter<string>()
+  @Output()selected:EventEmitter<string> = new EventEmitter<string>()
   text: string;
 
   click(){

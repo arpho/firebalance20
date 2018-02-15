@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,Output,EventEmitter } from '@angular/core';
 import { CategoryItemComponent } from '../category-item/category-item';
 
 /**
@@ -14,7 +14,7 @@ import { CategoryItemComponent } from '../category-item/category-item';
 export class CategoryItemSelectedComponent extends CategoryItemComponent {
 
   text: string;
-
+  @Output() remove:EventEmitter<string>= new EventEmitter<string>()
  click(){
    console.log('remove',this.CategoryId)
  }
