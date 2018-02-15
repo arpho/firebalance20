@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,ChangeDetectionStrategy } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
@@ -11,6 +11,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 @Component({
   selector: 'page-category-selector',
   templateUrl: 'category-selector.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategorySelectorPage {
 

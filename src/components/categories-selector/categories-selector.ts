@@ -1,4 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { NavController, NavParams, ModalController, AlertController } from 'ionic-angular';
+import {CategorySelectorPage} from '../../pages/category-selector/category-selector';
 
 /**
  * Generated class for the CategoriesSelectorComponent component.
@@ -15,7 +17,7 @@ export class CategoriesSelectorComponent {
   @Output() SeletedCategories: EventEmitter<string[]>
   text: string;
 
-  constructor() {
+  constructor(public modal: ModalController) {
     console.log('Hello CategoriesSelectorComponent Component');
     this.text = 'Hello World';
   }
@@ -26,6 +28,11 @@ export class CategoriesSelectorComponent {
 
   clicked() {
     console.log('clicked');
+    let modal = this.modal.create(CategorySelectorPage,this.selectedCategories);
+    modal.onDidDismiss(data=>{
+      console.log('selected categories',data)
+    })
+    modal.present()
   }
 
   getClass() {

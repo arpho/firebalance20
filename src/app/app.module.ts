@@ -85,6 +85,7 @@ import { EmailComposer } from '@ionic-native/email-composer';
 import { Toast } from '@ionic-native/toast';
 // Functionalities
 import { FunctionalitiesPage } from '../pages/functionalities/functionalities';
+import {CategorySelectorPage} from '../pages/category-selector/category-selector';
 import { MapsPage } from '../pages/maps/maps';
 import { FacebookLoginPage } from '../pages/facebook-login/facebook-login';
 import { GoogleLoginPage } from '../pages/google-login/google-login';
@@ -183,6 +184,7 @@ export function createTranslateLoader(http: Http) {
     PrivacyPolicyPage,
     MapsPage,
     FunctionalitiesPage,
+    CategorySelectorPage,
     ItemCreatePage,
     ItemViewPage,
     FacebookLoginPage,
@@ -292,6 +294,7 @@ export function createTranslateLoader(http: Http) {
     PrivacyPolicyPage,
     MapsPage,
     FunctionalitiesPage,
+    CategorySelectorPage,
     ItemCreatePage,
     ItemViewPage,
     FacebookLoginPage,
