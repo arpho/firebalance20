@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CategoriesProvider } from '../../providers/categories/categories';
 import { Category } from '../../pages/categories/categories.model';
 
@@ -10,7 +10,8 @@ import { Category } from '../../pages/categories/categories.model';
  */
 @Component({
   selector: 'category-item',
-  templateUrl: 'category-item.html'
+  templateUrl: 'category-item.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoryItemComponent implements OnInit {
   @Input() CategoryId: string;
@@ -22,10 +23,8 @@ export class CategoryItemComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('categoryitem',this.CategoryId)
     this.Categories.getCategory(this.CategoryId).on('value', category => {
       this.Categoria = new Category({title:category.val().title,$key:category.key})
-      console.log(this.Categoria)
     })
   }
 

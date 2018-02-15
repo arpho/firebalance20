@@ -1,4 +1,4 @@
-import { Component,Output,EventEmitter } from '@angular/core';
+import { Component,Output,EventEmitter,ChangeDetectionStrategy } from '@angular/core';
 import { CategoryItemComponent } from '../category-item/category-item';
 
 /**
@@ -9,14 +9,15 @@ import { CategoryItemComponent } from '../category-item/category-item';
  */
 @Component({
   selector: 'category-item-selected',
-  templateUrl: 'category-item-selected.html'
+  templateUrl: 'category-item-selected.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoryItemSelectedComponent extends CategoryItemComponent {
 
   text: string;
   @Output() remove:EventEmitter<string>= new EventEmitter<string>()
  click(){
-   console.log('remove',this.CategoryId)
+   this.remove.emit(this.CategoryId);
  }
 
 }
