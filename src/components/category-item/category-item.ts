@@ -22,8 +22,10 @@ export class CategoryItemComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('categoryitem',this.CategoryId)
     this.Categories.getCategory(this.CategoryId).on('value', category => {
-      this.Categoria = new Category().build(category.val().title, category.key)
+      this.Categoria = new Category({title:category.val().title,$key:category.key})
+      console.log(this.Categoria)
     })
   }
 
