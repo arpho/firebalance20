@@ -10,14 +10,16 @@ import { CategoryItemComponent } from '../category-item/category-item';
 @Component({
   selector: 'category-item-available',
   templateUrl: 'category-item-available.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+//  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoryItemAvailableComponent extends CategoryItemComponent {
   @Output() selected:EventEmitter<string> = new EventEmitter<string>()
+  //@Input CategoryId:sdtring from father
   text: string;
 
   click(){
     this.selected.emit(this.CategoryId)
+    
   }
 
 }

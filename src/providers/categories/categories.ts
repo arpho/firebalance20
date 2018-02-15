@@ -23,7 +23,7 @@ export class CategoriesProvider {
   public user: any;
   Categorie: any;
   public Profile: ProfileService;
-  subjectCategoriesRef = new BehaviorSubject(null) // instanzio il behaviorSubject, è definito subito
+  subjectCategoriesRef = new BehaviorSubject(this.categoriesRef) // instanzio il behaviorSubject, è definito subito
   constructor(public http: Http,
     public ShoppingCart: ShoppingCartsProvider
 
@@ -56,7 +56,7 @@ export class CategoriesProvider {
     this.subjectCategoriesRef.subscribe(ref => {
       if (ref)
         ref.on('value', categoriesSnapshot => {
-
+            console.log('snapshot',categoriesSnapshot)
           this.Categorie = []; // inizializzo la lista delle categorie
 
           categoriesSnapshot.forEach(snap => {
