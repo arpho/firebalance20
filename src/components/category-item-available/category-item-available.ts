@@ -15,6 +15,8 @@ export class CategoryItemAvailableComponent extends CategoryItemComponent {
   @Output()removed:EventEmitter<string> = new EventEmitter<string>()
   text: string;
 
-  
+  click(){
+    console.log("clicked",this.CategoryId)
+  }
 
 }
