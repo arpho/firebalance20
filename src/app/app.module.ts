@@ -146,6 +146,7 @@ import { CategoryItemAvailableComponent } from '../components/category-item-avai
 import { CategoryItemSelectedComponent } from '../components/category-item-selected/category-item-selected';
 import { AvailableCategoriesListComponent } from '../components/available-categories-list/available-categories-list';
 import { SelectedCategoriesListComponent } from '../components/selected-categories-list/selected-categories-list';
+import { GeneralFilterPipe } from '../pipes/general-filter/general-filter';
 //import { PaymentProvider } from '../providers/payment/payment';
 //AngularFireModule.initializeApp(environment.firebaseConfig)
 export function createTranslateLoader(http: Http) {
@@ -245,7 +246,8 @@ export function createTranslateLoader(http: Http) {
     CategoryItemAvailableComponent,
     CategoryItemSelectedComponent,
     AvailableCategoriesListComponent,
-    SelectedCategoriesListComponent
+    SelectedCategoriesListComponent,
+    GeneralFilterPipe
   ],
   imports: [
     SuiModule,

@@ -17,17 +17,24 @@ import { Subscription } from 'rxjs';
 export class AvailableCategoriesListComponent implements OnDestroy, OnChanges{
  @Input() selectedCategories:string[]
  @Input() Categorie:string[]
+
  @Output() Selected:EventEmitter<string>= new EventEmitter<string>()
   text: string;
   subscription:Subscription
+  filter:(item:string)=>boolean
 
   constructor(public Categories:CategoriesProvider) {
     console.log('Hello AvailableCategoriesListComponent Component');
     this.text = 'Hello World available categories';
+    
    
   }
   ngOnChanges( changes:SimpleChanges){
 console.log('changes', changes)
+ if(changes.selectedCategories)
+ this.filter= (id:string)=>{
+   return this.selectedCategories.indexOf(id)==-1 // se non è presente nella lista dei selezionati lo prendo
+ }
   }
 
   selected(id){
