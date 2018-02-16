@@ -21,7 +21,10 @@
 <section class="selected">
   <selected-categories-list [selectedCategories]="selectedCategories"(Removed)="Removed($event)"></selected-categories-list>
 </section>
-<field-filter [placeholder]="placeholder"(doFilter)="filter($event)"></field-filter>
+<field-filter [placeholder]="placeholder"(doFilter)="filter($event)"></field-filter><ion-fab top right>
+    <button ion-fab color="twitter" (click)="create()"><ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
 <section class="available">
   <available-categories-list [Categorie]="Categorie" (Selected)="Selected($event)" [filterString]="filterString" [selectedCategories]="selectedCategories"></available-categories-list>
 </section><ion-fab bottom right>

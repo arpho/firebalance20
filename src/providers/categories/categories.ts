@@ -104,6 +104,6 @@ export class CategoriesProvider {
   }
 
   pushNewCategory(category: string) {
-    this.categoriesRef.push({ title: category })
+    return this.categoriesRef.push({ title: category })
   }
 }

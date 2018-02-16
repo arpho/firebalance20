@@ -59,6 +59,14 @@ export class CategorySelectorPage implements OnInit {
     this.selectedCategories = this.selectedCategories.filter(item => item != id)
   }
 
+  create(){
+    console.log('creating',this.filterString)
+    this.Categories.pushNewCategory(this.filterString).then(category=>{
+      console.log('creata',category)
+      this.selectedCategories.push(category.key)
+    })
+  }
+
   done() {
     console.log('done', this.selectedCategories)
     this.view.dismiss(this.selectedCategories)
