@@ -36,7 +36,6 @@ export class CategorySelectorPage implements OnInit{
               this.Categorie.push(snap.key );
               return false;
             })
-          console.log('categories',this.Categorie)
           });
         }
         else{
@@ -57,6 +56,11 @@ Removed(id){
   console.log('prima',this.selectedCategories)
   this.selectedCategories = this.selectedCategories.filter(item=>item!=id)
   console.log('dopo',this.selectedCategories)
+}
+
+done(){
+  console.log('done',this.selectedCategories)
+  this.view.dismiss(this.selectedCategories)
 }
 
   ngOnInit(){

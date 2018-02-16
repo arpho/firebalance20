@@ -31,6 +31,8 @@ export class CategoriesSelectorComponent {
     let modal = this.modal.create(CategorySelectorPage);
     modal.onDidDismiss(data=>{
       console.log('selected categories',data)
+      if(data)
+        this.categories= data
     })
     modal.present()
   }

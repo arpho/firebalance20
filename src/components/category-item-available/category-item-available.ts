@@ -22,7 +22,6 @@ export class CategoryItemAvailableComponent extends CategoryItemComponent implem
     
   }
   ngOnChanges(changes: SimpleChanges){
-    console.log('changes',changes)
   }
 
 }

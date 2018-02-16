@@ -23,5 +23,8 @@
 </section>
 <section class="available">
   <available-categories-list [Categorie]="Categorie" (Selected)="Selected($event)" [selectedCategories]="selectedCategories"></available-categories-list>
-</section>
+</section><ion-fab bottom right>
+    <button ion-fab color="primary" (click)="done()"><ion-icon name="checkmark"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>
