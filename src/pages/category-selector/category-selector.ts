@@ -20,7 +20,7 @@ import * as _ from 'lodash';
 export class CategorySelectorPage implements OnInit{
   subscription:Subscription;
   Categorie:string[]  
-  SelectedCategories:string[]   =[]                                                               
+  selectedCategories:string[]   =[]                                                               
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public Categories:CategoriesProvider,
     public view: ViewController) {
@@ -47,10 +47,18 @@ export class CategorySelectorPage implements OnInit{
   }
 
   Selected(id){
-    this.SelectedCategories.push(id)
-    this.SelectedCategories= this.SelectedCategories.filter(item =>item) // cambio  il riferimento  cosìche venga rilevato il cambio
-    console.log('selected',this.SelectedCategories)
+    this.selectedCategories.push(id)
+    this.selectedCategories= this.selectedCategories.filter(item =>item) // cambio  il riferimento  cosìche venga rilevato il cambio
+    console.log('selected',this.selectedCategories)
   }
+
+Removed(id){
+  console.log('removed',id)
+  console.log('prima',this.selectedCategories)
+  this.selectedCategories = this.selectedCategories.filter(item=>item!=id)
+  console.log('dopo',this.selectedCategories)
+}
+
   ngOnInit(){
 console.log('ricevuto',this.navParams.data)
 /*

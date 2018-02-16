@@ -1,0 +1,6 @@
+<!-- Generated template for the SelectedCategoriesListComponent component -->
+<div>
+  <article *ngFor="let category of selectedCategories" >
+    <category-item-selected [CategoryId]="category" (remove)="removed($event)"></category-item-selected>
+    </article>
+</div>

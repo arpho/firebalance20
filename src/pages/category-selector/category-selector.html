@@ -18,5 +18,10 @@
 
 
 <ion-content padding>
-  <available-categories-list [Categorie]="Categorie" (Selected)="Selected($event)"></available-categories-list>
+<section class="selected">
+  <selected-categories-list [selectedCategories]="selectedCategories"(Removed)="Removed($event)"></selected-categories-list>
+</section>
+<section class="available">
+  <available-categories-list [Categorie]="Categorie" (Selected)="Selected($event)" [selectedCategories]="selectedCategories"></available-categories-list>
+</section>
 </ion-content>
