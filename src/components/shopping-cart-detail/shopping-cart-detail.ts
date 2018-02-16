@@ -60,7 +60,6 @@ export class ShoppingCartDetailComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (this.selectedCart){
       this.cartForm = this.getForm(this.selectedCart)
-      console.log('selectedcart',this.selectedCart)
     }
   }
 

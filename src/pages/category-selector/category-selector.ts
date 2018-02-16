@@ -1,6 +1,8 @@
-import { Component,ChangeDetectionStrategy,OnInit } from '@angular/core';
+import { Component,ChangeDetectionStrategy,OnInit,  } from '@angular/core';
 import { IonicPage, NavController, NavParams,ViewController } from 'ionic-angular';
 import { CategoriesProvider } from '../../providers/categories/categories';
+import { Subscription } from 'rxjs';
+import * as _ from 'lodash';
 
 /**
  * 
@@ -16,14 +18,38 @@ import { CategoriesProvider } from '../../providers/categories/categories';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategorySelectorPage implements OnInit{
-                                                                    
+  subscription:Subscription;
+  Categorie:string[]  
+  SelectedCategories:string[]   =[]                                                               
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public Categories:CategoriesProvider,
     public view: ViewController) {
+      this.subscription= this.Categories.subscribeSubjectCategoriesRef(ref => {
+        console.log('ref',ref)
+        if (ref) {
+          ref.on('value', categoriesSnapshot => {
+  
+            this.Categorie = [];
+  
+            categoriesSnapshot.forEach(snap => {
+             // const categoria = new Category({ title: snap.val().title, $key: snap.key })
+              this.Categorie.push(snap.key );
+              return false;
+            })
+          console.log('categories',this.Categorie)
+          });
+        }
+        else{
+         // setTimeout(this.Categories.subscribeSubjectCategoriesRef(ref=>console.log('ref2',ref)))
+         console.log('ref non va')
+        }
+      })
   }
 
   Selected(id){
-    console.log('selected',id)
+    this.SelectedCategories.push(id)
+    this.SelectedCategories= this.SelectedCategories.filter(item =>item) // cambio  il riferimento  cosìche venga rilevato il cambio
+    console.log('selected',this.SelectedCategories)
   }
   ngOnInit(){
 console.log('ricevuto',this.navParams.data)

@@ -1,4 +1,4 @@
-import { Component,Output, EventEmitter,ChangeDetectionStrategy} from '@angular/core';
+import { Component,Output, EventEmitter,ChangeDetectionStrategy,OnInit, OnChanges, SimpleChanges} from '@angular/core';
 import { CategoryItemComponent } from '../category-item/category-item';
 
 /**
@@ -12,7 +12,7 @@ import { CategoryItemComponent } from '../category-item/category-item';
   templateUrl: 'category-item-available.html',
 //  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CategoryItemAvailableComponent extends CategoryItemComponent {
+export class CategoryItemAvailableComponent extends CategoryItemComponent implements OnChanges{
   @Output() selected:EventEmitter<string> = new EventEmitter<string>()
   //@Input CategoryId:sdtring from father
   text: string;
@@ -20,6 +20,9 @@ export class CategoryItemAvailableComponent extends CategoryItemComponent {
   click(){
     this.selected.emit(this.CategoryId)
     
+  }
+  ngOnChanges(changes: SimpleChanges){
+    console.log('changes',changes)
   }
 
 }

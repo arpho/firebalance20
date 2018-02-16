@@ -11,7 +11,6 @@ import { Category } from '../../pages/categories/categories.model';
 @Component({
   selector: 'category-item',
   templateUrl: 'category-item.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoryItemComponent implements OnInit {
   @Input() CategoryId: string;

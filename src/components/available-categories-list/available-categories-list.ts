@@ -1,4 +1,4 @@
-import { Component,ChangeDetectionStrategy,Input,OnDestroy,Output, EventEmitter } from '@angular/core';
+import { Component,ChangeDetectionStrategy,Input,OnDestroy,Output, EventEmitter,OnChanges, SimpleChanges } from '@angular/core';
 import { CategoriesProvider } from '../../providers/categories/categories';
 import { Category } from '../../pages/categories/categories.model';
 import { Subscription } from 'rxjs';
@@ -14,36 +14,20 @@ import { Subscription } from 'rxjs';
   templateUrl: 'available-categories-list.html',
   //changeDetection:ChangeDetectionStrategy.OnPush
 })
-export class AvailableCategoriesListComponent implements OnDestroy{
+export class AvailableCategoriesListComponent implements OnDestroy, OnChanges{
  @Input() selectedCategories:string[]
+ @Input() Categorie:string[]
  @Output() Selected:EventEmitter<string>= new EventEmitter<string>()
   text: string;
-  Categorie: any;
   subscription:Subscription
 
   constructor(public Categories:CategoriesProvider) {
     console.log('Hello AvailableCategoriesListComponent Component');
     this.text = 'Hello World available categories';
-   this.subscription= this.Categories.subscribeSubjectCategoriesRef(ref => {
-      console.log('ref',ref)
-      if (ref) {
-        ref.on('value', categoriesSnapshot => {
-
-          this.Categorie = [];
-
-          categoriesSnapshot.forEach(snap => {
-           // const categoria = new Category({ title: snap.val().title, $key: snap.key })
-            this.Categorie.push(snap.key );
-            return false;
-          })
-        console.log('categories',this.Categorie)
-        });
-      }
-      else{
-       // setTimeout(this.Categories.subscribeSubjectCategoriesRef(ref=>console.log('ref2',ref)))
-       console.log('ref non va')
-      }
-    })
+   
+  }
+  ngOnChanges( changes:SimpleChanges){
+console.log('changes', changes)
   }
 
   selected(id){
