@@ -27,8 +27,8 @@ export class CategoriesSelectorComponent {
   }
 
   clicked() {
-    console.log('selected categories', this.categories)
-    let modal = this.modal.create(CategorySelectorPage);
+    console.log('selected categories', {categories:this.categories})
+    let modal = this.modal.create(CategorySelectorPage,{categories:this.categories});
     modal.onDidDismiss(data => {
       console.log('selected categories', data)
       if (data)

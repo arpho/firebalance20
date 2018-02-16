@@ -1,5 +1,5 @@
-import { Component,ChangeDetectionStrategy,OnInit,  } from '@angular/core';
-import { IonicPage, NavController, NavParams,ViewController } from 'ionic-angular';
+import { Component, ChangeDetectionStrategy, OnInit, } from '@angular/core';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { CategoriesProvider } from '../../providers/categories/categories';
 import { Subscription } from 'rxjs';
 import * as _ from 'lodash';
@@ -17,74 +17,73 @@ import * as _ from 'lodash';
   templateUrl: 'category-selector.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CategorySelectorPage implements OnInit{
-  subscription:Subscription;
-  Categorie:string[]  
-  selectedCategories:string[]   =[]                                                               
+export class CategorySelectorPage implements OnInit {
+  subscription: Subscription;
+  Categorie: string[]
+  selectedCategories: string[] = []
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public Categories:CategoriesProvider,
+  constructor(public navCtrl: NavController, public navParams: NavParams, public Categories: CategoriesProvider,
     public view: ViewController) {
-      this.subscription= this.Categories.subscribeSubjectCategoriesRef(ref => {
-        console.log('ref',ref)
-        if (ref) {
-          ref.on('value', categoriesSnapshot => {
-  
-            this.Categorie = [];
-  
-            categoriesSnapshot.forEach(snap => {
-             // const categoria = new Category({ title: snap.val().title, $key: snap.key })
-              this.Categorie.push(snap.key );
-              return false;
-            })
-          });
-        }
-        else{
-         // setTimeout(this.Categories.subscribeSubjectCategoriesRef(ref=>console.log('ref2',ref)))
-         console.log('ref non va')
-        }
-      })
+    this.subscription = this.Categories.subscribeSubjectCategoriesRef(ref => {
+      console.log('ref', ref)
+      if (ref) {
+        ref.on('value', categoriesSnapshot => {
+
+          this.Categorie = [];
+
+          categoriesSnapshot.forEach(snap => {
+            // const categoria = new Category({ title: snap.val().title, $key: snap.key })
+            this.Categorie.push(snap.key);
+            return false;
+          })
+        });
+      }
+      else {
+        // setTimeout(this.Categories.subscribeSubjectCategoriesRef(ref=>console.log('ref2',ref)))
+        console.log('ref non va')
+      }
+    })
   }
 
-  Selected(id){
+  Selected(id) {
     this.selectedCategories.push(id)
-    this.selectedCategories= this.selectedCategories.filter(item =>item) // cambio  il riferimento  cosìche venga rilevato il cambio
-    console.log('selected',this.selectedCategories)
+    this.selectedCategories = this.selectedCategories.filter(item => item) // cambio  il riferimento  cosìche venga rilevato il cambio
   }
 
-Removed(id){
-  console.log('removed',id)
-  console.log('prima',this.selectedCategories)
-  this.selectedCategories = this.selectedCategories.filter(item=>item!=id)
-  console.log('dopo',this.selectedCategories)
-}
-
-done(){
-  console.log('done',this.selectedCategories)
-  this.view.dismiss(this.selectedCategories)
-}
-
-  ngOnInit(){
-console.log('ricevuto',this.navParams.data)
-/*
- this.Categories.subscribeSubjectCategoriesRef(ref => {
-  console.log('ref',ref)
-  if (ref) {
-    ref.on('value', categoriesSnapshot => {
-
-      
-
-      categoriesSnapshot.forEach(snap => {
-       // const categoria = new Category({ title: snap.val().title, $key: snap.key })
-       
-        return false;
-      })
-    });
-  }
-})*/
+  Removed(id) {
+    this.selectedCategories = this.selectedCategories.filter(item => item != id)
   }
 
+  done() {
+    console.log('done', this.selectedCategories)
+    this.view.dismiss(this.selectedCategories)
+  }
 
-  
+  ngOnInit() {
+    console.log('ricevuto', this.navParams.data.categories)
+    if(this.navParams.data.categories)
+      this.selectedCategories = this.navParams.data.categories
+    console.log('selected categories',this.selectedCategories)
+    /*
+     this.Categories.subscribeSubjectCategoriesRef(ref => {
+      console.log('ref',ref)
+      if (ref) {
+        ref.on('value', categoriesSnapshot => {
+    
+          
+    
+          categoriesSnapshot.forEach(snap => {
+           // const categoria = new Category({ title: snap.val().title, $key: snap.key })
+           
+            return false;
+          })
+        });
+      }
+    })*/
+  }
+
+
+
 
   dismiss() {
     this.view.dismiss();

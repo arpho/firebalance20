@@ -11,6 +11,7 @@ import { Category } from '../../pages/categories/categories.model';
 @Component({
   selector: 'category-item',
   templateUrl: 'category-item.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoryItemComponent implements OnInit {
   @Input() CategoryId: string;
@@ -23,7 +24,8 @@ export class CategoryItemComponent implements OnInit {
 
   ngOnInit() {
     this.Categories.getCategory(this.CategoryId).on('value', category => {
-      this.Categoria = new Category({title:category.val().title,$key:category.key})
+
+      this.Categoria = new Category({ title: category.val().title, $key: category.key })
     })
   }
 
