@@ -36,7 +36,7 @@
         <ion-item-sliding *ngFor="let item of selectedCart.items" >
           <ion-item><article><h2>{{item.descrizione}}  {{item.moneta}} {{item.prezzo}}</h2><h3>{{item.quantita}}</h3>
 
-    <categories-selector [categories]="item.categorieId" (selectedCategories)="selectedCategories($event)"></categories-selector>
+    <categories-selector [categories]="item.categorieId" (SeletedCategories)="SelectedCategories($event,item)"></categories-selector>
            </article><ion-icon class='drag' name="more"></ion-icon></ion-item>
   <ion-item-options side="right">
       <button ion-button (click)="update(item)"><ion-icon name="eye"></ion-icon>wiev</button>

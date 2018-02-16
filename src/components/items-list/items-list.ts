@@ -20,7 +20,7 @@ export class ItemsListComponent implements OnInit, OnChanges {
   @Input() component: string;
   @Output() selectedEvent: EventEmitter<string> = new EventEmitter<string>()
   @Input() filterString: string;
-  @Input() provider:boolean;
+  @Input() provider: boolean;
   subscription: Subscription;
   location: { latitude: number, longitude: number };
   text: string;
@@ -39,11 +39,11 @@ export class ItemsListComponent implements OnInit, OnChanges {
      }*/
   }
   ngOnInit() {
-    if(this.provider)
-    this.Geolocation.subScribeLocation(coords=>{
-      if (coords)
-        this.location = { longitude: coords.longitude, latitude: coords.latitude }
-    })
+    if (this.provider)
+      this.Geolocation.subScribeLocation(coords => {
+        if (coords)
+          this.location = { longitude: coords.longitude, latitude: coords.latitude }
+      })
     this.db = this.Dbs[this.component]
 
     this.db.getElements(res => {
@@ -55,7 +55,7 @@ export class ItemsListComponent implements OnInit, OnChanges {
     this.selectedEvent.emit(item.key)
   }
   constructor(public Payments: PaymentsProvider,
-    public Geolocation:GeolocationProvider,
+    public Geolocation: GeolocationProvider,
     public Suppliers: ProvidersProvider) {
     console.log('Hello ItemsListComponent Component');
     this.Geolocation.refreshLocation();

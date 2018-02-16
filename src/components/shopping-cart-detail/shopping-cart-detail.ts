@@ -58,7 +58,7 @@ export class ShoppingCartDetailComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (this.selectedCart){
+    if (this.selectedCart) {
       this.cartForm = this.getForm(this.selectedCart)
     }
   }
@@ -75,6 +75,13 @@ export class ShoppingCartDetailComponent implements OnChanges {
     this.Save.emit(cart);
   }
 
+  SelectedCategories(categories, item: ItemModel) {
+    item.categorieId = categories
+    console.log('set categories', categories, 'on', item)
+
+
+  }
+
   eventPagamento(data) {
     if (data) {
       this.cartForm.controls.pagamentoId.setValue(data.itemId)
@@ -82,7 +89,7 @@ export class ShoppingCartDetailComponent implements OnChanges {
     }
   }
 
-  update(item:ItemModel) {
+  update(item: ItemModel) {
     let modal = this.modal.create(ItemViewPage, item);
     modal.onDidDismiss(item => {
       if (item) {
