@@ -1,6 +1,6 @@
 <!-- Generated template for the AvailableCategoriesListComponent component -->
 <div>
  <ion-item *ngFor="let categoria of Categorie|general_filter:filter">
-   <category-item-available [CategoryId]="categoria"(selected)="selected($event)"></category-item-available>
+   <category-item-available [filterString]="filterString" [CategoryId]="categoria"(selected)="selected($event)"  ></category-item-available>
  </ion-item>
 </div>

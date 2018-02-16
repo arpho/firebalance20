@@ -1,4 +1,4 @@
-import { Component,Output, EventEmitter,ChangeDetectionStrategy,OnInit, OnChanges, SimpleChanges} from '@angular/core';
+import { Component,Output, EventEmitter,ChangeDetectionStrategy,OnInit, OnChanges, SimpleChanges,Input} from '@angular/core';
 import { CategoryItemComponent } from '../category-item/category-item';
 
 /**
@@ -13,15 +13,21 @@ import { CategoryItemComponent } from '../category-item/category-item';
 //  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoryItemAvailableComponent extends CategoryItemComponent implements OnChanges{
-  @Output() selected:EventEmitter<string> = new EventEmitter<string>()
+  @Output() selected:EventEmitter<string> = new EventEmitter<string>();
+  @Input() filterString:string;
   //@Input CategoryId:sdtring from father
   text: string;
 
   click(){
-    this.selected.emit(this.CategoryId)
+    this.selected.emit(this.CategoryId);
     
   }
   ngOnChanges(changes: SimpleChanges){
+   
+  }
+
+  isVisible(){
+    return (this.filterString)?!!this.Categoria.title.toLocaleLowerCase().match(this.filterString.toLocaleLowerCase()):true
   }
 
 }

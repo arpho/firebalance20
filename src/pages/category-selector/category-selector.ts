@@ -20,6 +20,7 @@ import * as _ from 'lodash';
 export class CategorySelectorPage implements OnInit {
   subscription: Subscription;
   Categorie: string[]
+  filterString:string
   selectedCategories: string[] = []
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public Categories: CategoriesProvider,
@@ -45,6 +46,10 @@ export class CategorySelectorPage implements OnInit {
     })
   }
 
+  filter(filter){
+    console.log('filter',filter.data)
+    this.filterString= filter.data;
+  }
   Selected(id) {
     this.selectedCategories.push(id)
     this.selectedCategories = this.selectedCategories.filter(item => item) // cambio  il riferimento  cosìche venga rilevato il cambio
@@ -60,10 +65,10 @@ export class CategorySelectorPage implements OnInit {
   }
 
   ngOnInit() {
-    console.log('ricevuto', this.navParams.data.categories)
+    console.log('ricevuto', this.navParams.data.categories)// sistema le cose con le chiamate asincrone non si puo'
     if(this.navParams.data.categories)
       this.selectedCategories = this.navParams.data.categories
-    console.log('selected categories',this.selectedCategories)
+    //console.log('selected categories',this.selectedCategories)
     /*
      this.Categories.subscribeSubjectCategoriesRef(ref => {
       console.log('ref',ref)
